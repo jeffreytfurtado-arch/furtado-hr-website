@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1770521396495,
+      "tag": "0000_tidy_zuras",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1770601405021,
+      "tag": "0001_curved_darkstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1770605311579,
+      "tag": "0002_rich_mephisto",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1770609651683,
+      "tag": "0003_icy_shiva",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1770610566954,
+      "tag": "0004_workable_dreadnoughts",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1770612191607,
+      "tag": "0005_chilly_romulus",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background shape -->
+  <rect x="2" y="8" width="44" height="44" rx="8" fill="#0F4C81"/>
+  
+  <!-- Three people icons representing HR -->
+  <!-- Center person (larger) -->
+  <circle cx="24" cy="22" r="4" fill="white"/>
+  <path d="M24 28c-3.5 0-6 2-6 4v2h12v-2c0-2-2.5-4-6-4z" fill="white"/>
+  
+  <!-- Left person -->
+  <circle cx="15" cy="26" r="3" fill="white" opacity="0.8"/>
+  <path d="M15 30c-2.5 0-4.5 1.5-4.5 3v1.5h9v-1.5c0-1.5-2-3-4.5-3z" fill="white" opacity="0.8"/>
+  
+  <!-- Right person -->
+  <circle cx="33" cy="26" r="3" fill="white" opacity="0.8"/>
+  <path d="M33 30c-2.5 0-4.5 1.5-4.5 3v1.5h9v-1.5c0-1.5-2-3-4.5-3z" fill="white" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="54" y="28" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#0F4C81">Precise</text>
+  <text x="54" y="45" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#00A3E0">HR</text>
+</svg>

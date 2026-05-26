@@ -1,0 +1,627 @@
+{
+  "runs": [
+    {
+      "timestamp": 1770511542272,
+      "appId": "72yiw7v13w",
+      "mode": "semantic",
+      "report": {
+        "summary": {
+          "total": 13,
+          "errors": 7,
+          "warnings": 2,
+          "suggestions": 4,
+          "passed": 0
+        },
+        "categories": [
+          {
+            "name": "Call-to-Action",
+            "engine": "semantic",
+            "status": "warning",
+            "issueCount": 2,
+            "issues": [
+              {
+                "id": "cta-206de3ddac54",
+                "category": "cta",
+                "severity": "warning",
+                "title": "Generic CTA text in header",
+                "description": "Header uses generic 'Get Started' and 'Sign In' CTAs without clear value proposition or destination. These should be more specific to HR services (e.g., 'Schedule Consultation', 'Request Quote').",
+                "location": {
+                  "file": "src/layouts/parts/Header.tsx",
+                  "line": 48,
+                  "page": "Header"
+                },
+                "recommendation": "Replace generic CTAs with HR-specific actions: 'Schedule Consultation' instead of 'Get Started', and 'Client Portal' instead of 'Sign In'. Add onClick handlers to navigate to contact form or client portal.",
+                "autoFixable": false
+              },
+              {
+                "id": "cta-d8f95cc6bc26",
+                "category": "cta",
+                "severity": "warning",
+                "title": "Weak CTA in hero section",
+                "description": "Hero section has two CTAs: 'Get Started' (generic) and 'Schedule Consultation' (better but vague). The primary CTA should be more specific about what happens next (e.g., 'Get Free HR Assessment', 'Talk to an Expert').",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 89,
+                  "page": "HomePage"
+                },
+                "recommendation": "Make primary CTA more specific and value-driven: 'Get Free HR Assessment' or 'Talk to an Expert Today'. Ensure it links to contact form with appropriate context.",
+                "autoFixable": false
+              }
+            ]
+          },
+          {
+            "name": "CTA Functionality",
+            "engine": "technical",
+            "status": "error",
+            "issueCount": 7,
+            "issues": [
+              {
+                "id": "cta_functionality-d74af6b750d0",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional header CTAs",
+                "description": "Header 'Sign In' and 'Get Started' buttons have no onClick handlers or href attributes - they do nothing when clicked. These are placeholder buttons that need implementation.",
+                "location": {
+                  "file": "src/layouts/parts/Header.tsx",
+                  "line": 48,
+                  "page": "Header"
+                },
+                "recommendation": "Add onClick handlers or href attributes to make buttons functional. Example: <Button onClick={() => navigate('/#contact')}>Schedule Consultation</Button> or <a href='/#contact'><Button>Schedule Consultation</Button></a>",
+                "autoFixable": true,
+                "suggestedFix": "Replace lines 48-53 with:\n<Button variant=\"ghost\" size=\"sm\" asChild>\n  <a href=\"/#contact\">Client Portal</a>\n</Button>\n<Button size=\"sm\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>"
+              },
+              {
+                "id": "cta_functionality-908b19d37b05",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional footer links",
+                "description": "Footer contains multiple links with href='#' that go nowhere: Services links, Company links (About Us, Our Team, Careers, Resources, Contact), and legal links (Privacy Policy, Terms of Service). These are placeholder links.",
+                "location": {
+                  "file": "src/layouts/parts/Footer.tsx",
+                  "line": 30,
+                  "page": "Footer"
+                },
+                "recommendation": "Update all footer links with actual routes. Services should link to /services with anchors, Company links should route to actual pages or sections, legal links should point to policy pages.",
+                "autoFixable": true,
+                "suggestedFix": "Replace href='#' with actual routes:\n- Services: href='/services#compliance', href='/services#talent', etc.\n- About Us: href='/about'\n- Contact: href='/#contact'\n- Privacy/Terms: href='/privacy', href='/terms' (create these pages)"
+              },
+              {
+                "id": "cta_functionality-de74abf42620",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional hero CTAs",
+                "description": "Hero section CTAs ('Get Started' and 'Schedule Consultation') have no onClick handlers or href - they don't navigate anywhere when clicked.",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 89,
+                  "page": "HomePage"
+                },
+                "recommendation": "Add navigation to contact form: <Button size='lg' asChild><a href='/#contact'>Get Free Assessment</a></Button>",
+                "autoFixable": true,
+                "suggestedFix": "Replace lines 89-96 with:\n<Button size=\"lg\" asChild>\n  <a href=\"/#contact\">Get Free Assessment</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>"
+              },
+              {
+                "id": "cta_functionality-d5ee0462f032",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional final CTA section",
+                "description": "Final CTA section has 'Schedule Consultation' and 'Call (555) 123-4567' buttons with no functionality - they don't navigate or initiate calls.",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 1013,
+                  "page": "HomePage"
+                },
+                "recommendation": "Add href to make buttons functional: <a href='/#contact'> for consultation, <a href='tel:+15551234567'> for phone call.",
+                "autoFixable": true,
+                "suggestedFix": "Replace lines 1013-1020 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"tel:+15551234567\">Call (555) 123-4567</a>\n</Button>"
+              },
+              {
+                "id": "cta_functionality-f9a93e5aa3b7",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional About page CTA",
+                "description": "About page final CTA 'Get Started Today' button has no href or onClick - it doesn't navigate anywhere.",
+                "location": {
+                  "file": "src/pages/about.tsx",
+                  "line": 244,
+                  "page": "AboutPage"
+                },
+                "recommendation": "Add href to contact form: <Button size='lg' variant='secondary' asChild><a href='/#contact'>Get Started Today</a></Button>",
+                "autoFixable": true,
+                "suggestedFix": "Replace line 244 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Get Started Today</a>\n</Button>"
+              },
+              {
+                "id": "cta_functionality-39c75892f641",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional Services page CTAs",
+                "description": "Services page has multiple 'Get Started with [Service]' buttons that don't navigate anywhere - no href or onClick handlers.",
+                "location": {
+                  "file": "src/pages/services.tsx",
+                  "line": 176,
+                  "page": "ServicesPage"
+                },
+                "recommendation": "Add href to contact form with service context: <Button size='lg' asChild><a href='/#contact'>Get Started with {service.title}</a></Button>",
+                "autoFixable": true,
+                "suggestedFix": "Replace line 176 with:\n<Button size=\"lg\" asChild>\n  <a href=\"/#contact\">Get Started with {service.title}</a>\n</Button>"
+              },
+              {
+                "id": "cta_functionality-ea0027a7e6aa",
+                "category": "cta_functionality",
+                "severity": "error",
+                "title": "Non-functional Services page final CTA",
+                "description": "Services page final CTA section has 'Contact Us' and 'Call (555) 123-4567' buttons with no functionality.",
+                "location": {
+                  "file": "src/pages/services.tsx",
+                  "line": 196,
+                  "page": "ServicesPage"
+                },
+                "recommendation": "Add href to make buttons functional: <a href='/#contact'> for contact, <a href='tel:+15551234567'> for phone.",
+                "autoFixable": true,
+                "suggestedFix": "Replace lines 196-203 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Contact Us</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"tel:+15551234567\">Call (555) 123-4567</a>\n</Button>"
+              }
+            ]
+          },
+          {
+            "name": "Trust Signals",
+            "engine": "semantic",
+            "status": "pass",
+            "issueCount": 2,
+            "issues": [
+              {
+                "id": "trust-a3d2e3298871",
+                "category": "trust",
+                "severity": "suggestion",
+                "title": "Client logos are placeholders",
+                "description": "Client logos section shows 12 companies with abbreviated names (TS, GL, CM, etc.) instead of actual logos. While this demonstrates social proof structure, real client logos or testimonials would be more credible.",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 166,
+                  "page": "HomePage"
+                },
+                "recommendation": "Replace placeholder abbreviations with actual client logos (if permission obtained) or remove this section if real clients can't be displayed. Alternatively, use industry badges/certifications instead.",
+                "autoFixable": false
+              },
+              {
+                "id": "trust-d8f4dba0fbf0",
+                "category": "trust",
+                "severity": "suggestion",
+                "title": "Team photos are placeholder icons",
+                "description": "About page leadership team uses generic user icons instead of actual photos. Real photos would build more trust and credibility.",
+                "location": {
+                  "file": "src/pages/about.tsx",
+                  "line": 209,
+                  "page": "AboutPage"
+                },
+                "recommendation": "Add actual team member photos or professional headshots. If photos aren't available, consider using professional illustrations or removing the visual element entirely.",
+                "autoFixable": false
+              }
+            ]
+          },
+          {
+            "name": "Form Validation",
+            "engine": "technical",
+            "status": "pass",
+            "issueCount": 2,
+            "issues": [
+              {
+                "id": "form_validation-2a25b09ce1fb",
+                "category": "form_validation",
+                "severity": "suggestion",
+                "title": "Contact form could use better client-side validation",
+                "description": "Contact form has basic HTML5 validation (required fields) but could benefit from more robust client-side validation with better error messages and field-specific validation (email format, phone format).",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 868,
+                  "page": "HomePage"
+                },
+                "recommendation": "Add field-specific validation with clear error messages. Example: validate email format, phone format, provide inline error feedback before submission.",
+                "autoFixable": false
+              },
+              {
+                "id": "form_validation-884fbf4c5e83",
+                "category": "form_validation",
+                "severity": "suggestion",
+                "title": "Newsletter form could use better validation",
+                "description": "Newsletter form has basic HTML5 validation but could provide better user feedback with inline validation and clearer error messages.",
+                "location": {
+                  "file": "src/pages/index.tsx",
+                  "line": 730,
+                  "page": "HomePage"
+                },
+                "recommendation": "Add email format validation with inline feedback, show validation errors before submission attempt.",
+                "autoFixable": false
+              }
+            ]
+          }
+        ]
+      },
+      "issueIds": [
+        "cta-206de3ddac54",
+        "cta_functionality-d74af6b750d0",
+        "cta_functionality-908b19d37b05",
+        "cta-d8f95cc6bc26",
+        "cta_functionality-de74abf42620",
+        "cta_functionality-d5ee0462f032",
+        "trust-a3d2e3298871",
+        "trust-d8f4dba0fbf0",
+        "cta_functionality-f9a93e5aa3b7",
+        "cta_functionality-39c75892f641",
+        "cta_functionality-ea0027a7e6aa",
+        "form_validation-2a25b09ce1fb",
+        "form_validation-884fbf4c5e83"
+      ]
+    }
+  ],
+  "fixedIssues": {
+    "cta-206de3ddac54": {
+      "issueId": "cta-206de3ddac54",
+      "title": "Generic CTA text in header",
+      "category": "cta",
+      "severity": "warning",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-d74af6b750d0": {
+      "issueId": "cta_functionality-d74af6b750d0",
+      "title": "Non-functional header CTAs",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-908b19d37b05": {
+      "issueId": "cta_functionality-908b19d37b05",
+      "title": "Non-functional footer links",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta-d8f95cc6bc26": {
+      "issueId": "cta-d8f95cc6bc26",
+      "title": "Weak CTA in hero section",
+      "category": "cta",
+      "severity": "warning",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-de74abf42620": {
+      "issueId": "cta_functionality-de74abf42620",
+      "title": "Non-functional hero CTAs",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-d5ee0462f032": {
+      "issueId": "cta_functionality-d5ee0462f032",
+      "title": "Non-functional final CTA section",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "trust-a3d2e3298871": {
+      "issueId": "trust-a3d2e3298871",
+      "title": "Client logos are placeholders",
+      "category": "trust",
+      "severity": "suggestion",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "trust-d8f4dba0fbf0": {
+      "issueId": "trust-d8f4dba0fbf0",
+      "title": "Team photos are placeholder icons",
+      "category": "trust",
+      "severity": "suggestion",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-f9a93e5aa3b7": {
+      "issueId": "cta_functionality-f9a93e5aa3b7",
+      "title": "Non-functional About page CTA",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-39c75892f641": {
+      "issueId": "cta_functionality-39c75892f641",
+      "title": "Non-functional Services page CTAs",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "cta_functionality-ea0027a7e6aa": {
+      "issueId": "cta_functionality-ea0027a7e6aa",
+      "title": "Non-functional Services page final CTA",
+      "category": "cta_functionality",
+      "severity": "error",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "form_validation-2a25b09ce1fb": {
+      "issueId": "form_validation-2a25b09ce1fb",
+      "title": "Contact form could use better client-side validation",
+      "category": "form_validation",
+      "severity": "suggestion",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    },
+    "form_validation-884fbf4c5e83": {
+      "issueId": "form_validation-884fbf4c5e83",
+      "title": "Newsletter form could use better validation",
+      "category": "form_validation",
+      "severity": "suggestion",
+      "firstSeen": 1770511542272,
+      "lastSeen": 1770511542272,
+      "fixedAt": null
+    }
+  },
+  "lastRun": {
+    "timestamp": 1770511542272,
+    "appId": "72yiw7v13w",
+    "mode": "semantic",
+    "report": {
+      "summary": {
+        "total": 13,
+        "errors": 7,
+        "warnings": 2,
+        "suggestions": 4,
+        "passed": 0
+      },
+      "categories": [
+        {
+          "name": "Call-to-Action",
+          "engine": "semantic",
+          "status": "warning",
+          "issueCount": 2,
+          "issues": [
+            {
+              "id": "cta-206de3ddac54",
+              "category": "cta",
+              "severity": "warning",
+              "title": "Generic CTA text in header",
+              "description": "Header uses generic 'Get Started' and 'Sign In' CTAs without clear value proposition or destination. These should be more specific to HR services (e.g., 'Schedule Consultation', 'Request Quote').",
+              "location": {
+                "file": "src/layouts/parts/Header.tsx",
+                "line": 48,
+                "page": "Header"
+              },
+              "recommendation": "Replace generic CTAs with HR-specific actions: 'Schedule Consultation' instead of 'Get Started', and 'Client Portal' instead of 'Sign In'. Add onClick handlers to navigate to contact form or client portal.",
+              "autoFixable": false
+            },
+            {
+              "id": "cta-d8f95cc6bc26",
+              "category": "cta",
+              "severity": "warning",
+              "title": "Weak CTA in hero section",
+              "description": "Hero section has two CTAs: 'Get Started' (generic) and 'Schedule Consultation' (better but vague). The primary CTA should be more specific about what happens next (e.g., 'Get Free HR Assessment', 'Talk to an Expert').",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 89,
+                "page": "HomePage"
+              },
+              "recommendation": "Make primary CTA more specific and value-driven: 'Get Free HR Assessment' or 'Talk to an Expert Today'. Ensure it links to contact form with appropriate context.",
+              "autoFixable": false
+            }
+          ]
+        },
+        {
+          "name": "CTA Functionality",
+          "engine": "technical",
+          "status": "error",
+          "issueCount": 7,
+          "issues": [
+            {
+              "id": "cta_functionality-d74af6b750d0",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional header CTAs",
+              "description": "Header 'Sign In' and 'Get Started' buttons have no onClick handlers or href attributes - they do nothing when clicked. These are placeholder buttons that need implementation.",
+              "location": {
+                "file": "src/layouts/parts/Header.tsx",
+                "line": 48,
+                "page": "Header"
+              },
+              "recommendation": "Add onClick handlers or href attributes to make buttons functional. Example: <Button onClick={() => navigate('/#contact')}>Schedule Consultation</Button> or <a href='/#contact'><Button>Schedule Consultation</Button></a>",
+              "autoFixable": true,
+              "suggestedFix": "Replace lines 48-53 with:\n<Button variant=\"ghost\" size=\"sm\" asChild>\n  <a href=\"/#contact\">Client Portal</a>\n</Button>\n<Button size=\"sm\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>"
+            },
+            {
+              "id": "cta_functionality-908b19d37b05",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional footer links",
+              "description": "Footer contains multiple links with href='#' that go nowhere: Services links, Company links (About Us, Our Team, Careers, Resources, Contact), and legal links (Privacy Policy, Terms of Service). These are placeholder links.",
+              "location": {
+                "file": "src/layouts/parts/Footer.tsx",
+                "line": 30,
+                "page": "Footer"
+              },
+              "recommendation": "Update all footer links with actual routes. Services should link to /services with anchors, Company links should route to actual pages or sections, legal links should point to policy pages.",
+              "autoFixable": true,
+              "suggestedFix": "Replace href='#' with actual routes:\n- Services: href='/services#compliance', href='/services#talent', etc.\n- About Us: href='/about'\n- Contact: href='/#contact'\n- Privacy/Terms: href='/privacy', href='/terms' (create these pages)"
+            },
+            {
+              "id": "cta_functionality-de74abf42620",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional hero CTAs",
+              "description": "Hero section CTAs ('Get Started' and 'Schedule Consultation') have no onClick handlers or href - they don't navigate anywhere when clicked.",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 89,
+                "page": "HomePage"
+              },
+              "recommendation": "Add navigation to contact form: <Button size='lg' asChild><a href='/#contact'>Get Free Assessment</a></Button>",
+              "autoFixable": true,
+              "suggestedFix": "Replace lines 89-96 with:\n<Button size=\"lg\" asChild>\n  <a href=\"/#contact\">Get Free Assessment</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>"
+            },
+            {
+              "id": "cta_functionality-d5ee0462f032",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional final CTA section",
+              "description": "Final CTA section has 'Schedule Consultation' and 'Call (555) 123-4567' buttons with no functionality - they don't navigate or initiate calls.",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 1013,
+                "page": "HomePage"
+              },
+              "recommendation": "Add href to make buttons functional: <a href='/#contact'> for consultation, <a href='tel:+15551234567'> for phone call.",
+              "autoFixable": true,
+              "suggestedFix": "Replace lines 1013-1020 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Schedule Consultation</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"tel:+15551234567\">Call (555) 123-4567</a>\n</Button>"
+            },
+            {
+              "id": "cta_functionality-f9a93e5aa3b7",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional About page CTA",
+              "description": "About page final CTA 'Get Started Today' button has no href or onClick - it doesn't navigate anywhere.",
+              "location": {
+                "file": "src/pages/about.tsx",
+                "line": 244,
+                "page": "AboutPage"
+              },
+              "recommendation": "Add href to contact form: <Button size='lg' variant='secondary' asChild><a href='/#contact'>Get Started Today</a></Button>",
+              "autoFixable": true,
+              "suggestedFix": "Replace line 244 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Get Started Today</a>\n</Button>"
+            },
+            {
+              "id": "cta_functionality-39c75892f641",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional Services page CTAs",
+              "description": "Services page has multiple 'Get Started with [Service]' buttons that don't navigate anywhere - no href or onClick handlers.",
+              "location": {
+                "file": "src/pages/services.tsx",
+                "line": 176,
+                "page": "ServicesPage"
+              },
+              "recommendation": "Add href to contact form with service context: <Button size='lg' asChild><a href='/#contact'>Get Started with {service.title}</a></Button>",
+              "autoFixable": true,
+              "suggestedFix": "Replace line 176 with:\n<Button size=\"lg\" asChild>\n  <a href=\"/#contact\">Get Started with {service.title}</a>\n</Button>"
+            },
+            {
+              "id": "cta_functionality-ea0027a7e6aa",
+              "category": "cta_functionality",
+              "severity": "error",
+              "title": "Non-functional Services page final CTA",
+              "description": "Services page final CTA section has 'Contact Us' and 'Call (555) 123-4567' buttons with no functionality.",
+              "location": {
+                "file": "src/pages/services.tsx",
+                "line": 196,
+                "page": "ServicesPage"
+              },
+              "recommendation": "Add href to make buttons functional: <a href='/#contact'> for contact, <a href='tel:+15551234567'> for phone.",
+              "autoFixable": true,
+              "suggestedFix": "Replace lines 196-203 with:\n<Button size=\"lg\" variant=\"secondary\" asChild>\n  <a href=\"/#contact\">Contact Us</a>\n</Button>\n<Button size=\"lg\" variant=\"outline\" asChild>\n  <a href=\"tel:+15551234567\">Call (555) 123-4567</a>\n</Button>"
+            }
+          ]
+        },
+        {
+          "name": "Trust Signals",
+          "engine": "semantic",
+          "status": "pass",
+          "issueCount": 2,
+          "issues": [
+            {
+              "id": "trust-a3d2e3298871",
+              "category": "trust",
+              "severity": "suggestion",
+              "title": "Client logos are placeholders",
+              "description": "Client logos section shows 12 companies with abbreviated names (TS, GL, CM, etc.) instead of actual logos. While this demonstrates social proof structure, real client logos or testimonials would be more credible.",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 166,
+                "page": "HomePage"
+              },
+              "recommendation": "Replace placeholder abbreviations with actual client logos (if permission obtained) or remove this section if real clients can't be displayed. Alternatively, use industry badges/certifications instead.",
+              "autoFixable": false
+            },
+            {
+              "id": "trust-d8f4dba0fbf0",
+              "category": "trust",
+              "severity": "suggestion",
+              "title": "Team photos are placeholder icons",
+              "description": "About page leadership team uses generic user icons instead of actual photos. Real photos would build more trust and credibility.",
+              "location": {
+                "file": "src/pages/about.tsx",
+                "line": 209,
+                "page": "AboutPage"
+              },
+              "recommendation": "Add actual team member photos or professional headshots. If photos aren't available, consider using professional illustrations or removing the visual element entirely.",
+              "autoFixable": false
+            }
+          ]
+        },
+        {
+          "name": "Form Validation",
+          "engine": "technical",
+          "status": "pass",
+          "issueCount": 2,
+          "issues": [
+            {
+              "id": "form_validation-2a25b09ce1fb",
+              "category": "form_validation",
+              "severity": "suggestion",
+              "title": "Contact form could use better client-side validation",
+              "description": "Contact form has basic HTML5 validation (required fields) but could benefit from more robust client-side validation with better error messages and field-specific validation (email format, phone format).",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 868,
+                "page": "HomePage"
+              },
+              "recommendation": "Add field-specific validation with clear error messages. Example: validate email format, phone format, provide inline error feedback before submission.",
+              "autoFixable": false
+            },
+            {
+              "id": "form_validation-884fbf4c5e83",
+              "category": "form_validation",
+              "severity": "suggestion",
+              "title": "Newsletter form could use better validation",
+              "description": "Newsletter form has basic HTML5 validation but could provide better user feedback with inline validation and clearer error messages.",
+              "location": {
+                "file": "src/pages/index.tsx",
+                "line": 730,
+                "page": "HomePage"
+              },
+              "recommendation": "Add email format validation with inline feedback, show validation errors before submission attempt.",
+              "autoFixable": false
+            }
+          ]
+        }
+      ]
+    },
+    "issueIds": [
+      "cta-206de3ddac54",
+      "cta_functionality-d74af6b750d0",
+      "cta_functionality-908b19d37b05",
+      "cta-d8f95cc6bc26",
+      "cta_functionality-de74abf42620",
+      "cta_functionality-d5ee0462f032",
+      "trust-a3d2e3298871",
+      "trust-d8f4dba0fbf0",
+      "cta_functionality-f9a93e5aa3b7",
+      "cta_functionality-39c75892f641",
+      "cta_functionality-ea0027a7e6aa",
+      "form_validation-2a25b09ce1fb",
+      "form_validation-884fbf4c5e83"
+    ]
+  }
+}
