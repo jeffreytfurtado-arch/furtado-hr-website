@@ -14,6 +14,10 @@ import CaseStudiesPage from './pages/case-studies';
 import BlogPage from './pages/blog';
 import ContactPage from './pages/contact';
 import HRAssessmentPage from './pages/hr-assessment';
+import ROICalculatorPage from './pages/roi-calculator';
+import SalaryBenchmarkingPage from './pages/salary-benchmarking';
+import TurnoverCalculatorPage from './pages/turnover-calculator';
+import HiringCalculatorPage from './pages/hiring-calculator';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
 import PortalEmployees from './pages/portal/employees';
@@ -90,6 +94,22 @@ export const routes: RouteObject[] = [
   {
     path: '/hr-assessment',
     element: <HRAssessmentPage />,
+  },
+  {
+    path: '/roi-calculator',
+    element: <ROICalculatorPage />,
+  },
+  {
+    path: '/salary-benchmarking',
+    element: <SalaryBenchmarkingPage />,
+  },
+  {
+    path: '/turnover-calculator',
+    element: <TurnoverCalculatorPage />,
+  },
+  {
+    path: '/hiring-calculator',
+    element: <HiringCalculatorPage />,
   },
   {
     path: '/portal',
