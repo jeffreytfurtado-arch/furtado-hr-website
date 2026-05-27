@@ -34,7 +34,7 @@ export default function LiveChat() {
 
     // Compliance questions
     if (msg.includes('compliance') || msg.includes('regulation') || msg.includes('legal') || msg.includes('law') || msg.includes('audit')) {
-      return "Our compliance team monitors federal, provincial, and territorial employment laws including Canada Labour Code, ESA, OHSA, and WSIB requirements. We provide proactive updates, policy reviews, and expert guidance. We've helped 500+ Canadian businesses avoid costly penalties. Want to learn more about our compliance services?";
+      return "Our compliance team monitors federal, provincial, and territorial employment laws including Canada Labour Code, ESA, OHSA, and WSIB requirements. We provide proactive updates, policy reviews, and expert guidance. We've helped 90+ Canadian businesses avoid costly penalties. Want to learn more about our compliance services?";
     }
 
     // Payroll questions
@@ -69,7 +69,7 @@ export default function LiveChat() {
 
     // Company size questions
     if (msg.includes('size') || msg.includes('employees') || msg.includes('small') || msg.includes('large') || msg.includes('startup') || msg.includes('growing')) {
-      return "We specialize in businesses with 10-500 employees. Our solutions are scalable and customized to fit your specific needs, whether you're a growing startup or established company. How many employees do you have?";
+      return "We specialize in businesses with 5-200 employees. Our solutions are scalable and customized to fit your specific needs, whether you're a growing startup or established company. How many employees do you have?";
     }
 
     // Support questions
@@ -94,7 +94,7 @@ export default function LiveChat() {
 
     // Testimonial/proof questions
     if (msg.includes('testimonial') || msg.includes('review') || msg.includes('client') || msg.includes('success') || msg.includes('result') || msg.includes('case study')) {
-      return "We maintain a 98% client satisfaction rate and have helped 500+ Canadian businesses transform their HR operations. Our clients report significant improvements in federal and provincial compliance, efficiency, and employee satisfaction. Check out our case studies and testimonials on the homepage!";
+      return "We maintain a 98% client satisfaction rate and have helped 90+ Canadian businesses transform their HR operations. Our clients report significant improvements in federal and provincial compliance, efficiency, and employee satisfaction. Check out our case studies and testimonials on the homepage!";
     }
 
     // Difference/comparison questions

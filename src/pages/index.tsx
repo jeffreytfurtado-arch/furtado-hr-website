@@ -31,10 +31,10 @@ const staggerChild = (delay: number) => ({
 
 export default function HomePage() {
   const stats = [
-    { value: '500+', label: 'Clients Served' },
+    { value: '90+', label: 'Clients Served' },
     { value: '15+', label: 'Years Experience' },
     { value: '98%', label: 'Client Satisfaction' },
-    { value: '24/7', label: 'Support Available' },
+    { value: '1,500+', label: 'Employees Supported' },
   ];
 
   const services = [
@@ -73,7 +73,7 @@ export default function HomePage() {
   const differentiators = [
     { title: 'Canadian Expertise', description: 'Deep knowledge of federal and provincial employment law across all Canadian jurisdictions.' },
     { title: 'Technology + Consulting', description: 'The only provider combining a full HR software platform with hands-on expert consulting.' },
-    { title: 'Scalable Solutions', description: 'From 5 employees to 500 — our services grow with your business, no long-term contracts required.' },
+    { title: 'Scalable Solutions', description: 'From 5 employees to 200 — our services grow with your business, no long-term contracts required.' },
   ];
 
   const faqs = [
@@ -100,7 +100,7 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-8 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Trusted by 500+ Canadian organizations
+              Trusted by 90+ Canadian organizations
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
               HR solutions that
@@ -325,7 +325,7 @@ export default function HomePage() {
               Ready to transform your HR?
             </h2>
             <p className="text-lg text-white/80 mb-10 leading-relaxed">
-              Join 500+ Canadian organizations that trust PreciseHR. Get a free assessment and see how we can help.
+              Join 90+ Canadian organizations that trust PreciseHR. Get a free assessment and see how we can help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">

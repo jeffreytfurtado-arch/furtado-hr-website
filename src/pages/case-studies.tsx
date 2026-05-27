@@ -66,7 +66,7 @@ const caseStudies = [
   {
     company: 'GreenRetail Group',
     industry: 'Retail',
-    size: '500+ employees',
+    size: '200+ employees',
     challenge: 'High seasonal turnover, inconsistent training across 15 locations, and difficulty managing multi-site workforce.',
     solution: 'Implemented centralized HRIS, standardized onboarding, and performance tracking across all locations.',
     results: [

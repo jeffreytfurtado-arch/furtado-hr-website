@@ -189,7 +189,7 @@ export default function TurnoverCalculatorPage() {
                   <div className="bg-primary/5 rounded-lg p-6 text-center">
                     <h3 className="font-bold mb-2">Reduce Turnover with Expert HR Support</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Our retention strategies have helped Canadian businesses reduce turnover by 50% and save millions in replacement costs.
+                      Our retention strategies have helped Canadian businesses reduce turnover by 50% and save significantly on replacement costs.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
                       <a href="tel:+14378872263">
@@ -223,8 +223,8 @@ export default function TurnoverCalculatorPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <DollarSign className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-bold mb-2">$2M+ Saved</h3>
-                <p className="text-sm text-muted-foreground">Total savings for our clients through reduced turnover</p>
+                <h3 className="font-bold mb-2">$1M+ Saved</h3>
+                <p className="text-sm text-muted-foreground">Estimated savings for our clients through reduced turnover</p>
               </CardContent>
             </Card>
             <Card>

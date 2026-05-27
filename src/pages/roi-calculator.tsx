@@ -122,7 +122,7 @@ export default function ROICalculatorPage() {
                       </label>
                       <span className="text-sm font-semibold">{employees}</span>
                     </div>
-                    <Slider value={[employees]} onValueChange={(v) => setEmployees(v[0])} min={5} max={500} step={5} />
+                    <Slider value={[employees]} onValueChange={(v) => setEmployees(v[0])} min={5} max={250} step={5} />
                   </div>
 
                   {/* Average Employee Salary */}
