@@ -1,0 +1,112 @@
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, Phone } from 'lucide-react';
+import { motion } from 'motion/react';
+import { getPostById, blogPosts } from '@/data/blog-data';
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+};
+
+export default function BlogPostPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const post = slug ? getPostById(slug) : undefined;
+
+  if (!post) return <Navigate to="/blog" replace />;
+
+  const currentIndex = blogPosts.findIndex((p) => p.id === post.id);
+  const nextPost = blogPosts[currentIndex + 1];
+  const prevPost = blogPosts[currentIndex - 1];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <title>{post.title} - PreciseHR</title>
+
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mb-6 transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Back to Blog
+            </Link>
+            <Badge className="mb-4 bg-white/10 text-white border-white/20">{post.category}</Badge>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight">{post.title}</h1>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-white/70">
+              <span className="flex items-center gap-2"><User className="w-4 h-4" />{post.author}</span>
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{post.date}</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" />{post.readTime}</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Content */}
+      <article className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <motion.p {...fadeUp} className="text-lg text-muted-foreground mb-8 italic border-l-4 border-primary pl-4">
+              {post.excerpt}
+            </motion.p>
+
+            {post.sections.map((section, i) => (
+              <motion.div key={i} {...fadeUp} className="mb-10">
+                <h2 className="text-2xl font-bold mb-4">{section.heading}</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">{section.content}</p>
+                {section.bullets && (
+                  <ul className="space-y-2 ml-1">
+                    {section.bullets.map((bullet, j) => (
+                      <li key={j} className="flex items-start gap-3 text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            ))}
+
+            {/* CTA */}
+            <motion.div {...fadeUp} className="bg-primary/5 border border-primary/20 rounded-lg p-8 my-12 text-center">
+              <p className="text-lg font-semibold mb-2">Need Help?</p>
+              <p className="text-muted-foreground mb-6">{post.cta}</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link to="/contact">
+                  <Button>
+                    Get Free Assessment <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <a href="tel:+14378872263">
+                  <Button variant="outline">
+                    <Phone className="mr-2 w-4 h-4" /> (437) 887-2263
+                  </Button>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Nav between posts */}
+            <div className="flex justify-between items-center pt-8 border-t">
+              {prevPost ? (
+                <Link to={`/blog/${prevPost.id}`} className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                  <span className="hidden sm:inline">{prevPost.title.length > 40 ? prevPost.title.slice(0, 40) + '...' : prevPost.title}</span>
+                  <span className="sm:hidden">Previous</span>
+                </Link>
+              ) : <div />}
+              {nextPost ? (
+                <Link to={`/blog/${nextPost.id}`} className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <span className="hidden sm:inline">{nextPost.title.length > 40 ? nextPost.title.slice(0, 40) + '...' : nextPost.title}</span>
+                  <span className="sm:hidden">Next</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              ) : <div />}
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}

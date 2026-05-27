@@ -18,6 +18,7 @@ import ROICalculatorPage from './pages/roi-calculator';
 import SalaryBenchmarkingPage from './pages/salary-benchmarking';
 import TurnoverCalculatorPage from './pages/turnover-calculator';
 import HiringCalculatorPage from './pages/hiring-calculator';
+import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
 import PortalEmployees from './pages/portal/employees';
@@ -86,6 +87,10 @@ export const routes: RouteObject[] = [
   {
     path: '/blog',
     element: <BlogPage />,
+  },
+  {
+    path: '/blog/:slug',
+    element: <BlogPostPage />,
   },
   {
     path: '/contact',
