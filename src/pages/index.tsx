@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import {
   Shield,
   Users,
@@ -14,9 +13,58 @@ import {
   Laptop,
   Phone,
   Search,
+  ClipboardCheck,
+  Scale,
+  UserX,
+  ChevronDown,
+  Plus,
+  Minus,
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, useAnimation } from 'motion/react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
+/* ── Intersection Observer hook ── */
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        setInView(true);
+        obs.disconnect();
+      }
+    }, { threshold: 0.3, ...options });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, inView };
+}
+
+/* ── Count-up hook ── */
+function useCountUp(end: number, duration = 2000, start = false, suffix = '', prefix = '') {
+  const [display, setDisplay] = useState(prefix + '0' + suffix);
+  useEffect(() => {
+    if (!start) return;
+    let startTime: number | null = null;
+    let frame: number;
+    const animate = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      // easeOutExpo
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.round(eased * end);
+      setDisplay(prefix + current.toLocaleString() + suffix);
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [start, end, duration, suffix, prefix]);
+  return display;
+}
+
+/* ── Animation variants ── */
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -29,6 +77,111 @@ const staggerChild = (delay: number) => ({
   transition: { ...fadeUp.transition, delay },
 });
 
+/* ── Stat counter component ── */
+function StatCounter({ value, label, delay }: { value: string; label: string; delay: number }) {
+  const { ref, inView } = useInView();
+  // Parse the value: "90+" -> end=90, suffix="+"
+  const numMatch = value.match(/^([^\d]*)(\d[\d,]*)(.*)$/);
+  const prefix = numMatch?.[1] || '';
+  const num = numMatch ? parseInt(numMatch[2].replace(/,/g, ''), 10) : 0;
+  const suffix = numMatch?.[3] || '';
+  const display = useCountUp(num, 2200, inView, suffix, prefix);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay }}
+      className="text-center"
+    >
+      <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{display}</div>
+      <div className="text-sm text-muted-foreground font-medium">{label}</div>
+    </motion.div>
+  );
+}
+
+/* ── FAQ Item component ── */
+function FaqItem({ question, answer, index }: { question: string; answer: string; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { ref, inView } = useInView();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div
+        className={`group relative rounded-xl border bg-card overflow-hidden transition-all duration-300 ${
+          isOpen ? 'border-primary/40 shadow-lg shadow-primary/5' : 'border-border hover:border-primary/20 hover:shadow-md'
+        }`}
+      >
+        {/* Gradient accent line */}
+        <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-cyan-400 to-primary transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'}`} />
+        
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full text-left p-5 md:p-6 flex items-center justify-between gap-4"
+        >
+          <span className="font-semibold text-sm md:text-base pr-2">{question}</span>
+          <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+            isOpen ? 'bg-primary text-white rotate-0' : 'bg-primary/10 text-primary'
+          }`}>
+            {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+          </div>
+        </button>
+
+        <div className={`grid transition-all duration-300 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+          <div className="overflow-hidden">
+            <div className="px-5 md:px-6 pb-5 md:pb-6 text-muted-foreground text-sm leading-relaxed border-t border-border/50 pt-4">
+              {answer}
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Process Step component ── */
+function ProcessStep({ step, title, desc, index }: { step: string; title: string; desc: string; index: number }) {
+  const { ref, inView } = useInView();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
+      className="relative"
+    >
+      <div className="relative bg-card rounded-2xl border p-8 hover:shadow-xl hover:border-primary/20 transition-all duration-500 group">
+        {/* Step number with animated ring */}
+        <div className="relative w-16 h-16 mb-6">
+          <div className={`absolute inset-0 rounded-full border-2 border-primary/20 transition-all duration-500 ${inView ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`} />
+          <div className="absolute inset-1 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/20">
+            <span className="text-xl font-bold text-white">{step}</span>
+          </div>
+        </div>
+        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+      </div>
+
+      {/* Connector line for desktop */}
+      {index < 2 && (
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 + index * 0.2 }}
+          className="hidden md:block absolute top-12 -right-[calc(50%-2rem)] w-[calc(100%-4rem)] h-[2px] bg-gradient-to-r from-primary/40 to-primary/10 origin-left"
+        />
+      )}
+    </motion.div>
+  );
+}
+
 export default function HomePage() {
   const stats = [
     { value: '90+', label: 'Clients Served' },
@@ -37,7 +190,7 @@ export default function HomePage() {
     { value: '1,500+', label: 'Employees Supported' },
   ];
 
-  const services = [
+  const primaryServices = [
     {
       icon: Laptop,
       title: 'HR Software Platform',
@@ -54,35 +207,54 @@ export default function HomePage() {
       description: 'Full-cycle recruitment from executive search to onboarding — find the right people, faster.',
     },
     {
-      icon: Shield,
-      title: 'Compliance & Risk',
-      description: 'Navigate Canadian employment law, workplace investigations, and regulatory requirements.',
-    },
-    {
-      icon: TrendingUp,
-      title: 'Performance Management',
-      description: 'Performance reviews, goal setting, succession planning, and career development programs.',
-    },
-    {
       icon: DollarSign,
       title: 'Compensation & Benefits',
       description: 'Salary benchmarking, benefits design, and total rewards strategy to attract and retain talent.',
     },
   ];
 
+  const secondaryServices = [
+    {
+      icon: Search,
+      title: 'Workplace Investigations',
+      description: 'Compliant, non-biased third-party investigations for harassment, violence, and workplace complaints.',
+    },
+    {
+      icon: UserX,
+      title: 'Termination Services',
+      description: 'Professional termination planning, severance calculation, legal compliance, and post-termination support.',
+    },
+    {
+      icon: Shield,
+      title: 'Compliance & Risk',
+      description: 'Navigate Canadian employment law, workplace safety, and regulatory requirements.',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Performance Management',
+      description: 'Performance reviews, goal setting, succession planning, and career development programs.',
+    },
+  ];
+
   const differentiators = [
     { title: 'Canadian Expertise', description: 'Deep knowledge of federal and provincial employment law across all Canadian jurisdictions.' },
     { title: 'Technology + Consulting', description: 'The only provider combining a full HR software platform with hands-on expert consulting.' },
-    { title: 'Scalable Solutions', description: 'From 5 employees to 200 — our services grow with your business, no long-term contracts required.' },
+    { title: 'Scalable Solutions', description: 'From 1 employee to 5,000 — our services grow with your business, no long-term contracts required.' },
   ];
 
   const faqs = [
-    { q: 'What size businesses do you work with?', a: 'We work with businesses of all sizes, from startups with just a few employees to established companies with hundreds of staff. Our services are scalable and customized to your needs.' },
-    { q: 'How quickly can you get started?', a: 'We can typically begin within 1-2 business days. For urgent matters like workplace investigations or terminations, we offer expedited onboarding.' },
-    { q: 'Do I need to use all your services?', a: 'No — you have complete flexibility. Many clients start with one or two services and expand as needs grow. We\'ll create a package that fits your business and budget.' },
-    { q: 'What makes PreciseHR different?', a: 'We combine cutting-edge HR technology with personalized consulting. Unlike providers that offer only software or only consulting, we provide both — plus deep expertise in Canadian employment law.' },
-    { q: 'How do you handle compliance?', a: 'Our team continuously monitors federal and provincial employment law changes. We proactively update our recommendations, and you\'ll receive timely alerts about changes affecting your business.' },
-    { q: 'What is your pricing structure?', a: 'We offer transparent, flexible pricing based on company size and selected services. Contact us for a free assessment and customized quote.' },
+    { q: 'What size businesses do you work with?', a: 'We work with businesses of all sizes, from solo founders to enterprises with thousands of employees. Our services are modular — you pick what you need, and we scale with you as you grow.' },
+    { q: 'How quickly can you get started?', a: 'We can typically begin within 1-2 business days. For urgent matters like workplace investigations or terminations, we offer same-day expedited onboarding.' },
+    { q: 'Do I need to use all your services?', a: 'Not at all. Many clients start with one or two services and expand over time. We\'ll build a package around your priorities and budget — no lock-in contracts.' },
+    { q: 'What makes PreciseHR different from other HR firms?', a: 'We combine cutting-edge HR technology with personalized consulting — most firms offer one or the other. Plus, we specialize in Canadian employment law across all provinces and territories.' },
+    { q: 'How do you handle compliance across provinces?', a: 'Our team continuously monitors federal and provincial employment law changes. You\'ll get proactive alerts and updated recommendations before changes affect your business.' },
+    { q: 'What is your pricing structure?', a: 'Transparent, flexible pricing based on company size and selected services. No hidden fees, no long-term contracts. Contact us for a free assessment and customized quote.' },
+  ];
+
+  const processSteps = [
+    { step: '01', title: 'Free Assessment', desc: 'We review your current HR operations and identify gaps, risks, and opportunities.' },
+    { step: '02', title: 'Custom Plan', desc: 'We design a tailored HR strategy and select the services that fit your needs and budget.' },
+    { step: '03', title: 'Ongoing Support', desc: 'Your dedicated HR team handles the work — you focus on growing your business.' },
   ];
 
   return (
@@ -96,7 +268,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
+            className="max-w-3xl mx-auto text-center"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-8 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -107,19 +279,20 @@ export default function HomePage() {
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-200">move your business forward</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
               Strategic consulting, powerful software, and deep Canadian expertise — everything you need to build exceptional teams and stay compliant.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
                   Get a Free Assessment
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/services">
+              <Link to="/hr-assessment">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 backdrop-blur-sm">
-                  Explore Services
+                  <ClipboardCheck className="mr-2 w-5 h-5" />
+                  Take Free HR Health Check
                 </Button>
               </Link>
             </div>
@@ -127,21 +300,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats — count up on scroll */}
       <section className="border-b bg-card">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
-              <motion.div key={i} {...staggerChild(i * 0.1)} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-              </motion.div>
+              <StatCounter key={i} value={stat.value} label={stat.label} delay={i * 0.1} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
+      {/* Primary Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -152,8 +322,8 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {services.map((service, i) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {primaryServices.map((service, i) => {
               const Icon = service.icon;
               return (
                 <motion.div key={i} {...staggerChild(i * 0.08)}>
@@ -171,7 +341,29 @@ export default function HomePage() {
             })}
           </div>
 
-          <motion.div {...fadeUp} className="text-center mt-12">
+          {/* Secondary Services — compact row */}
+          <motion.div {...fadeUp} className="mt-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {secondaryServices.map((service, i) => {
+                const Icon = service.icon;
+                return (
+                  <motion.div key={i} {...staggerChild(0.4 + i * 0.06)}>
+                    <div className="flex items-start gap-3 p-4 rounded-xl border bg-card hover:border-primary/20 hover:shadow-sm transition-all duration-300 group">
+                      <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                        <Icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-sm mb-1">{service.title}</h4>
+                        <p className="text-muted-foreground text-xs leading-relaxed">{service.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="text-center mt-10">
             <Link to="/services">
               <Button variant="outline" size="lg">
                 View All Services
@@ -182,31 +374,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why PreciseHR — full-width accent band */}
+      {/* Why PreciseHR */}
       <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Why PreciseHR</p>
-            <h2 className="text-3xl md:text-4xl font-bold">What sets us apart</h2>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <motion.div {...fadeUp}>
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&h=500&fit=crop&q=80"
+                  alt="Professional team collaborating"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {differentiators.map((item, i) => (
-              <motion.div key={i} {...staggerChild(i * 0.1)}>
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                    <span className="text-2xl font-bold text-primary">{i + 1}</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                </div>
+            <div>
+              <motion.div {...fadeUp}>
+                <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Why PreciseHR</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-8">What sets us apart</h2>
               </motion.div>
-            ))}
+
+              <div className="space-y-6">
+                {differentiators.map((item, i) => (
+                  <motion.div key={i} {...staggerChild(i * 0.15)} className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg font-bold text-primary">{i + 1}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Process */}
+      {/* Process — animated steps */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -214,22 +422,9 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold">Getting started is simple</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              { step: '01', title: 'Free Assessment', desc: 'We review your current HR operations and identify gaps, risks, and opportunities.' },
-              { step: '02', title: 'Custom Plan', desc: 'We design a tailored HR strategy and select the services that fit your needs and budget.' },
-              { step: '03', title: 'Ongoing Support', desc: 'Your dedicated HR team handles the work — you focus on growing your business.' },
-            ].map((item, i) => (
-              <motion.div key={i} {...staggerChild(i * 0.15)} className="relative">
-                <div className="text-6xl font-black text-primary/10 mb-2">{item.step}</div>
-                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-                {i < 2 && (
-                  <div className="hidden md:block absolute top-8 -right-4 w-8 text-primary/20">
-                    <ArrowRight className="w-8 h-8" />
-                  </div>
-                )}
-              </motion.div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {processSteps.map((item, i) => (
+              <ProcessStep key={i} step={item.step} title={item.title} desc={item.desc} index={i} />
             ))}
           </div>
 
@@ -281,33 +476,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — cutting edge design */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQ</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Frequently asked questions</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Got questions? We've got answers.</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">Everything you need to know about working with PreciseHR.</p>
           </motion.div>
 
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="bg-card border rounded-lg px-6 hover:border-primary/30 transition-colors">
-                  <AccordionTrigger className="text-left hover:no-underline py-5">
-                    <span className="font-semibold pr-4">{faq.q}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
-                    {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {faqs.map((faq, i) => (
+              <FaqItem key={i} question={faq.q} answer={faq.a} index={i} />
+            ))}
+          </div>
 
           <motion.div {...fadeUp} className="text-center mt-10">
-            <p className="text-muted-foreground mb-4">Have more questions?</p>
+            <p className="text-muted-foreground text-sm mb-4">Still have questions?</p>
             <Link to="/contact">
-              <Button variant="outline" size="lg">
+              <Button variant="outline">
                 Contact Us
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -316,18 +503,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
+      {/* Bottom CTA — compact */}
+      <section className="py-16 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <motion.div {...fadeUp} className="max-w-xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Ready to transform your HR?
             </h2>
-            <p className="text-lg text-white/80 mb-10 leading-relaxed">
-              Join 90+ Canadian organizations that trust PreciseHR. Get a free assessment and see how we can help.
+            <p className="text-white/80 mb-8 leading-relaxed">
+              Join 90+ Canadian organizations that trust PreciseHR.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/contact">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
                   Get Free Assessment

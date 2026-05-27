@@ -66,96 +66,60 @@ export function NewsletterSignup({ variant = 'default', showBenefits = true }: N
   if (variant === 'compact') {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        whileHover={{ y: -5 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4 }}
+        className="rounded-xl border bg-card/50 p-5"
       >
-        <Card className="bg-gradient-to-br from-primary/15 via-accent/10 to-primary/5 border-2 border-primary/30 shadow-xl relative overflow-hidden">
-          {/* Animated gradient background */}
+        {isSuccess ? (
           <motion.div
-            animate={{ 
-              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
-            }}
-            transition={{ 
-              duration: 10,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent opacity-50"
-            style={{ backgroundSize: '200% 200%' }}
-          />
-        <CardContent className="p-6">
-          {isSuccess ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-4"
-            >
-              <CheckCircle2 className="w-12 h-12 text-green-600 mx-auto mb-3" />
-              <h3 className="font-bold text-lg mb-2">You're Subscribed!</h3>
-              <p className="text-sm text-muted-foreground">Check your email for a welcome message.</p>
-            </motion.div>
-          ) : (
-            <>
-              <div className="flex items-center gap-2 mb-4 relative z-10">
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg"
-                >
-                  <Mail className="w-5 h-5 text-white" />
-                </motion.div>
-                <h3 className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Stay Informed</h3>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4 relative z-10">
-                Get monthly HR insights and compliance updates delivered to your inbox.
-              </p>
-              <form onSubmit={handleSubmit} className="space-y-3 relative z-10">
-                <div className="grid grid-cols-2 gap-2">
-                  <Input
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <Input
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <Input
-                  type="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  disabled={isSubmitting}
-                />
-                {error && <p className="text-sm text-red-600">{error}</p>}
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Subscribing...
-                    </>
-                  ) : (
-                    'Subscribe'
-                  )}
-                </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                  We respect your privacy. Unsubscribe anytime.
-                </p>
-              </form>
-            </>
-          )}
-        </CardContent>
-      </Card>
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex items-center gap-3 justify-center py-1"
+          >
+            <CheckCircle2 className="w-5 h-5 text-green-600" />
+            <p className="text-sm font-medium">You're subscribed! Check your email for a welcome message.</p>
+          </motion.div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row md:items-center gap-3">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Mail className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold whitespace-nowrap">Stay Informed</span>
+            </div>
+            <div className="flex flex-1 gap-2 items-center">
+              <Input
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                required
+                disabled={isSubmitting}
+                className="h-9 text-sm"
+              />
+              <Input
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                required
+                disabled={isSubmitting}
+                className="h-9 text-sm"
+              />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                disabled={isSubmitting}
+                className="h-9 text-sm"
+              />
+              <Button type="submit" size="sm" disabled={isSubmitting} className="h-9 px-5 flex-shrink-0">
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Subscribe'}
+              </Button>
+            </div>
+            {error && <p className="text-xs text-red-600">{error}</p>}
+          </form>
+        )}
       </motion.div>
     );
   }
