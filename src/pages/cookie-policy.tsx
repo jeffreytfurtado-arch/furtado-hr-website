@@ -120,7 +120,7 @@ export default function CookiePolicyPage() {
                   If you have questions about our use of cookies, please contact us:
                 </p>
                 <ul>
-                  <li>Email: <a href="mailto:admin@furtadofirm.ca">admin@furtadofirm.ca</a></li>
+                  <li>Email: <a href="mailto:info@precisehr.ca">info@precisehr.ca</a></li>
                   <li>Phone: <a href="tel:+14378872263">(437) 887-2263</a></li>
                   <li>Address: Toronto, Ontario, Canada</li>
                 </ul>

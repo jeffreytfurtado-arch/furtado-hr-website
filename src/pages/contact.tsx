@@ -369,8 +369,8 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h4 className="font-semibold mb-1">Email</h4>
-                        <a href="mailto:admin@furtadofirm.ca" className="text-sm text-muted-foreground hover:text-primary break-all">
-                          admin@furtadofirm.ca
+                        <a href="mailto:info@precisehr.ca" className="text-sm text-muted-foreground hover:text-primary break-all">
+                          info@precisehr.ca
                         </a>
                       </div>
                     </div>

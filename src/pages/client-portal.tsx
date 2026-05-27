@@ -232,9 +232,9 @@ export default function ClientPortal() {
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="mailto:admin@furtadofirm.ca">
+                <a href="mailto:info@precisehr.ca">
                   <Mail className="w-4 h-4 mr-2" />
-                  admin@furtadofirm.ca
+                  info@precisehr.ca
                 </a>
               </Button>
             </div>

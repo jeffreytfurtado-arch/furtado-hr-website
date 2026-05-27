@@ -28,7 +28,7 @@ export default function SettingsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email">Contact Email</Label>
-                  <Input id="email" type="email" defaultValue="admin@furtadofirm.ca" />
+                  <Input id="email" type="email" defaultValue="info@precisehr.ca" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
