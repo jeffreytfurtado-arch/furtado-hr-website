@@ -1,145 +1,91 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  Target, 
-  Heart, 
-  Award,
-  TrendingUp,
+import {
   Shield,
+  Heart,
+  Award,
   Lightbulb,
   CheckCircle2,
   ArrowRight,
-  ClipboardCheck,
-  Rocket,
-  Users
+  Phone,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+};
+
+const staggerChild = (delay: number) => ({
+  ...fadeUp,
+  transition: { ...fadeUp.transition, delay },
+});
+
 export default function AboutPage() {
   const values = [
-    {
-      icon: Shield,
-      title: 'Integrity',
-      description: 'We operate with transparency, honesty, and ethical practices in everything we do.'
-    },
-    {
-      icon: Heart,
-      title: 'People-First',
-      description: 'Your employees are your greatest asset. We help you build cultures where people thrive.'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Innovation',
-      description: 'We stay ahead of HR trends and leverage technology to deliver modern solutions.'
-    },
-    {
-      icon: Award,
-      title: 'Excellence',
-      description: 'We are committed to delivering precise, high-quality HR services that exceed expectations.'
-    }
-  ];
-
-  const processSteps = [
-    {
-      step: '01',
-      title: 'Free Assessment',
-      description: 'We start with a comprehensive analysis of your current HR practices, challenges, and goals. No obligation, no pressure - just expert insights into how we can help.',
-      icon: ClipboardCheck,
-      highlights: ['30-minute consultation', 'Identify pain points', 'Custom recommendations']
-    },
-    {
-      step: '02',
-      title: 'Custom Strategy',
-      description: 'Based on your assessment, we create a tailored HR solution plan. Choose the services you need - software, consulting, or both - with transparent pricing and clear deliverables.',
-      icon: Target,
-      highlights: ['Personalized roadmap', 'Flexible service options', 'Clear timeline & pricing']
-    },
-    {
-      step: '03',
-      title: 'Implementation',
-      description: 'Our team works alongside you to deploy systems, update policies, and train your staff. We handle the heavy lifting while keeping disruption to a minimum.',
-      icon: Rocket,
-      highlights: ['Seamless onboarding', 'Staff training included', 'Minimal disruption']
-    },
-    {
-      step: '04',
-      title: 'Ongoing Support',
-      description: 'HR doesn\'t stop after setup. We provide continuous guidance, software updates, compliance monitoring, and expert advice whenever you need it.',
-      icon: Users,
-      highlights: ['24/7 platform access', 'Expert advisors on-call', 'Regular compliance updates']
-    }
+    { icon: Shield, title: 'Integrity', description: 'Transparent, honest, and ethical practices in everything we do.' },
+    { icon: Heart, title: 'People-First', description: 'Your employees are your greatest asset. We help build cultures where people thrive.' },
+    { icon: Lightbulb, title: 'Innovation', description: 'We leverage the latest HR technology and stay ahead of industry trends.' },
+    { icon: Award, title: 'Excellence', description: 'Precise, high-quality services that consistently exceed expectations.' },
   ];
 
   const certifications = [
     'Chartered Professionals in Human Resources (CPHR)',
     'Society for Human Resource Management (SHRM)',
     'Human Resources Professionals Association (HRPA)',
-    'Canadian Payroll Association (CPA)'
+    'Canadian Payroll Association (CPA)',
   ];
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary via-primary to-secondary text-primary-foreground py-20 md:py-32">
-        <div className="absolute inset-0 bg-[url('https://media.gettyimages.com/id/2235463489/photo/a-shared-moment-of-success-and-joy.jpg?b=1&s=2048x2048&w=0&k=20&c=hVQst7SUgLZS0REuQ90nFpbiCbl4tA9fRVHmo78ClE8=')] bg-cover bg-center opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              About PreciseHR
+            <p className="text-sm font-semibold text-cyan-300 uppercase tracking-wider mb-4">About Us</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+              Your trusted partner in
+              <br />HR excellence
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90">
-              Your trusted partner in human resources excellence. We combine deep expertise 
-              with a commitment to precision, helping Canadian organizations build stronger teams 
-              and better workplaces.
+            <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+              We combine deep expertise with a commitment to precision, helping Canadian organizations build stronger teams and better workplaces.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full">
-                <CardContent className="pt-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <Target className="w-6 h-6 text-primary" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-                  <p className="text-muted-foreground text-lg">
-                    To empower organizations with precise, efficient, and compliant HR solutions 
-                    that enable them to attract, develop, and retain exceptional talent while 
-                    fostering positive workplace cultures.
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <motion.div {...staggerChild(0)}>
+              <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <CardContent className="p-8">
+                  <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Our Mission</p>
+                  <h2 className="text-2xl font-bold mb-4">Empowering organizations through precision HR</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To provide efficient, compliant HR solutions that enable organizations to attract, develop, and retain exceptional talent while fostering positive workplace cultures.
                   </p>
                 </CardContent>
               </Card>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full">
-                <CardContent className="pt-6">
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                    <TrendingUp className="w-6 h-6 text-accent" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
-                  <p className="text-muted-foreground text-lg">
-                    To be Canada's most trusted HR partner, recognized for our expertise, 
-                    innovation, and unwavering commitment to helping organizations achieve 
-                    their full potential through exceptional people management.
+            <motion.div {...staggerChild(0.1)}>
+              <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <CardContent className="p-8">
+                  <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Our Vision</p>
+                  <h2 className="text-2xl font-bold mb-4">Canada's most trusted HR partner</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To be recognized for our expertise, innovation, and unwavering commitment to helping organizations achieve their full potential through exceptional people management.
                   </p>
                 </CardContent>
               </Card>
@@ -148,39 +94,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Values */}
-      <section className="py-20 bg-background">
+      {/* Values */}
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Core Values</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide everything we do
-            </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Our Values</p>
+            <h2 className="text-3xl md:text-4xl font-bold">The principles that guide us</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {values.map((value, i) => {
               const Icon = value.icon;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="h-full text-center">
-                    <CardContent className="pt-6">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                        <Icon className="w-8 h-8 text-primary" />
+                <motion.div key={i} {...staggerChild(i * 0.1)}>
+                  <Card className="h-full text-center group hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                        <Icon className="w-7 h-7 text-primary" />
                       </div>
-                      <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                      <p className="text-muted-foreground">{value.description}</p>
+                      <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -190,146 +123,87 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Process */}
-      <section className="py-20 bg-muted">
+      {/* Process */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <span className="text-primary font-semibold">How It Works</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A simple, proven approach to transforming your HR operations
-            </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">How It Works</p>
+            <h2 className="text-3xl md:text-4xl font-bold">A proven approach</h2>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
-              {processSteps.map((process, index) => {
-                const Icon = process.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 }}
-                  >
-                    <Card className="h-full hover:shadow-xl transition-all border-2 hover:border-primary/50">
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4 mb-4">
-                          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <Icon className="w-8 h-8 text-primary" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-primary mb-1">Step {process.step}</div>
-                            <h3 className="text-2xl font-bold">{process.title}</h3>
-                          </div>
-                        </div>
-                        <p className="text-muted-foreground mb-4">{process.description}</p>
-                        <ul className="space-y-2">
-                          {process.highlights.map((highlight, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-sm">
-                              <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mt-12"
-            >
-              <Link to="/contact">
-                <Button size="lg">
-                  Start Your Free Assessment
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-            </motion.div>
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {[
+              { step: '01', title: 'Assessment', desc: 'Comprehensive review of your current HR practices, challenges, and goals.' },
+              { step: '02', title: 'Strategy', desc: 'Tailored plan with the right mix of software and consulting for your needs.' },
+              { step: '03', title: 'Implementation', desc: 'Hands-on deployment with training and minimal disruption to your team.' },
+              { step: '04', title: 'Ongoing Support', desc: 'Continuous guidance, compliance monitoring, and expert advice on-call.' },
+            ].map((item, i) => (
+              <motion.div key={i} {...staggerChild(i * 0.1)} className="text-center">
+                <div className="text-5xl font-black text-primary/10 mb-3">{item.step}</div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
+
+          <motion.div {...fadeUp} className="text-center mt-14">
+            <Link to="/contact">
+              <Button size="lg">
+                Start Your Free Assessment
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Certifications */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Certifications</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our team holds certifications from leading HR professional organizations
-            </p>
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Credentials</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Professional certifications</h2>
           </motion.div>
 
-          <div className="max-w-2xl mx-auto">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
             <Card>
-              <CardContent className="pt-6">
-                <ul className="space-y-3">
-                  {certifications.map((cert, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-lg">{cert}</span>
-                    </motion.li>
+              <CardContent className="p-8">
+                <div className="space-y-4">
+                  {certifications.map((cert, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                      <span className="font-medium">{cert}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Work Together?
-            </h2>
-            <p className="text-lg mb-8 text-primary-foreground/90">
+      {/* CTA */}
+      <section className="py-24 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to work together?</h2>
+            <p className="text-lg text-white/80 mb-10 leading-relaxed">
               Let's discuss how PreciseHR can help your organization achieve its HR goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Get Free HR Assessment
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
+                  Get Free Assessment
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/services">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 border-white/30 text-white">
-                  View Our Services
+              <a href="tel:+14378872263">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
+                  <Phone className="mr-2 w-4 h-4" />
+                  (437) 887-2263
                 </Button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

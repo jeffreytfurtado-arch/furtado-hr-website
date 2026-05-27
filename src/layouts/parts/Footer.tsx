@@ -9,7 +9,15 @@ export default function Footer() {
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Services', href: '/services' },
+      { name: 'Contact Us', href: '/contact' },
       { name: 'PreciseHR App', href: '/client-portal' },
+    ],
+    tools: [
+      { name: 'ROI Calculator', href: '/roi-calculator' },
+      { name: 'HR Health Check', href: '/hr-assessment' },
+      { name: 'Salary Benchmarking', href: '/salary-benchmarking' },
+      { name: 'Turnover Calculator', href: '/turnover-calculator' },
+      { name: 'Hiring Calculator', href: '/hiring-calculator' },
     ],
     resources: [
       { name: 'Blog', href: '/blog' },
@@ -37,7 +45,7 @@ export default function Footer() {
           <NewsletterSignup variant="compact" showBenefits={false} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block mb-4">
@@ -72,6 +80,23 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tools Links */}
+          <div>
+            <h3 className="font-semibold mb-4">Tools</h3>
+            <ul className="space-y-2">
+              {footerLinks.tools.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
