@@ -1,28 +1,33 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { NewsletterSignup } from '@/components/NewsletterSignup';
-import { 
-  Shield, 
-  Users, 
-  FileText, 
-  TrendingUp, 
+import {
+  Shield,
+  Users,
+  TrendingUp,
   ArrowRight,
   CheckCircle2,
-  Star,
   Briefcase,
   UserCheck,
-  Award,
   DollarSign,
   Laptop,
+  Phone,
   Search,
-  UserX,
-  ClipboardCheck,
-  Target,
-  Rocket
 } from 'lucide-react';
 import { motion } from 'motion/react';
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+};
+
+const staggerChild = (delay: number) => ({
+  ...fadeUp,
+  transition: { ...fadeUp.transition, delay },
+});
 
 export default function HomePage() {
   const stats = [
@@ -36,230 +41,85 @@ export default function HomePage() {
     {
       icon: Laptop,
       title: 'HR Software Platform',
-      description: 'All-in-one HR management software to streamline your operations and automate tasks.',
-      features: [
-        'Employee profiles & data repository',
-        'Document management & storage',
-        'Vacation & sick day tracking',
-        'Attendance monitoring',
-        'Policy document uploads',
-        'Legally compliant HR reports'
-      ],
-      link: '/client-portal',
-      hasButton: true
+      description: 'All-in-one HR management software to streamline operations, track employees, and automate compliance.',
     },
     {
       icon: Briefcase,
       title: 'HR Consulting & Strategy',
-      description: 'Strategic HR guidance to align your people practices with business objectives.',
-      features: [
-        'HR strategy development',
-        'Organizational design',
-        'Change management',
-        'HR policy development',
-        'Workforce planning',
-        'HR audits & assessments'
-      ],
-      link: '/services'
+      description: 'Strategic guidance to align your people practices with business objectives and drive growth.',
     },
     {
       icon: UserCheck,
-      title: 'Recruitment & Talent Acquisition',
-      description: 'Find and attract the right talent to build high-performing teams.',
-      features: [
-        'Executive search',
-        'Full-cycle recruitment',
-        'Candidate screening',
-        'Interview coordination',
-        'Employer branding',
-        'Onboarding programs'
-      ],
-      link: '/services'
+      title: 'Recruitment & Talent',
+      description: 'Full-cycle recruitment from executive search to onboarding — find the right people, faster.',
     },
     {
       icon: Shield,
-      title: 'Compliance & Risk Management',
-      description: 'Navigate Canadian employment law and mitigate workplace risks.',
-      features: [
-        'Employment law compliance',
-        'Policy & handbook creation',
-        'Workplace investigations',
-        'Health & safety programs',
-        'Regulatory updates',
-        'Risk assessments'
-      ],
-      link: '/services'
+      title: 'Compliance & Risk',
+      description: 'Navigate Canadian employment law, workplace investigations, and regulatory requirements.',
     },
     {
       icon: TrendingUp,
       title: 'Performance Management',
-      description: 'Drive employee performance and organizational success.',
-      features: [
-        'Performance review systems',
-        'Goal setting frameworks',
-        '360-degree feedback',
-        'Performance improvement plans',
-        'Succession planning',
-        'Career development'
-      ],
-      link: '/services'
-    },
-    {
-      icon: Award,
-      title: 'Training & Development',
-      description: 'Invest in your team\'s growth with customized learning programs.',
-      features: [
-        'Leadership development',
-        'Management training',
-        'Skills workshops',
-        'Coaching & mentoring',
-        'Team building',
-        'Diversity & inclusion training'
-      ],
-      link: '/services'
+      description: 'Performance reviews, goal setting, succession planning, and career development programs.',
     },
     {
       icon: DollarSign,
       title: 'Compensation & Benefits',
-      description: 'Design competitive compensation packages to attract and retain talent.',
-      features: [
-        'Salary benchmarking',
-        'Compensation structure design',
-        'Benefits program design',
-        'Total rewards strategy',
-        'Job evaluation',
-        'Incentive programs'
-      ],
-      link: '/services'
+      description: 'Salary benchmarking, benefits design, and total rewards strategy to attract and retain talent.',
     },
-    {
-      icon: FileText,
-      title: 'HR Documentation',
-      description: 'Professional documentation and policy management.',
-      features: [
-        'Employee handbooks',
-        'Job descriptions',
-        'Employment contracts',
-        'Policy templates',
-        'Forms & checklists',
-        'HR process documentation'
-      ],
-      link: '/services'
-    },
-    {
-      icon: Users,
-      title: 'Employee Relations',
-      description: 'Foster positive workplace culture and resolve employee issues.',
-      features: [
-        'Conflict resolution',
-        'Mediation services',
-        'Disciplinary processes',
-        'Employee engagement',
-        'Culture development',
-        'Workplace communication'
-      ],
-      link: '/services'
-    },
-    {
-      icon: Search,
-      title: 'Workplace Investigations',
-      description: 'Fully compliant, non-biased third-party investigations for workplace violence, harassment, and employee complaints with comprehensive reports.',
-      features: [
-        'Harassment investigations',
-        'Workplace violence assessments',
-        'Employee complaint resolution',
-        'Third-party neutral investigations',
-        'Comprehensive investigation reports',
-        'Legal compliance documentation'
-      ],
-      link: '/services'
-    },
-    {
-      icon: UserX,
-      title: 'Termination Services',
-      description: 'End-to-end termination support from planning to execution, including termination meetings, documentation, and compliance with Canadian employment laws.',
-      features: [
-        'Termination planning & strategy',
-        'Termination meeting facilitation',
-        'Severance package calculation',
-        'Legal compliance review',
-        'Documentation preparation',
-        'Post-termination support'
-      ],
-      link: '/services'
-    }
   ];
 
-  const whyChooseUs = [
-    {
-      title: 'Canadian Expertise',
-      description: 'Deep understanding of Canadian employment law, regulations, and best practices across all provinces.'
-    },
-    {
-      title: 'Tailored Solutions',
-      description: 'Customized HR strategies designed specifically for your industry, size, and organizational culture.'
-    },
-    {
-      title: 'Responsive Support',
-      description: '24/7 access to certified HR professionals who understand your business and respond when you need them.'
-    }
+  const differentiators = [
+    { title: 'Canadian Expertise', description: 'Deep knowledge of federal and provincial employment law across all Canadian jurisdictions.' },
+    { title: 'Technology + Consulting', description: 'The only provider combining a full HR software platform with hands-on expert consulting.' },
+    { title: 'Scalable Solutions', description: 'From 5 employees to 500 — our services grow with your business, no long-term contracts required.' },
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah M.',
-      company: 'Technology',
-      role: 'CEO',
-      content: 'PreciseHR transformed our HR operations. Their software platform and consulting services helped us scale from 20 to 150 employees seamlessly.',
-      rating: 5
-    },
-    {
-      name: 'David C.',
-      company: 'Manufacturing',
-      role: 'Operations Director',
-      content: 'The compliance support alone has saved us countless hours and potential legal issues. Their team is knowledgeable, responsive, and truly cares about our success.',
-      rating: 5
-    },
-    {
-      name: 'Jennifer T.',
-      company: 'Retail',
-      role: 'HR Manager',
-      content: 'Best decision we made was partnering with PreciseHR. The software is intuitive, and their consulting team feels like an extension of our own HR department.',
-      rating: 5
-    }
+  const faqs = [
+    { q: 'What size businesses do you work with?', a: 'We work with businesses of all sizes, from startups with just a few employees to established companies with hundreds of staff. Our services are scalable and customized to your needs.' },
+    { q: 'How quickly can you get started?', a: 'We can typically begin within 1-2 business days. For urgent matters like workplace investigations or terminations, we offer expedited onboarding.' },
+    { q: 'Do I need to use all your services?', a: 'No — you have complete flexibility. Many clients start with one or two services and expand as needs grow. We\'ll create a package that fits your business and budget.' },
+    { q: 'What makes PreciseHR different?', a: 'We combine cutting-edge HR technology with personalized consulting. Unlike providers that offer only software or only consulting, we provide both — plus deep expertise in Canadian employment law.' },
+    { q: 'How do you handle compliance?', a: 'Our team continuously monitors federal and provincial employment law changes. We proactively update our recommendations, and you\'ll receive timely alerts about changes affecting your business.' },
+    { q: 'What is your pricing structure?', a: 'We offer transparent, flexible pricing based on company size and selected services. Contact us for a free assessment and customized quote.' },
   ];
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary via-primary to-secondary text-primary-foreground py-20 md:py-32">
-        <div className="absolute inset-0 bg-[url('https://media.gettyimages.com/id/2229956035/photo/team-lunch-meeting-in-the-boardroom.jpg?b=1&s=2048x2048&w=0&k=20&c=shUfuIReGsFsMF5kX_LOkSZW-tuj2LCm95z7Vsh2wEI=')] bg-cover bg-center opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="container mx-auto px-4 py-24 md:py-36 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Comprehensive HR Solutions for
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-8 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              Trusted by 500+ Canadian organizations
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
+              HR solutions that
               <br />
-              <span className="text-accent">Canadian Businesses</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-200">move your business forward</span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8">
-              From strategic consulting to powerful HR software, we provide everything you need 
-              to build exceptional teams and maintain compliance.
+            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl leading-relaxed">
+              Strategic consulting, powerful software, and deep Canadian expertise — everything you need to build exceptional teams and stay compliant.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/hr-assessment">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Take Free HR Health Check
-                  <ClipboardCheck className="ml-2 w-5 h-5" />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contact">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
+                  Get a Free Assessment
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/contact">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 border-white/30 text-white">
-                  Schedule An Assessment
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 backdrop-blur-sm">
+                  Explore Services
                 </Button>
               </Link>
             </div>
@@ -267,456 +127,116 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-card py-12 border-b">
-        <div className="container mx-auto px-4">
+      {/* Stats */}
+      <section className="border-b bg-card">
+        <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+            {stats.map((stat, i) => (
+              <motion.div key={i} {...staggerChild(i * 0.1)} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* All Services */}
-      <section className="py-20 bg-background">
+      {/* Services */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">What We Do</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Comprehensive HR Solutions</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive HR solutions tailored to your organization's needs
+              From day-to-day operations to strategic initiatives, we cover every aspect of human resources.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <Card className="h-full hover:shadow-lg transition-all hover:border-primary/50">
-                    <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <motion.div key={i} {...staggerChild(i * 0.08)}>
+                  <Card className="h-full group hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                         <Icon className="w-6 h-6 text-primary" />
                       </div>
-                      <CardTitle className="text-xl">
-                        {service.title}
-                      </CardTitle>
-                      <CardDescription className="text-base">
-                        {service.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2 mb-4">
-                        {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link to="/contact">
-                        <Button className="w-full" size="sm">
-                          Schedule an Assessment
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </Link>
+                      <h3 className="text-lg font-bold mb-2">{service.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               );
             })}
           </div>
+
+          <motion.div {...fadeUp} className="text-center mt-12">
+            <Link to="/services">
+              <Button variant="outline" size="lg">
+                View All Services
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-muted">
+      {/* Why PreciseHR — full-width accent band */}
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose PreciseHR?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Trusted by over 500 Canadian organizations
-            </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Why PreciseHR</p>
+            <h2 className="text-3xl md:text-4xl font-bold">What sets us apart</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {whyChooseUs.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="h-full text-center">
-                  <CardContent className="pt-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </CardContent>
-                </Card>
+            {differentiators.map((item, i) => (
+              <motion.div key={i} {...staggerChild(i * 0.1)}>
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <span className="text-2xl font-bold text-primary">{i + 1}</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our Process */}
-      <section className="py-20 bg-background">
+      {/* Process */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <span className="text-primary font-semibold">How It Works</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A simple, proven approach to transforming your HR operations
-            </p>
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">How It Works</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Getting started is simple</h2>
           </motion.div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-primary to-transparent" />
-
-              {[
-                {
-                  step: '01',
-                  title: 'Free Assessment',
-                  description: 'We start with a comprehensive analysis of your current HR practices, challenges, and goals. No obligation, no pressure - just expert insights into how we can help.',
-                  icon: ClipboardCheck,
-                  highlights: ['30-minute consultation', 'Identify pain points', 'Custom recommendations']
-                },
-                {
-                  step: '02',
-                  title: 'Custom Strategy',
-                  description: 'Based on your assessment, we create a tailored HR solution plan. Choose the services you need - software, consulting, or both - with transparent pricing and clear deliverables.',
-                  icon: Target,
-                  highlights: ['Personalized roadmap', 'Flexible service options', 'Clear timeline & pricing']
-                },
-                {
-                  step: '03',
-                  title: 'Implementation',
-                  description: 'Our team works alongside you to deploy systems, update policies, and train your staff. We handle the heavy lifting while keeping disruption to a minimum.',
-                  icon: Rocket,
-                  highlights: ['Seamless onboarding', 'Staff training included', 'Minimal disruption']
-                },
-                {
-                  step: '04',
-                  title: 'Ongoing Support',
-                  description: 'HR doesn\'t stop after setup. We provide continuous guidance, software updates, compliance monitoring, and expert advice whenever you need it.',
-                  icon: Users,
-                  highlights: ['24/7 platform access', 'Expert advisors on-call', 'Regular compliance updates']
-                }
-              ].map((process, index) => {
-                const Icon = process.icon;
-                const isEven = index % 2 === 0;
-                
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2, duration: 0.6 }}
-                    className="relative mb-12 md:mb-20 last:mb-0"
-                  >
-                    <div className={`md:flex items-center gap-8 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                      {/* Content */}
-                      <div className="md:w-1/2">
-                        <Card className="hover:shadow-xl transition-all border-2 hover:border-primary/50">
-                          <CardContent className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                <Icon className="w-8 h-8 text-primary" />
-                              </div>
-                              <div>
-                                <div className="text-sm font-semibold text-primary mb-1">Step {process.step}</div>
-                                <h3 className="text-2xl font-bold">{process.title}</h3>
-                              </div>
-                            </div>
-                            <p className="text-muted-foreground mb-4">{process.description}</p>
-                            <ul className="space-y-2">
-                              {process.highlights.map((highlight, idx) => (
-                                <li key={idx} className="flex items-center gap-2 text-sm">
-                                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                  <span>{highlight}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </CardContent>
-                        </Card>
-                      </div>
-
-                      {/* Timeline dot */}
-                      <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg" />
-
-                      {/* Spacer for other side */}
-                      <div className="hidden md:block md:w-1/2" />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mt-12"
-            >
-              <Link to="/contact">
-                <Button size="lg">
-                  Start Your Free Assessment
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Real results from real businesses
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="h-full">
-                  <CardContent className="pt-6">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-4 italic">
-                      "{testimonial.content}"
-                    </p>
-                    <div className="border-t pt-4">
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                      <p className="text-sm text-primary">{testimonial.company}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
-        {/* Animated background elements */}
-        <motion.div
-          animate={{ 
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-            opacity: [0.1, 0.2, 0.1]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-10 left-10 w-96 h-96 bg-primary rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90],
-            opacity: [0.15, 0.25, 0.15]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-10 right-10 w-96 h-96 bg-accent rounded-full blur-3xl"
-        />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-              className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent rounded-full mb-4 shadow-lg"
-            >
-              <span className="text-white font-semibold text-sm">📬 Stay Connected</span>
-            </motion.div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Never Miss an Update
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join our community of HR professionals and get exclusive insights delivered monthly
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="max-w-5xl mx-auto"
-          >
-            <NewsletterSignup variant="default" showBenefits={true} />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <span className="text-primary font-semibold">FAQ</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get answers to common questions about our HR services
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <Accordion type="single" collapsible className="space-y-4">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              {
-                question: 'What size businesses do you work with?',
-                answer: 'We work with businesses of all sizes, from startups with just a few employees to established companies with hundreds of staff members. Our services are scalable and customized to meet the unique needs of your organization, whether you\'re a small business looking for foundational HR support or a larger company needing comprehensive HR management.'
-              },
-              {
-                question: 'How quickly can you get started?',
-                answer: 'We can typically begin working with you within 1-2 business days of our initial consultation. For urgent matters like workplace investigations or terminations, we offer expedited onboarding. Our streamlined process ensures you get the HR support you need without unnecessary delays.'
-              },
-              {
-                question: 'Do I need to use all your services or can I pick specific ones?',
-                answer: 'You have complete flexibility to choose exactly the services you need. Many clients start with one or two core services and expand as their needs grow. Whether you need just our HR software platform, specific consulting services, or a comprehensive HR solution, we\'ll create a package that works for your business and budget.'
-              },
-              {
-                question: 'What makes Precise HR different from other HR providers?',
-                answer: 'We combine cutting-edge HR technology with personalized consulting services. Unlike providers that offer only software or only consulting, we provide both—giving you the tools to manage HR efficiently while having expert advisors available when you need strategic guidance. Plus, our deep expertise in Canadian employment law ensures you stay compliant.'
-              },
-              {
-                question: 'How do you ensure compliance with changing regulations?',
-                answer: 'Our team continuously monitors federal and provincial employment law changes across Canada. We proactively update our software, policies, and recommendations to reflect new regulations. You\'ll receive timely alerts about changes that affect your business, along with guidance on implementation. Our compliance audits help identify and address potential issues before they become problems.'
-              },
-              {
-                question: 'What is your pricing structure?',
-                answer: 'We offer transparent, flexible pricing based on your company size and selected services. Our HR software platform starts with affordable monthly subscriptions, while consulting services can be purchased as needed or through retainer packages. Contact us for a free assessment and customized quote—we\'ll create a solution that fits your budget.'
-              },
-              {
-                question: 'Do you provide support for remote and hybrid workforces?',
-                answer: 'Absolutely! Our cloud-based HR platform is designed for modern workplaces, whether your team is in-office, remote, or hybrid. We help you create policies, manage performance, and maintain compliance across distributed teams. Our training programs are available virtually, and our consultants are experienced in addressing the unique challenges of remote work.'
-              },
-              {
-                question: 'What kind of support can I expect?',
-                answer: 'You\'ll have access to our expert HR team via phone, email, and our client portal. Response times vary by service level, but we typically respond to inquiries within 24 hours. For urgent matters like workplace investigations or legal compliance issues, we offer priority support. Our software platform includes built-in help resources and live chat support.'
-              },
-              {
-                question: 'Can you integrate with our existing systems?',
-                answer: 'Our HR software platform integrates with many popular payroll, accounting, and business management systems. During onboarding, we\'ll assess your current technology stack and recommend the best integration approach. We can also work alongside your existing systems if you prefer to keep certain tools in place.'
-              },
-              {
-                question: 'What if we need to cancel or change services?',
-                answer: 'We offer flexible contracts with no long-term commitments for most services. You can adjust your service level or cancel with 30 days\' notice. Our goal is to earn your business every month through exceptional service, not lock you into rigid contracts. If your needs change, we\'ll work with you to find the right solution.'
-              },
-              {
-                question: 'Do you handle workplace investigations?',
-                answer: 'Yes, we provide fully compliant, non-biased third-party investigations for workplace violence, harassment, and employee complaints. Our investigators are trained professionals who conduct thorough, confidential investigations and provide comprehensive reports that meet legal standards. This protects both your employees and your organization.'
-              },
-              {
-                question: 'Can you help with employee terminations?',
-                answer: 'We offer end-to-end termination support, from planning and strategy to facilitating termination meetings and ensuring legal compliance. We help you calculate appropriate severance, prepare documentation, and navigate the process professionally and compassionately. Our guidance minimizes legal risk and maintains workplace morale.'
-              }
-            ].map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="bg-card border border-border rounded-lg px-6 hover:border-primary/50 transition-colors">
-                <AccordionTrigger className="text-left hover:no-underline py-6">
-                  <span className="text-lg font-semibold pr-4">{faq.question}</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6 pt-2">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              { step: '01', title: 'Free Assessment', desc: 'We review your current HR operations and identify gaps, risks, and opportunities.' },
+              { step: '02', title: 'Custom Plan', desc: 'We design a tailored HR strategy and select the services that fit your needs and budget.' },
+              { step: '03', title: 'Ongoing Support', desc: 'Your dedicated HR team handles the work — you focus on growing your business.' },
+            ].map((item, i) => (
+              <motion.div key={i} {...staggerChild(i * 0.15)} className="relative">
+                <div className="text-6xl font-black text-primary/10 mb-2">{item.step}</div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-8 -right-4 w-8 text-primary/20">
+                    <ArrowRight className="w-8 h-8" />
+                  </div>
+                )}
+              </motion.div>
             ))}
-            </Accordion>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <p className="text-muted-foreground mb-4">Still have questions?</p>
+          <motion.div {...fadeUp} className="text-center mt-14">
             <Link to="/contact">
               <Button size="lg">
-                Contact Us
+                Book Your Free Assessment
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -724,33 +244,102 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
+      {/* Testimonials */}
+      <section className="py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Testimonials</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Trusted by Canadian businesses</h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { name: 'Sarah M.', role: 'CEO', industry: 'Technology', quote: 'PreciseHR transformed our HR operations. Their software and consulting helped us scale from 20 to 150 employees seamlessly.' },
+              { name: 'David C.', role: 'Operations Director', industry: 'Manufacturing', quote: 'The compliance support alone has saved us countless hours and potential legal issues. Their team truly cares about our success.' },
+              { name: 'Jennifer T.', role: 'HR Manager', industry: 'Retail', quote: 'Best decision we made. The software is intuitive, and their consulting team feels like an extension of our HR department.' },
+            ].map((t, i) => (
+              <motion.div key={i} {...staggerChild(i * 0.1)}>
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, j) => (
+                        <svg key={j} className="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 italic">"{t.quote}"</p>
+                    <div className="border-t pt-4">
+                      <p className="font-semibold text-sm">{t.name}</p>
+                      <p className="text-xs text-muted-foreground">{t.role} · {t.industry}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-16">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Frequently asked questions</h2>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="bg-card border rounded-lg px-6 hover:border-primary/30 transition-colors">
+                  <AccordionTrigger className="text-left hover:no-underline py-5">
+                    <span className="font-semibold pr-4">{faq.q}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="text-center mt-10">
+            <p className="text-muted-foreground mb-4">Have more questions?</p>
+            <Link to="/contact">
+              <Button variant="outline" size="lg">
+                Contact Us
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your HR?
+              Ready to transform your HR?
             </h2>
-            <p className="text-lg mb-8 text-primary-foreground/90">
-              Join over 500 Canadian organizations that trust PreciseHR for their HR needs.
+            <p className="text-lg text-white/80 mb-10 leading-relaxed">
+              Join 500+ Canadian organizations that trust PreciseHR. Get a free assessment and see how we can help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Get Free HR Assessment
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
+                  Get Free Assessment
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/services">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 border-white/30 text-white">
-                  Learn About Our Services
+              <a href="tel:+14378872263">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
+                  <Phone className="mr-2 w-4 h-4" />
+                  (437) 887-2263
                 </Button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
