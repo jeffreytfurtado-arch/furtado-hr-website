@@ -98,7 +98,7 @@ export default function ContactPage() {
       setSubscribeToNewsletter(false);
       
       // Immediately redirect to Calendly
-      window.open('https://calendly.com/admin-furtadofirm/30min', '_blank');
+      window.open('https://calendly.com/precisehr-info/precisehr-consult', '_blank');
     } catch (err) {
       setError('Something went wrong. Please try again or call us directly.');
     } finally {
@@ -444,7 +444,7 @@ export default function ContactPage() {
             <Card>
               <CardContent className="p-0">
                 <div className="calendly-inline-widget" 
-                  data-url="https://calendly.com/admin-furtadofirm/30min?hide_gdpr_banner=1&primary_color=8b5cf6" 
+                  data-url="https://calendly.com/precisehr-info/precisehr-consult?hide_gdpr_banner=1&primary_color=8b5cf6" 
                   style={{ minWidth: '320px', height: '700px' }}
                 />
               </CardContent>
