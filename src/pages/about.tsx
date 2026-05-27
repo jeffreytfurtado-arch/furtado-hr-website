@@ -15,7 +15,6 @@ import {
   Laptop,
   Briefcase,
   Target,
-  Linkedin,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
@@ -248,55 +247,6 @@ export default function AboutPage() {
               </Card>
             </AnimatedCard>
           </div>
-        </div>
-      </section>
-
-      {/* Leadership */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Leadership</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Who's behind PreciseHR</h2>
-          </motion.div>
-
-          <AnimatedCard index={0} className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-0">
-                <div className="grid md:grid-cols-5 gap-0">
-                  <div className="md:col-span-2 relative bg-gradient-to-br from-primary/10 to-primary/5">
-                    <img
-                      src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=600&fit=crop&q=80"
-                      alt="Professional headshot"
-                      className="w-full h-64 md:h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center">
-                    <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Managing Partner & Principal Consultant</p>
-                    <h3 className="text-2xl font-bold mb-1">Jeffrey Furtado</h3>
-                    <p className="text-sm text-muted-foreground mb-5">CPHR · SHRM-SCP</p>
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                      With over 15 years of experience spanning HR strategy, employment law compliance, and organizational design, Jeffrey founded PreciseHR to give Canadian businesses access to the caliber of HR expertise typically reserved for large enterprises.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      His approach combines technology-driven efficiency with the personal attention that complex people challenges demand — from high-growth startups navigating their first hires to established companies restructuring for scale.
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                        <Linkedin className="w-5 h-5" />
-                      </a>
-                      <Link to="/contact">
-                        <Button size="sm" variant="outline">
-                          Get in Touch
-                          <ArrowRight className="ml-2 w-3 h-3" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedCard>
         </div>
       </section>
 
