@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 export default function Footer() {
@@ -32,9 +32,7 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'Facebook', icon: Facebook, href: '#' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/precisehrcanada/' },
   ];
 
   return (
