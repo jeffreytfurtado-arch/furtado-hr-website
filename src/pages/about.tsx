@@ -182,7 +182,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '90+', label: 'Clients Served' },
+              { value: '13', label: 'Provinces Covered' },
               { value: '15+', label: 'Years Experience' },
               { value: '98%', label: 'Client Satisfaction' },
               { value: '1,500+', label: 'Employees Supported' },

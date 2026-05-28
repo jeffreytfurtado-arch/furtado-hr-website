@@ -188,7 +188,7 @@ function ProcessStep({ step, title, desc, index }: { step: string; title: string
 
 export default function HomePage() {
   const stats = [
-    { value: '90+', label: 'Clients Served' },
+    { value: '13', label: 'Provinces Covered' },
     { value: '15+', label: 'Years Experience' },
     { value: '98%', label: 'Client Satisfaction' },
     { value: '1,500+', label: 'Employees Supported' },
@@ -277,7 +277,7 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-8 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Trusted by 90+ Canadian organizations
+              Trusted by Canadian organizations nationwide
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
               HR solutions that
@@ -582,7 +582,7 @@ export default function HomePage() {
               Ready to transform your HR?
             </h2>
             <p className="text-white/80 mb-8 leading-relaxed">
-              Join 90+ Canadian organizations that trust PreciseHR.
+              Join the Canadian organizations that trust PreciseHR.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/contact">
