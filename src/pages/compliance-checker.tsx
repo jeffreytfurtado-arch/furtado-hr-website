@@ -17,6 +17,8 @@ import {
   ChevronRight,
   Sparkles,
   RefreshCw,
+  FileSearch,
+  Scale,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState, useRef, useEffect } from 'react';
@@ -101,6 +103,147 @@ function PriorityBadge({ priority }: { priority: string }) {
     <span className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${styles[priority] || styles.medium}`}>
       {priority}
     </span>
+  );
+}
+
+/* ── Multi-stage loading animation ── */
+function ComplianceLoadingAnimation({ province, companySize, industry }: { province: string; companySize: string; industry: string }) {
+  const [activeStep, setActiveStep] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const steps = [
+    { icon: MapPin, label: `Loading ${province} employment standards`, duration: 3000 },
+    { icon: Shield, label: 'Reviewing health & safety requirements', duration: 3500 },
+    { icon: Scale, label: 'Checking human rights & pay equity obligations', duration: 3000 },
+    { icon: FileSearch, label: 'Analyzing compliance gaps against your practices', duration: 4000 },
+    { icon: AlertTriangle, label: 'Assessing risk levels and priorities', duration: 2500 },
+    { icon: Sparkles, label: 'Generating your personalized report', duration: 3000 },
+  ];
+
+  useEffect(() => {
+    // Progress bar animation
+    const totalDuration = 19000;
+    const startTime = Date.now();
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const pct = Math.min((elapsed / totalDuration) * 100, 95);
+      setProgress(pct);
+    }, 100);
+
+    // Step progression
+    let stepTimeout: ReturnType<typeof setTimeout>;
+    let currentStep = 0;
+    const advanceStep = () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        setActiveStep(currentStep);
+        stepTimeout = setTimeout(advanceStep, steps[currentStep].duration);
+      }
+    };
+    stepTimeout = setTimeout(advanceStep, steps[0].duration);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearTimeout(stepTimeout);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Card className="overflow-hidden">
+        {/* Progress bar */}
+        <div className="h-1 bg-muted">
+          <motion.div
+            className="h-full bg-gradient-to-r from-primary via-cyan-500 to-primary"
+            initial={{ width: '0%' }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.3, ease: 'linear' }}
+          />
+        </div>
+
+        <CardContent className="p-8 md:p-10">
+          {/* Animated pulse icon */}
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              <motion.div
+                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-0 rounded-2xl bg-primary/20"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0, 0.2] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                className="absolute inset-0 rounded-2xl bg-primary/15"
+              />
+              <div className="relative w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <motion.div
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Shield className="w-8 h-8 text-primary" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-center mb-2">Analyzing your compliance</h3>
+          <p className="text-muted-foreground text-sm text-center mb-8">
+            {companySize} {industry.toLowerCase()} company in {province}
+          </p>
+
+          {/* Steps */}
+          <div className="space-y-3 max-w-md mx-auto">
+            {steps.map((step, i) => {
+              const Icon = step.icon;
+              const isActive = i === activeStep;
+              const isComplete = i < activeStep;
+              const isPending = i > activeStep;
+
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: isPending ? 0.3 : 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-500 ${
+                    isActive ? 'bg-primary/5 border border-primary/20' : 'border border-transparent'
+                  }`}
+                >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500 ${
+                    isComplete ? 'bg-green-100 dark:bg-green-950' :
+                    isActive ? 'bg-primary/10' : 'bg-muted'
+                  }`}>
+                    {isComplete ? (
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    ) : isActive ? (
+                      <motion.div animate={{ rotate: 360 }} transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}>
+                        <Loader2 className="w-4 h-4 text-primary" />
+                      </motion.div>
+                    ) : (
+                      <Icon className="w-4 h-4 text-muted-foreground" />
+                    )}
+                  </div>
+                  <span className={`text-sm transition-all duration-500 ${
+                    isActive ? 'font-medium text-foreground' :
+                    isComplete ? 'text-muted-foreground' : 'text-muted-foreground/50'
+                  }`}>
+                    {step.label}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <p className="text-xs text-muted-foreground text-center mt-6">
+            {Math.round(progress)}% complete
+          </p>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
 
@@ -406,23 +549,7 @@ export default function ComplianceCheckerPage() {
 
             {/* Loading state */}
             {isGenerating && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-20"
-              >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                  className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6"
-                >
-                  <Shield className="w-8 h-8 text-primary" />
-                </motion.div>
-                <h3 className="text-xl font-bold mb-3">Running your compliance check...</h3>
-                <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
-                  Analyzing {formData.province} employment law requirements for a {formData.companySize} {formData.industry.toLowerCase()} company. This takes about 15 seconds.
-                </p>
-              </motion.div>
+              <ComplianceLoadingAnimation province={formData.province} companySize={formData.companySize} industry={formData.industry} />
             )}
 
             {/* Results */}

@@ -19,6 +19,9 @@ import {
   Zap,
   Bot,
   FileText,
+  CheckCircle2,
+  Users,
+  Shield,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState, useRef, useEffect } from 'react';
@@ -49,6 +52,111 @@ const staggerChild = (delay: number) => ({
   ...fadeUp,
   transition: { ...fadeUp.transition, delay },
 });
+
+/* ── Multi-stage loading animation for JD Generator ── */
+function JDLoadingAnimation({ jobTitle, industry }: { jobTitle: string; industry: string }) {
+  const [activeStep, setActiveStep] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const steps = [
+    { icon: Building2, label: `Analyzing ${industry} role requirements` },
+    { icon: Shield, label: 'Applying Canadian employment standards' },
+    { icon: Users, label: 'Crafting responsibilities & qualifications' },
+    { icon: Sparkles, label: 'Writing your job description' },
+  ];
+
+  useEffect(() => {
+    const totalDuration = 12000;
+    const startTime = Date.now();
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      setProgress(Math.min((elapsed / totalDuration) * 100, 95));
+    }, 100);
+
+    const stepDurations = [2500, 3000, 3500, 3000];
+    let currentStep = 0;
+    let stepTimeout: ReturnType<typeof setTimeout>;
+    const advanceStep = () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        setActiveStep(currentStep);
+        stepTimeout = setTimeout(advanceStep, stepDurations[currentStep]);
+      }
+    };
+    stepTimeout = setTimeout(advanceStep, stepDurations[0]);
+
+    return () => { clearInterval(progressInterval); clearTimeout(stepTimeout); };
+  }, []);
+
+  return (
+    <div className="rounded-2xl border bg-card overflow-hidden min-h-[400px] flex flex-col">
+      <div className="h-1 bg-muted">
+        <motion.div
+          className="h-full bg-gradient-to-r from-primary via-cyan-500 to-primary"
+          initial={{ width: '0%' }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.3, ease: 'linear' }}
+        />
+      </div>
+      <div className="flex-1 flex flex-col items-center justify-center p-8">
+        <div className="relative mb-6">
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-0 rounded-2xl bg-primary/20"
+          />
+          <div className="relative w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+            <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 3, repeat: Infinity }}>
+              <FileText className="w-7 h-7 text-primary" />
+            </motion.div>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold mb-1">Generating: {jobTitle}</h3>
+        <p className="text-xs text-muted-foreground mb-6">{industry}</p>
+
+        <div className="space-y-2 w-full max-w-xs">
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            const isActive = i === activeStep;
+            const isComplete = i < activeStep;
+            const isPending = i > activeStep;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: isPending ? 0.3 : 1, x: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-500 ${
+                  isActive ? 'bg-primary/5 border border-primary/20' : 'border border-transparent'
+                }`}
+              >
+                <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-all duration-500 ${
+                  isComplete ? 'bg-green-100 dark:bg-green-950' : isActive ? 'bg-primary/10' : 'bg-muted'
+                }`}>
+                  {isComplete ? (
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
+                  ) : isActive ? (
+                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}>
+                      <Loader2 className="w-3.5 h-3.5 text-primary" />
+                    </motion.div>
+                  ) : (
+                    <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+                  )}
+                </div>
+                <span className={`text-xs ${isActive ? 'font-medium' : isComplete ? 'text-muted-foreground' : 'text-muted-foreground/50'}`}>
+                  {step.label}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        <p className="text-[10px] text-muted-foreground mt-4">{Math.round(progress)}% complete</p>
+      </div>
+    </div>
+  );
+}
 
 export default function JDGeneratorPage() {
   const [formData, setFormData] = useState({
@@ -299,19 +407,7 @@ export default function JDGeneratorPage() {
                     </p>
                   </div>
                 ) : isGenerating ? (
-                  <div className="rounded-2xl border bg-card p-12 text-center h-full flex flex-col items-center justify-center min-h-[400px]">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                      className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6"
-                    >
-                      <Sparkles className="w-8 h-8 text-primary" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold mb-3">Generating your job description...</h3>
-                    <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-                      Our intelligent system is crafting a tailored, compliant job description for your role. This takes about 10 seconds.
-                    </p>
-                  </div>
+                  <JDLoadingAnimation jobTitle={formData.jobTitle} industry={formData.industry} />
                 ) : (
                   <Card className="overflow-hidden">
                     <div className="flex items-center justify-between px-6 py-4 border-b bg-muted/30">
