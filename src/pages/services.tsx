@@ -36,26 +36,26 @@ export default function ServicesPage() {
     {
       icon: Laptop,
       title: 'HR Software Platform',
-      description: 'All-in-one HR management software to streamline operations and automate tasks.',
-      features: ['Employee profiles & data repository', 'Document management & storage', 'Vacation & sick day tracking', 'Attendance monitoring', 'Policy document uploads', 'Legally compliant HR reports'],
+      description: 'Intelligent HR management software that automates tasks, flags risks, and delivers real-time workforce insights.',
+      features: ['Automated employee profiles & data management', 'Intelligent document management & storage', 'Smart vacation & sick day tracking', 'Automated attendance monitoring', 'Policy document management with alerts', 'Auto-generated compliance reports'],
     },
     {
       icon: Briefcase,
       title: 'HR Consulting & Strategy',
-      description: 'Strategic HR guidance aligned with your business objectives.',
-      features: ['HR strategy development', 'Organizational design', 'Change management', 'HR policy development', 'Workforce planning', 'HR audits & assessments'],
+      description: 'Data-driven HR guidance aligned with your business objectives.',
+      features: ['HR strategy development', 'Organizational design', 'Change management', 'Intelligent policy development', 'Workforce planning & analytics', 'Automated HR audits & assessments'],
     },
     {
       icon: UserCheck,
       title: 'Recruitment & Talent',
-      description: 'Find and attract the right talent to build high-performing teams.',
-      features: ['Executive search', 'Full-cycle recruitment', 'Candidate screening', 'Interview coordination', 'Employer branding', 'Onboarding programs'],
+      description: 'Smart recruitment — automated screening, intelligent matching, faster hires.',
+      features: ['Executive search', 'Full-cycle recruitment', 'Automated candidate screening', 'Interview coordination', 'Employer branding', 'Streamlined onboarding programs'],
     },
     {
       icon: Shield,
       title: 'Compliance & Risk',
-      description: 'Navigate Canadian employment law and mitigate workplace risks.',
-      features: ['Employment law compliance', 'Policy & handbook creation', 'Health & safety programs', 'Regulatory updates', 'Risk assessments', 'Audit preparation'],
+      description: 'Automated compliance monitoring across all Canadian jurisdictions.',
+      features: ['Automated employment law monitoring', 'Intelligent policy & handbook creation', 'Health & safety programs', 'Real-time regulatory alerts', 'Automated risk assessments', 'Audit-ready documentation'],
     },
     {
       icon: TrendingUp,
@@ -107,12 +107,12 @@ export default function ServicesPage() {
   ];
 
   const benefits = [
-    'Reduce HR administrative burden by up to 60%',
-    'Ensure 100% compliance with Canadian employment law',
-    'Improve employee retention rates',
-    'Access to certified HR professionals',
+    'Reduce HR administrative burden by up to 60% with intelligent automation',
+    'Automated compliance monitoring across all Canadian jurisdictions',
+    'Predictive analytics to improve employee retention',
+    'Instant document generation — job descriptions, policies, contracts',
     'Scalable solutions that grow with your business',
-    'Cost-effective alternative to in-house HR',
+    'Lower costs than in-house HR with better coverage',
   ];
 
   return (
@@ -130,11 +130,11 @@ export default function ServicesPage() {
           >
             <p className="text-sm font-semibold text-cyan-300 uppercase tracking-wider mb-4">Our Services</p>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-              Comprehensive HR solutions
+              Intelligent HR solutions
               <br />for Canadian businesses
             </h1>
             <p className="text-lg text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-              From strategic consulting to day-to-day support, we provide the expertise you need to build and manage exceptional teams.
+              From strategic consulting to automated compliance, we combine expert guidance with intelligent technology to manage your people smarter.
             </p>
             <Link to="/contact">
               <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
@@ -151,9 +151,9 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-16">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Full-Spectrum HR</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything your organization needs</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Intelligent tools, expert guidance</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose the services that fit — from a single area of support to a complete HR solution.
+              Every service is enhanced with built-in intelligence — automating the routine so your team can focus on what matters.
             </p>
           </motion.div>
 

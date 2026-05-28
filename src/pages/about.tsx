@@ -111,7 +111,7 @@ export default function AboutPage() {
   const values = [
     { icon: Shield, title: 'Integrity', description: 'Transparent, honest, and ethical practices in everything we do.' },
     { icon: Heart, title: 'People-First', description: 'Your employees are your greatest asset. We help build cultures where people thrive.' },
-    { icon: Lightbulb, title: 'Innovation', description: 'We leverage the latest HR technology and stay ahead of industry trends.' },
+    { icon: Lightbulb, title: 'Innovation', description: 'We build intelligent automation into every service — reducing costs and putting our clients in control.' },
     { icon: Award, title: 'Excellence', description: 'Precise, high-quality services that consistently exceed expectations.' },
   ];
 
@@ -137,7 +137,7 @@ export default function AboutPage() {
     {
       icon: Laptop,
       title: 'HR Technology',
-      description: 'Our technology team builds and supports our proprietary HR software platform — streamlining employee management, compliance tracking, and reporting for organizations of every size.',
+      description: 'Our technology team builds and supports our intelligent HR software platform — automating compliance tracking, generating documents instantly, surfacing workforce insights, and giving organizations of every size the tools to operate smarter with less overhead.',
       image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
     },
   ];
@@ -213,7 +213,7 @@ export default function AboutPage() {
                 PreciseHR was founded on a simple observation: Canadian businesses deserve HR support that's both expert and accessible. Too many organizations — especially growing ones — are forced to choose between expensive enterprise solutions and generic advice that doesn't account for the complexities of Canadian employment law.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                We built PreciseHR to bridge that gap. By combining a powerful software platform with hands-on consulting from experienced professionals, we give businesses of every size the tools and guidance to manage their people with confidence — from their first hire to their five-thousandth.
+                We built PreciseHR to bridge that gap. By combining intelligent automation with hands-on consulting from experienced professionals, we give businesses of every size the tools and guidance to manage their people with confidence — from their first hire to their five-thousandth. Our platform handles the repetitive work automatically, so you get more control at a fraction of the cost.
               </p>
             </AnimatedCard>
           </div>
