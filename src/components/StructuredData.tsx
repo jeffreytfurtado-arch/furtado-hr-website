@@ -10,7 +10,7 @@ const PERSON_SCHEMA = {
   additionalName: 'T.',
   familyName: 'Furtado',
   jobTitle: 'Chief Operating Officer & Executive Producer',
-  description: 'Canadian executive, entrepreneur, and strategic investor with a career spanning Gaming, Fintech, SaaS, HR Technology, Real Estate, and BPO. COO & Executive Producer at Big Viking Games. Previously COO & CRO at Mortgage Automator (BVP Forge) — nine-figure exit. Managing Partner at PreciseHR. Board advisor for GLG and Guidepoint. Strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate.',
+  description: 'Canadian executive, entrepreneur, and strategic investor with a career spanning Gaming, Fintech, SaaS, HR Technology, Real Estate, and BPO. COO & Executive Producer at Big Viking Games. Previously COO & CRO at Mortgage Automator (BVP Forge) — nine-figure exit. Founder of DooLeeNoted (multi-million dollar exit). Managing Partner at PreciseHR. Board advisor for GLG and Guidepoint. Strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate.',
   url: 'https://www.precisehr.ca/about/jeffrey-furtado',
   image: 'https://www.precisehr.ca/images/jeffrey-furtado.jpg',
   worksFor: [
@@ -33,6 +33,10 @@ const PERSON_SCHEMA = {
       description: 'Real estate investment firm specializing in multi-unit, commercial property, private mortgages, and rent-to-own solutions.',
     },
   ],
+  founder: [
+    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Founded and exited — multi-million dollar acquisition' },
+    { '@type': 'Organization', name: 'FurtadoFirm', url: 'https://furtadofirm.com' },
+  ],
   memberOf: [
     { '@type': 'Organization', name: 'GLG', description: 'Global expert network — board advisor and consultant' },
     { '@type': 'Organization', name: 'Guidepoint', description: 'Expert network — board advisor and consultant' },
@@ -51,6 +55,8 @@ const PERSON_SCHEMA = {
     { '@type': 'Occupation', name: 'Vice President of Customer Success' },
     { '@type': 'Occupation', name: 'Vice President of Lending' },
     { '@type': 'Occupation', name: 'Entrepreneur' },
+    { '@type': 'Occupation', name: 'Founder' },
+    { '@type': 'Occupation', name: 'Managing Partner' },
     { '@type': 'Occupation', name: 'Business Executive' },
   ],
   knowsAbout: [

@@ -94,6 +94,12 @@ export default function JeffreyFurtadoPage() {
       url: 'https://furtadofirm.com',
     },
     {
+      title: 'Founder (Exited)',
+      company: 'DooLeeNoted',
+      period: 'Previously',
+      description: 'Founded and scaled DooLeeNoted to a successful multi-million dollar exit. Built the company from concept to acquisition, demonstrating the ability to create, grow, and profitably exit ventures.',
+    },
+    {
       title: 'Chief Operating Officer & CRO',
       company: 'Mortgage Automator (BVP Forge)',
       period: 'Previously',
@@ -135,7 +141,7 @@ export default function JeffreyFurtadoPage() {
     <div className="flex flex-col">
       <SEO
         title="Jeffrey T. Furtado — Executive, Entrepreneur, Operator"
-        description="Jeffrey T. Furtado is a Canadian executive, entrepreneur, and strategic investor. COO & Executive Producer at Big Viking Games. Previously COO at Mortgage Automator (BVP Forge). Managing Partner at PreciseHR. Board advisor for GLG and Guidepoint. Track record of nine-figure exits across Gaming, Fintech, SaaS, HR, and Real Estate."
+        description="Jeffrey T. Furtado is a Canadian executive, entrepreneur, and strategic investor. COO & Executive Producer at Big Viking Games. Previously COO at Mortgage Automator (BVP Forge). Managing Partner at PreciseHR. Founder of DooLeeNoted (exited) and FurtadoFirm. Board advisor for GLG and Guidepoint. Track record of multiple exits across Gaming, Fintech, SaaS, HR, and Real Estate."
         path="/about/jeffrey-furtado"
       />
       <Helmet>
@@ -155,7 +161,7 @@ export default function JeffreyFurtadoPage() {
             <p className="text-xl text-cyan-300 font-medium mb-2">Executive · Entrepreneur · Strategic Investor</p>
             <p className="text-sm text-white/60 mb-6">Toronto · Oakville · Simcoe, Ontario, Canada</p>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Scaling growth-stage companies across gaming, fintech, SaaS, HR technology, and real estate. Track record of driving nine-figure exits, enterprise strategy, and operational transformation.
+              Scaling growth-stage companies across gaming, fintech, SaaS, HR technology, and real estate. Track record of multiple exits including nine-figure partnerships, enterprise strategy, and operational transformation.
             </p>
             <div className="flex gap-3 justify-center mt-8">
               <a href="https://www.linkedin.com/in/jeffreytfurtado/" target="_blank" rel="noopener noreferrer">
@@ -195,7 +201,7 @@ export default function JeffreyFurtadoPage() {
                   Jeffrey is Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving Canadian organizations across all provinces. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.
                 </p>
                 <p>
-                  He serves as a board advisor and consultant for GLG and Guidepoint, advising institutional investors, private equity firms, and Fortune 500 companies. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses, and the founder of FurtadoFirm, a real estate investment firm specializing in multi-unit property, private lending, and rent-to-own solutions.
+                  He serves as a board advisor and consultant for GLG and Guidepoint, advising institutional investors, private equity firms, and Fortune 500 companies. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded DooLeeNoted, which he scaled to a successful multi-million dollar exit.
                 </p>
                 <p>
                   Throughout his career, Jeffrey has held senior executive roles including VP of Sales, VP of Operations, VP of Shared Services, VP of Customer Success, VP of Lending, Chief Risk & Compliance Officer, Chief Revenue Officer, and Chief Marketing Officer — successfully leading a strategic exit at CCi, navigating pre-IPO stages at Progressa, and consistently institutionalizing growth-stage companies for profitability and scale.
@@ -288,10 +294,10 @@ export default function JeffreyFurtadoPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { metric: '9-Figure', label: 'Strategic exit — Mortgage Automator / BVP Forge partnership' },
+                { metric: 'Multi-M', label: 'Exit — founded and sold DooLeeNoted' },
                 { metric: 'Billions', label: 'In loans funded globally through the Mortgage Automator platform' },
                 { metric: 'Millions', label: 'Players across Big Viking Games titles worldwide' },
-                { metric: '5+', label: 'Companies scaled as executive, investor, and operator' },
-                { metric: 'GLG · GP', label: 'Board advisor and consultant for global expert networks' },
+                { metric: '300+', label: 'FTEs built and led across dozens of functional areas' },
                 { metric: 'Active', label: 'Strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate' },
               ].map((item, i) => (
                 <motion.div
