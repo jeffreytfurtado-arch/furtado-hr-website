@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { motion } from 'motion/react';
 import { HRAssessmentQuiz } from '@/components/HRAssessmentQuiz';
 import { ClipboardCheck, Target, TrendingUp } from 'lucide-react';

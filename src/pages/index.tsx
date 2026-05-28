@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -262,6 +263,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
+      <SEO title="PreciseHR" description="Intelligent HR consulting, automation-ready software, and deep Canadian expertise. Build exceptional teams and stay compliant." path="/" />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />

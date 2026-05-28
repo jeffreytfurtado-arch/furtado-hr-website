@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,7 @@ export default function BlogPage() {
 
   return (
     <div className="flex flex-col">
+      <SEO title="HR Blog" description="Expert insights on Canadian employment law, HR best practices, and compliance updates from the PreciseHR team." path="/blog" />
       <title>HR Insights & Blog - PreciseHR</title>
 
       {/* Hero */}

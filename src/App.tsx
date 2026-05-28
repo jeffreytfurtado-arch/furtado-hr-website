@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import AiroErrorBoundary from '../dev-tools/src/AiroErrorBoundary';
 import RootLayout from './layouts/RootLayout';
 import { routes } from './routes';
@@ -35,5 +36,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
+  );
 }
