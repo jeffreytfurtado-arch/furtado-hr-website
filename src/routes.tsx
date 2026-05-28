@@ -24,6 +24,7 @@ import ComplianceUpdatesPage from './pages/compliance-updates';
 import MinimumWagePage from './pages/minimum-wage';
 import StatutoryHolidaysPage from './pages/statutory-holidays';
 import NetPayCalculatorPage from './pages/net-pay-calculator';
+import JeffreyFurtadoPage from './pages/about/jeffrey-furtado';
 import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
@@ -145,6 +146,10 @@ export const routes: RouteObject[] = [
   {
     path: '/net-pay-calculator',
     element: <NetPayCalculatorPage />,
+  },
+  {
+    path: '/about/jeffrey-furtado',
+    element: <JeffreyFurtadoPage />,
   },
   {
     path: '/portal',

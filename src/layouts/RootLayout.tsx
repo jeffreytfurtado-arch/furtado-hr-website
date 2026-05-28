@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 import CookieBanner from '@/components/CookieBanner';
 import LiveChat from '@/components/LiveChat';
 import ScrollToTop from '@/components/ScrollToTop';
+import { GlobalStructuredData } from '@/components/StructuredData';
 import Footer from '@/layouts/parts/Footer';
 import Header from '@/layouts/parts/Header';
 import Website from '@/layouts/Website';
@@ -33,6 +34,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <Website>
+      <GlobalStructuredData />
       <ScrollToTop />
       <Header />
       {children}
