@@ -73,6 +73,7 @@ const PERSON_SCHEMA = {
     'https://www.linkedin.com/company/precisehrcanada/',
     'https://furtadofirm.com/about-us',
     'https://www.bigvikinggames.com',
+    'https://www.wikidata.org/wiki/Q139970179',
     'https://www.businesswire.com/news/home/20250219687145/en/Mortgage-Automator-Announces-Record-Growth-AI-Driven-Innovation-in-2024',
   ],
 };
