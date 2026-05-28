@@ -50,7 +50,7 @@ Generate the job description in this exact format with these sections:
 Keep the tone professional but warm. Use "you" language where appropriate. Do not include salary ranges. Make it specific to the role and industry, not generic.`;
 
     const requestBody = {
-      model: 'claude-3-haiku-20240307',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 2000,
       messages: [{ role: 'user', content: prompt }],
     };
