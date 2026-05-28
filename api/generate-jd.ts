@@ -18,6 +18,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Service temporarily unavailable' });
   }
 
+  // Log key prefix for debugging (safe - only shows first 10 chars)
+  console.log('API key prefix:', apiKey.substring(0, 10) + '...');
+  console.log('API key length:', apiKey.length);
+
   try {
     const { jobTitle, industry, employmentType, location, seniorityLevel, keyResponsibilities } = req.body;
 
@@ -45,6 +49,15 @@ Generate the job description in this exact format with these sections:
 
 Keep the tone professional but warm. Use "you" language where appropriate. Do not include salary ranges. Make it specific to the role and industry, not generic.`;
 
+    const requestBody = {
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: prompt }],
+    };
+
+    console.log('Sending request to Anthropic API...');
+    console.log('Model:', requestBody.model);
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -52,17 +65,16 @@ Keep the tone professional but warm. Use "you" language where appropriate. Do no
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({
-        model: 'claude-3-haiku-20240307',
-        max_tokens: 2000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
+      body: JSON.stringify(requestBody),
     });
+
+    console.log('Response status:', response.status);
+    console.log('Response headers:', JSON.stringify(Object.fromEntries(response.headers.entries())));
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Anthropic API error:', response.status, errorText);
-      return res.status(500).json({ error: 'Failed to generate job description' });
+      console.error('FULL API error response:', errorText);
+      return res.status(500).json({ error: 'Failed to generate job description', debug: errorText });
     }
 
     const data = await response.json();
@@ -72,8 +84,8 @@ Keep the tone professional but warm. Use "you" language where appropriate. Do no
       .join('\n');
 
     return res.status(200).json({ jobDescription: text });
-  } catch (error) {
-    console.error('JD generation error:', error);
+  } catch (error: any) {
+    console.error('JD generation error:', error.message, error.stack);
     return res.status(500).json({ error: 'An unexpected error occurred' });
   }
 }
