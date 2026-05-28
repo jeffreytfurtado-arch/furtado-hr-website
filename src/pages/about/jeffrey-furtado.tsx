@@ -14,9 +14,27 @@ import {
   Building2,
   Users,
   Lightbulb,
+  TrendingUp,
+  Zap,
+  DollarSign,
+  ExternalLink,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Helmet } from '@dr.pogodin/react-helmet';
+import { useRef, useState, useEffect } from 'react';
+
+function useInView(opts?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold: 0.15, ...opts });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, inView };
+}
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -27,33 +45,78 @@ const fadeUp = {
 
 export default function JeffreyFurtadoPage() {
   const expertise = [
-    'HR Strategy & Organizational Design',
-    'Canadian Employment Law Compliance',
-    'Intelligent HR Technology & Automation',
-    'Talent Acquisition & Workforce Planning',
-    'Compensation & Benefits Strategy',
-    'Workplace Investigations',
-    'Change Management',
-    'Multi-Provincial Compliance',
+    { label: 'SaaS Operations & Scaling', icon: TrendingUp },
+    { label: 'Go-to-Market Strategy', icon: Zap },
+    { label: 'Revenue & Sales Leadership', icon: DollarSign },
+    { label: 'Private Equity & M&A Exits', icon: Award },
+    { label: 'Fintech & Financial Services', icon: Building2 },
+    { label: 'HR Technology & Automation', icon: Lightbulb },
+    { label: 'Real Estate Investment', icon: Globe },
+    { label: 'AI-Driven Business Operations', icon: Zap },
   ];
 
-  const milestones = [
-    { year: '2011', text: 'Founded PreciseHR to bring enterprise-grade HR consulting to Canadian SMBs' },
-    { year: '2018', text: 'Expanded services to cover all 13 Canadian provinces and territories' },
-    { year: '2023', text: 'Launched the PreciseHR intelligent software platform' },
-    { year: '2025', text: 'Surpassed 90+ active Canadian client organizations' },
-    { year: '2026', text: 'Introduced AI-powered compliance tools and document generation' },
+  const roles = [
+    {
+      title: 'Chief Operating Officer & CRO',
+      company: 'Mortgage Automator (BVP Forge)',
+      period: 'Current',
+      description: 'COO at the leading SaaS platform for private and asset-based lenders. 400+ lenders worldwide, $66B+ in funded loans. Driving force behind the company\'s $110M strategic partnership with BVP Forge, one of the world\'s largest private equity firms. Led AI integration across business operations, 30% customer growth, and global expansion.',
+      url: 'https://www.mortgageautomator.com',
+      highlight: true,
+    },
+    {
+      title: 'Founder & Managing Partner',
+      company: 'PreciseHR',
+      period: 'Current',
+      description: 'Founded PreciseHR to bring intelligent HR consulting and software to Canadian businesses. The platform combines automated compliance monitoring, document generation, and workforce analytics with hands-on consulting across all 13 provinces. 90+ active client organizations.',
+      url: 'https://www.precisehr.ca',
+      highlight: true,
+    },
+    {
+      title: 'Founder',
+      company: 'FurtadoFirm',
+      period: 'Current',
+      description: 'Real estate investment firm specializing in multi-unit and commercial property acquisition, private mortgages, tenant rentals, and rent-to-own homeownership solutions.',
+      url: 'https://furtadofirm.com',
+    },
+    {
+      title: 'Senior Executive',
+      company: 'Progressa',
+      period: 'Previous',
+      description: 'Executive leadership role at a pre-IPO stage fintech company focused on consumer lending and financial wellness.',
+    },
+    {
+      title: 'Executive',
+      company: 'Consumer Centre Inc. (CCi)',
+      period: 'Previous',
+      description: 'Successfully led the company through a strategic exit. BPO operations leadership driving revenue growth and operational efficiency.',
+    },
+  ];
+
+  const mentions = [
+    {
+      title: 'Mortgage Automator Announces Record Growth & AI-Driven Innovation in 2024',
+      source: 'Business Wire',
+      date: 'February 2025',
+      url: 'https://www.businesswire.com/news/home/20250219687145/en/Mortgage-Automator-Announces-Record-Growth-AI-Driven-Innovation-in-2024',
+      excerpt: 'Jeffrey Furtado was promoted to Chief Operating Officer (COO)',
+    },
+    {
+      title: 'Mortgage Automator Receives Strategic Investment from BVP Forge',
+      source: 'Business Wire',
+      date: 'May 2024',
+      url: 'https://www.businesswire.com/news/home/20240501524578/en/',
+      excerpt: '$110M strategic partnership with one of the world\'s largest private equity firms',
+    },
   ];
 
   return (
     <div className="flex flex-col">
       <SEO
-        title="Jeffrey T. Furtado — Managing Partner, PreciseHR"
-        description="Jeffrey T. Furtado is the Managing Partner and Principal Consultant of PreciseHR, a Canadian HR consulting and technology firm. Over 15 years of experience in HR strategy, employment law compliance, and intelligent HR technology."
+        title="Jeffrey T. Furtado — Executive, Entrepreneur, Operator"
+        description="Jeffrey T. Furtado is a Canadian executive and entrepreneur. COO at Mortgage Automator (BVP Forge). Founder of PreciseHR and FurtadoFirm. Track record scaling growth-stage companies, driving $110M+ exits, and building AI-driven operations across Fintech, SaaS, HR, and Real Estate."
         path="/about/jeffrey-furtado"
       />
-
-      {/* Enhanced Person schema specific to this page */}
       <Helmet>
         <link rel="canonical" href="https://www.precisehr.ca/about/jeffrey-furtado" />
         <meta property="og:type" content="profile" />
@@ -66,16 +129,12 @@ export default function JeffreyFurtadoPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Jeffrey T. Furtado</h1>
-            <p className="text-xl text-cyan-300 font-medium mb-4">Managing Partner & Principal Consultant</p>
+            <p className="text-xl text-cyan-300 font-medium mb-2">Executive · Entrepreneur · Operator</p>
+            <p className="text-sm text-white/60 mb-6">Toronto, Canada</p>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Founder of PreciseHR — helping Canadian businesses build compliant, scalable people operations through intelligent consulting and technology.
+              Scaling growth-stage companies across Fintech, SaaS, HR Technology, and Real Estate. Track record of driving enterprise strategy, revenue growth, and successful exits.
             </p>
             <div className="flex gap-3 justify-center mt-8">
               <a href="https://www.linkedin.com/in/jeffreytfurtado/" target="_blank" rel="noopener noreferrer">
@@ -100,16 +159,19 @@ export default function JeffreyFurtadoPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <motion.div {...fadeUp}>
-              <h2 className="text-2xl font-bold mb-6">About Jeffrey</h2>
-              <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed space-y-4">
+              <h2 className="text-2xl font-bold mb-6">About</h2>
+              <div className="text-muted-foreground leading-relaxed space-y-4 text-[15px]">
                 <p>
-                  Jeffrey T. Furtado is the Managing Partner and Principal Consultant of PreciseHR, a Canadian HR consulting and technology firm that serves organizations across all 13 provinces and territories. With over 15 years of experience spanning HR strategy, employment law compliance, organizational design, and HR technology, he founded PreciseHR to give Canadian businesses access to enterprise-grade human resources expertise — regardless of their size.
+                  Jeffrey T. Furtado is a Canadian executive, entrepreneur, and operator with a career defined by scaling businesses, unlocking revenue, and architecting enterprise-level strategies across Fintech, SaaS, HR Technology, BPO, and Real Estate.
                 </p>
                 <p>
-                  His approach to HR management combines deep regulatory knowledge with intelligent automation. Under his leadership, PreciseHR developed a proprietary software platform that automates compliance monitoring, document generation, and workforce analytics — capabilities typically reserved for large enterprises with dedicated HR departments.
+                  As Chief Operating Officer & CRO at Mortgage Automator — a BVP Forge portfolio company and the leading SaaS platform for private and asset-based lenders — Jeffrey was a driving force behind the company's $110M strategic partnership with one of the world's largest private equity firms. He leads AI integration across business operations, drove 30% customer growth in 2024, and oversees global expansion across the US, Canada, Australia, and New Zealand. The platform serves 400+ lenders worldwide and has facilitated over $66 billion in funded loans.
                 </p>
                 <p>
-                  Jeffrey has advised organizations across technology, healthcare, financial services, manufacturing, retail, professional services, and non-profit sectors. His work focuses on building compliant, scalable people operations that reduce risk and drive business growth, particularly for companies navigating the complexities of multi-provincial Canadian employment law.
+                  Jeffrey is also the founder of PreciseHR, an intelligent HR consulting and technology firm serving 90+ Canadian organizations, and FurtadoFirm, a real estate investment firm specializing in multi-unit property, private lending, and rent-to-own solutions.
+                </p>
+                <p>
+                  Throughout his career, Jeffrey has worn many hats — CRO, CCO, CMO, and VP across Sales, Operations, and Technology — successfully leading exits at CCi, navigating pre-IPO stages at Progressa, and consistently institutionalizing growth-stage companies for profitability and scale.
                 </p>
               </div>
             </motion.div>
@@ -122,54 +184,66 @@ export default function JeffreyFurtadoPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <motion.div {...fadeUp} className="mb-8">
-              <h2 className="text-2xl font-bold mb-2">Areas of Expertise</h2>
+              <h2 className="text-2xl font-bold">Areas of Expertise</h2>
             </motion.div>
             <div className="grid sm:grid-cols-2 gap-3">
-              {expertise.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="flex items-center gap-3 p-3 rounded-xl border bg-card"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                  <span className="text-sm font-medium">{item}</span>
-                </motion.div>
-              ))}
+              {expertise.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    className="flex items-center gap-3 p-3 rounded-xl border bg-card"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Professional Timeline */}
+      {/* Career */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <motion.div {...fadeUp} className="mb-8">
-              <h2 className="text-2xl font-bold mb-2">Professional Timeline</h2>
+              <h2 className="text-2xl font-bold">Career</h2>
             </motion.div>
-            <div className="space-y-0">
-              {milestones.map((item, i) => (
+            <div className="space-y-4">
+              {roles.map((role, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="flex gap-4 relative"
                 >
-                  {/* Timeline line */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center z-10">
-                      <span className="text-[10px] font-bold text-primary">{item.year}</span>
-                    </div>
-                    {i < milestones.length - 1 && <div className="w-0.5 h-full bg-primary/20 min-h-[2rem]" />}
-                  </div>
-                  <div className="pb-8 pt-2">
-                    <p className="text-sm leading-relaxed">{item.text}</p>
-                  </div>
+                  <Card className={`overflow-hidden transition-all duration-300 hover:shadow-md ${role.highlight ? 'border-l-4 border-l-primary' : ''}`}>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <div>
+                          <h3 className="font-bold">{role.title}</h3>
+                          <p className="text-sm text-primary font-medium">{role.company}</p>
+                        </div>
+                        <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full whitespace-nowrap">{role.period}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{role.description}</p>
+                      {role.url && (
+                        <a href={role.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary mt-3 hover:underline">
+                          <ExternalLink className="w-3 h-3" />
+                          {new URL(role.url).hostname.replace('www.', '')}
+                        </a>
+                      )}
+                    </CardContent>
+                  </Card>
                 </motion.div>
               ))}
             </div>
@@ -177,45 +251,96 @@ export default function JeffreyFurtadoPage() {
         </div>
       </section>
 
-      {/* PreciseHR connection */}
+      {/* Key Achievements */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
+            <motion.div {...fadeUp} className="mb-8">
+              <h2 className="text-2xl font-bold">Key Achievements</h2>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { metric: '$110M', label: 'Strategic exit at Mortgage Automator / BVP Forge partnership' },
+                { metric: '$66B+', label: 'Total loans funded through Mortgage Automator platform' },
+                { metric: '400+', label: 'Lenders worldwide on the Mortgage Automator platform' },
+                { metric: '90+', label: 'Canadian organizations served through PreciseHR' },
+                { metric: '30%', label: 'Customer growth driven at Mortgage Automator in 2024' },
+                { metric: '3', label: 'Companies founded or co-founded across industries' },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                >
+                  <Card className="h-full hover:shadow-md transition-shadow">
+                    <CardContent className="p-5">
+                      <div className="text-2xl font-bold text-primary mb-1">{item.metric}</div>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.label}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Press & Mentions */}
+      {mentions.length > 0 && (
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <motion.div {...fadeUp} className="mb-8">
+                <h2 className="text-2xl font-bold">Press & Mentions</h2>
+              </motion.div>
+              <div className="space-y-3">
+                {mentions.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                  >
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                      <Card className="hover:shadow-md hover:border-primary/20 transition-all duration-300 group">
+                        <CardContent className="p-5">
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">{item.title}</h3>
+                              <p className="text-xs text-muted-foreground mt-1">{item.source} · {item.date}</p>
+                              <p className="text-xs text-muted-foreground mt-2 italic">"{item.excerpt}"</p>
+                            </div>
+                            <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0 mt-1 group-hover:text-primary transition-colors" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Education */}
+      <section className="py-16 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
             <motion.div {...fadeUp}>
-              <Card className="overflow-hidden">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <Building2 className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-bold mb-1">PreciseHR</h2>
-                      <p className="text-sm text-muted-foreground">Founder & Managing Partner · 2011 – Present</p>
-                    </div>
+              <h2 className="text-2xl font-bold mb-6">Education</h2>
+              <Card>
+                <CardContent className="p-6 flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <Award className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    PreciseHR provides intelligent HR consulting and software for Canadian businesses. The firm serves 90+ organizations across all provinces, offering services from compliance management and recruitment to workplace investigations and HR technology — all enhanced by intelligent automation that reduces costs and improves accuracy.
-                  </p>
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="text-center p-3 rounded-xl bg-muted/50">
-                      <div className="text-2xl font-bold text-primary">90+</div>
-                      <div className="text-[10px] text-muted-foreground">Clients Served</div>
-                    </div>
-                    <div className="text-center p-3 rounded-xl bg-muted/50">
-                      <div className="text-2xl font-bold text-primary">15+</div>
-                      <div className="text-[10px] text-muted-foreground">Years Experience</div>
-                    </div>
-                    <div className="text-center p-3 rounded-xl bg-muted/50">
-                      <div className="text-2xl font-bold text-primary">1,500+</div>
-                      <div className="text-[10px] text-muted-foreground">Employees Supported</div>
-                    </div>
+                  <div>
+                    <h3 className="font-bold">Mohawk College</h3>
+                    <p className="text-sm text-muted-foreground">Hamilton, Ontario, Canada</p>
                   </div>
-                  <Link to="/">
-                    <Button>
-                      Visit PreciseHR
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
@@ -230,21 +355,21 @@ export default function JeffreyFurtadoPage() {
           <motion.div {...fadeUp} className="max-w-xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Connect with Jeffrey</h2>
             <p className="text-white/80 mb-8 leading-relaxed text-sm">
-              Interested in working together or discussing HR strategy for your organization?
+              Interested in working together, discussing strategy, or exploring partnership opportunities?
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
-                  Get Free Assessment
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
               <a href="https://www.linkedin.com/in/jeffreytfurtado/" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
-                  <Linkedin className="mr-2 w-4 h-4" />
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
+                  <Linkedin className="mr-2 w-5 h-5" />
                   Connect on LinkedIn
                 </Button>
               </a>
+              <Link to="/contact">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
+                  Get in Touch
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
