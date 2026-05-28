@@ -15,6 +15,7 @@ const toolsMenu = [
 
 const resourcesMenu = [
   { name: 'Compliance Updates', href: '/compliance-updates', description: 'Latest Canadian HR law changes', icon: Bell },
+  { name: 'Minimum Wage Tracker', href: '/minimum-wage', description: 'Current rates across Canada', icon: DollarSign },
   { name: 'Blog', href: '/blog', description: 'HR insights and best practices', icon: BookOpen },
   { name: 'Case Studies', href: '/case-studies', description: 'Client success stories', icon: FileBarChart },
   { name: 'HR Resources', href: '/resources', description: 'Templates, guides & downloads', icon: FolderOpen },

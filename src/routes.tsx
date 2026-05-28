@@ -21,6 +21,7 @@ import HiringCalculatorPage from './pages/hiring-calculator';
 import JDGeneratorPage from './pages/jd-generator';
 import ComplianceCheckerPage from './pages/compliance-checker';
 import ComplianceUpdatesPage from './pages/compliance-updates';
+import MinimumWagePage from './pages/minimum-wage';
 import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
@@ -130,6 +131,10 @@ export const routes: RouteObject[] = [
   {
     path: '/compliance-updates',
     element: <ComplianceUpdatesPage />,
+  },
+  {
+    path: '/minimum-wage',
+    element: <MinimumWagePage />,
   },
   {
     path: '/portal',
