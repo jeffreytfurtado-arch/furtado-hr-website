@@ -23,6 +23,7 @@ import ComplianceCheckerPage from './pages/compliance-checker';
 import ComplianceUpdatesPage from './pages/compliance-updates';
 import MinimumWagePage from './pages/minimum-wage';
 import StatutoryHolidaysPage from './pages/statutory-holidays';
+import NetPayCalculatorPage from './pages/net-pay-calculator';
 import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
@@ -140,6 +141,10 @@ export const routes: RouteObject[] = [
   {
     path: '/statutory-holidays',
     element: <StatutoryHolidaysPage />,
+  },
+  {
+    path: '/net-pay-calculator',
+    element: <NetPayCalculatorPage />,
   },
   {
     path: '/portal',

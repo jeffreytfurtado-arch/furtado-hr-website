@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 const toolsMenu = [
   { name: 'Compliance Checker', href: '/compliance-checker', description: 'Check your HR compliance gaps', icon: Shield },
   { name: 'JD Generator', href: '/jd-generator', description: 'Generate job descriptions instantly', icon: Sparkles },
+  { name: 'Net Pay Calculator', href: '/net-pay-calculator', description: 'Calculate take-home pay for 2026', icon: Calculator },
   { name: 'ROI Calculator', href: '/roi-calculator', description: 'Calculate HR outsourcing savings', icon: Calculator },
   { name: 'HR Health Check', href: '/hr-assessment', description: 'Assess your HR compliance', icon: ClipboardCheck },
   { name: 'Salary Benchmarking', href: '/salary-benchmarking', description: 'Compare Canadian salaries', icon: TrendingUp },
