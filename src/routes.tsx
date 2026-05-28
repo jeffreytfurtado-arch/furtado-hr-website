@@ -22,6 +22,7 @@ import JDGeneratorPage from './pages/jd-generator';
 import ComplianceCheckerPage from './pages/compliance-checker';
 import ComplianceUpdatesPage from './pages/compliance-updates';
 import MinimumWagePage from './pages/minimum-wage';
+import StatutoryHolidaysPage from './pages/statutory-holidays';
 import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
@@ -135,6 +136,10 @@ export const routes: RouteObject[] = [
   {
     path: '/minimum-wage',
     element: <MinimumWagePage />,
+  },
+  {
+    path: '/statutory-holidays',
+    element: <StatutoryHolidaysPage />,
   },
   {
     path: '/portal',

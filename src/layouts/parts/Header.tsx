@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell } from 'lucide-react';
+import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const toolsMenu = [
@@ -15,6 +15,7 @@ const toolsMenu = [
 
 const resourcesMenu = [
   { name: 'Compliance Updates', href: '/compliance-updates', description: 'Latest Canadian HR law changes', icon: Bell },
+  { name: 'Statutory Holidays', href: '/statutory-holidays', description: '2026 holiday calendar & pay calculator', icon: Calendar },
   { name: 'Minimum Wage Tracker', href: '/minimum-wage', description: 'Current rates across Canada', icon: DollarSign },
   { name: 'Blog', href: '/blog', description: 'HR insights and best practices', icon: BookOpen },
   { name: 'Case Studies', href: '/case-studies', description: 'Client success stories', icon: FileBarChart },
