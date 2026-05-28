@@ -10,10 +10,16 @@ const PERSON_SCHEMA = {
   additionalName: 'T.',
   familyName: 'Furtado',
   jobTitle: 'Chief Operating Officer',
-  description: 'Canadian executive, entrepreneur, and operator with a career spanning Fintech, SaaS, HR Technology, Real Estate, and BPO. COO at Mortgage Automator (BVP Forge portfolio company). Founder of PreciseHR and FurtadoFirm. Track record of scaling growth-stage companies to profitability, driving GTM initiatives, and architecting enterprise-level strategies including a $110M strategic exit.',
+  description: 'Canadian executive, entrepreneur, and operator with a career spanning Gaming, Fintech, SaaS, HR Technology, Real Estate, and BPO. COO & Executive Producer at Big Viking Games. COO & CRO at Mortgage Automator (BVP Forge). Managing Partner at PreciseHR. Track record of scaling growth-stage companies to profitability, driving GTM initiatives, and architecting enterprise-level strategies including a $110M strategic exit.',
   url: 'https://www.precisehr.ca/about/jeffrey-furtado',
   image: 'https://www.precisehr.ca/images/jeffrey-furtado.jpg',
   worksFor: [
+    {
+      '@type': 'Organization',
+      name: 'Big Viking Games',
+      url: 'https://www.bigvikinggames.com',
+      description: 'Canada\'s largest independent mobile and social game studio. Series B funded ($21.8M). Titles played by millions worldwide including YoWorld (acquired from Zynga).',
+    },
     {
       '@type': 'Organization',
       name: 'Mortgage Automator',
@@ -33,13 +39,25 @@ const PERSON_SCHEMA = {
       description: 'Real estate investment firm specializing in multi-unit, commercial property, private mortgages, and rent-to-own solutions.',
     },
   ],
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Mohawk College',
-  },
+  hasOccupation: [
+    { '@type': 'Occupation', name: 'Chief Operating Officer' },
+    { '@type': 'Occupation', name: 'Executive Producer' },
+    { '@type': 'Occupation', name: 'Chief Revenue Officer' },
+    { '@type': 'Occupation', name: 'Chief Risk & Compliance Officer' },
+    { '@type': 'Occupation', name: 'Chief Marketing Officer' },
+    { '@type': 'Occupation', name: 'Vice President of Sales' },
+    { '@type': 'Occupation', name: 'Vice President of Operations' },
+    { '@type': 'Occupation', name: 'Vice President of Shared Services' },
+    { '@type': 'Occupation', name: 'Vice President of Customer Success' },
+    { '@type': 'Occupation', name: 'Vice President of Lending' },
+    { '@type': 'Occupation', name: 'Entrepreneur' },
+    { '@type': 'Occupation', name: 'Business Executive' },
+  ],
   knowsAbout: [
     'SaaS Operations',
     'Fintech',
+    'Gaming Industry',
+    'Live Operations',
     'Revenue Operations',
     'Go-to-Market Strategy',
     'Private Equity Exits',
@@ -50,36 +68,26 @@ const PERSON_SCHEMA = {
     'AI-Driven Business Operations',
     'Sales Leadership',
     'Enterprise Strategy',
-  ],
-  hasOccupation: [
-    {
-      '@type': 'Occupation',
-      name: 'Chief Operating Officer',
-      description: 'COO & CRO at Mortgage Automator / Automator Group, a BVP Forge portfolio company',
-    },
-    {
-      '@type': 'Occupation',
-      name: 'Founder & Managing Partner',
-      description: 'Founder of PreciseHR (HR consulting & technology) and FurtadoFirm (real estate investment)',
-    },
+    'Risk & Compliance',
+    'Customer Success',
   ],
   nationality: {
     '@type': 'Country',
     name: 'Canada',
   },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
-  },
+  homeLocation: [
+    { '@type': 'Place', name: 'Toronto', address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' } },
+    { '@type': 'Place', name: 'Oakville', address: { '@type': 'PostalAddress', addressLocality: 'Oakville', addressRegion: 'ON', addressCountry: 'CA' } },
+    { '@type': 'Place', name: 'Simcoe', address: { '@type': 'PostalAddress', addressLocality: 'Simcoe', addressRegion: 'ON', addressCountry: 'CA' } },
+  ],
   sameAs: [
     'https://www.linkedin.com/in/jeffreytfurtado/',
     'https://www.linkedin.com/company/precisehrcanada/',
     'https://furtadofirm.com/about-us',
     'https://www.mortgageautomator.com',
+    'https://www.bigvikinggames.com',
     'https://www.businesswire.com/news/home/20250219687145/en/Mortgage-Automator-Announces-Record-Growth-AI-Driven-Innovation-in-2024',
-    // Add these as profiles are created:
+    // Add as profiles are created:
     // 'https://www.youtube.com/@jeffreyfurtado',
     // 'https://www.instagram.com/jeffreytfurtado/',
     // 'https://www.facebook.com/jeffreytfurtado',
@@ -97,18 +105,7 @@ const ORGANIZATION_SCHEMA = {
   url: 'https://www.precisehr.ca',
   logo: 'https://www.precisehr.ca/images/logo.png',
   description: 'Intelligent HR consulting, automation-ready software, and deep Canadian expertise. PreciseHR helps Canadian businesses build exceptional teams and stay compliant.',
-  foundingDate: '2011',
-  founder: {
-    '@type': 'Person',
-    '@id': 'https://www.precisehr.ca/about/jeffrey-furtado#person',
-    name: 'Jeffrey T. Furtado',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
-  },
+  address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' },
   telephone: '+1-437-887-2263',
   email: 'info@precisehr.ca',
   areaServed: { '@type': 'Country', name: 'Canada' },
@@ -117,9 +114,7 @@ const ORGANIZATION_SCHEMA = {
     'Compensation and Benefits', 'Workplace Investigations', 'Termination Services',
     'Performance Management',
   ],
-  sameAs: [
-    'https://www.linkedin.com/company/precisehrcanada/',
-  ],
+  sameAs: ['https://www.linkedin.com/company/precisehrcanada/'],
 };
 
 const WEBSITE_SCHEMA = {

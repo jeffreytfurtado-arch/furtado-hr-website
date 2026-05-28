@@ -45,6 +45,7 @@ const fadeUp = {
 
 export default function JeffreyFurtadoPage() {
   const expertise = [
+    { label: 'Gaming & Live Operations', icon: Zap },
     { label: 'SaaS Operations & Scaling', icon: TrendingUp },
     { label: 'Go-to-Market Strategy', icon: Zap },
     { label: 'Revenue & Sales Leadership', icon: DollarSign },
@@ -52,10 +53,19 @@ export default function JeffreyFurtadoPage() {
     { label: 'Fintech & Financial Services', icon: Building2 },
     { label: 'HR Technology & Automation', icon: Lightbulb },
     { label: 'Real Estate Investment', icon: Globe },
-    { label: 'AI-Driven Business Operations', icon: Zap },
+    { label: 'AI-Driven Business Operations', icon: Lightbulb },
+    { label: 'Risk & Compliance', icon: Shield },
   ];
 
   const roles = [
+    {
+      title: 'Chief Operating Officer & Executive Producer',
+      company: 'Big Viking Games',
+      period: 'Current',
+      description: 'COO & Executive Producer at Canada\'s largest independent mobile and social game studio. Series B funded ($21.8M). Titles played by millions worldwide across iOS, Android, Facebook, and the web — including YoWorld, acquired from Zynga. Leading operations, live game production, and studio strategy across a 60+ person team.',
+      url: 'https://www.bigvikinggames.com',
+      highlight: true,
+    },
     {
       title: 'Chief Operating Officer & CRO',
       company: 'Mortgage Automator (BVP Forge)',
@@ -65,10 +75,10 @@ export default function JeffreyFurtadoPage() {
       highlight: true,
     },
     {
-      title: 'Founder & Managing Partner',
+      title: 'Managing Partner',
       company: 'PreciseHR',
       period: 'Current',
-      description: 'Founded PreciseHR to bring intelligent HR consulting and software to Canadian businesses. The platform combines automated compliance monitoring, document generation, and workforce analytics with hands-on consulting across all 13 provinces. 90+ active client organizations.',
+      description: 'Investor and operator at an intelligent HR consulting and technology firm serving 90+ Canadian organizations across all provinces. Leading the firm\'s strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.',
       url: 'https://www.precisehr.ca',
       highlight: true,
     },
@@ -80,16 +90,16 @@ export default function JeffreyFurtadoPage() {
       url: 'https://furtadofirm.com',
     },
     {
-      title: 'Senior Executive',
+      title: 'VP / Senior Executive',
       company: 'Progressa',
       period: 'Previous',
-      description: 'Executive leadership role at a pre-IPO stage fintech company focused on consumer lending and financial wellness.',
+      description: 'Senior executive at a pre-IPO stage fintech company focused on consumer lending and financial wellness. Held VP-level roles across Sales, Operations, and Lending.',
     },
     {
-      title: 'Executive',
+      title: 'VP / Senior Executive',
       company: 'Consumer Centre Inc. (CCi)',
       period: 'Previous',
-      description: 'Successfully led the company through a strategic exit. BPO operations leadership driving revenue growth and operational efficiency.',
+      description: 'Successfully led the company through a strategic exit. Held VP-level roles across Shared Services, Customer Success, and Operations — driving revenue growth and operational efficiency across BPO operations.',
     },
   ];
 
@@ -114,7 +124,7 @@ export default function JeffreyFurtadoPage() {
     <div className="flex flex-col">
       <SEO
         title="Jeffrey T. Furtado — Executive, Entrepreneur, Operator"
-        description="Jeffrey T. Furtado is a Canadian executive and entrepreneur. COO at Mortgage Automator (BVP Forge). Founder of PreciseHR and FurtadoFirm. Track record scaling growth-stage companies, driving $110M+ exits, and building AI-driven operations across Fintech, SaaS, HR, and Real Estate."
+        description="Jeffrey T. Furtado is a Canadian executive and entrepreneur. COO & Executive Producer at Big Viking Games. COO at Mortgage Automator (BVP Forge). Managing Partner at PreciseHR. Track record scaling growth-stage companies, driving $110M+ exits, and building AI-driven operations across Gaming, Fintech, SaaS, HR, and Real Estate."
         path="/about/jeffrey-furtado"
       />
       <Helmet>
@@ -132,9 +142,9 @@ export default function JeffreyFurtadoPage() {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Jeffrey T. Furtado</h1>
             <p className="text-xl text-cyan-300 font-medium mb-2">Executive · Entrepreneur · Operator</p>
-            <p className="text-sm text-white/60 mb-6">Toronto, Canada</p>
+            <p className="text-sm text-white/60 mb-6">Toronto · Oakville · Simcoe, Ontario, Canada</p>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Scaling growth-stage companies across Fintech, SaaS, HR Technology, and Real Estate. Track record of driving enterprise strategy, revenue growth, and successful exits.
+              Scaling growth-stage companies across gaming, fintech, SaaS, HR technology, and real estate. Track record of driving enterprise strategy, revenue growth, and successful exits.
             </p>
             <div className="flex gap-3 justify-center mt-8">
               <a href="https://www.linkedin.com/in/jeffreytfurtado/" target="_blank" rel="noopener noreferrer">
@@ -162,16 +172,19 @@ export default function JeffreyFurtadoPage() {
               <h2 className="text-2xl font-bold mb-6">About</h2>
               <div className="text-muted-foreground leading-relaxed space-y-4 text-[15px]">
                 <p>
-                  Jeffrey T. Furtado is a Canadian executive, entrepreneur, and operator with a career defined by scaling businesses, unlocking revenue, and architecting enterprise-level strategies across Fintech, SaaS, HR Technology, BPO, and Real Estate.
+                  Jeffrey T. Furtado is a Canadian executive, entrepreneur, and operator with a career defined by scaling businesses, unlocking revenue, and architecting enterprise-level strategies across gaming, fintech, SaaS, HR technology, BPO, and real estate.
                 </p>
                 <p>
-                  As Chief Operating Officer & CRO at Mortgage Automator — a BVP Forge portfolio company and the leading SaaS platform for private and asset-based lenders — Jeffrey was a driving force behind the company's $110M strategic partnership with one of the world's largest private equity firms. He leads AI integration across business operations, drove 30% customer growth in 2024, and oversees global expansion across the US, Canada, Australia, and New Zealand. The platform serves 400+ lenders worldwide and has facilitated over $66 billion in funded loans.
+                  Jeffrey currently serves as Chief Operating Officer & Executive Producer at Big Viking Games, Canada's largest independent mobile and social game studio. Backed by $21.8M in Series B funding, the company develops titles played by millions worldwide across iOS, Android, Facebook, and the web — including YoWorld, acquired from Zynga. He oversees operations, live game production, and studio strategy.
                 </p>
                 <p>
-                  Jeffrey is also the founder of PreciseHR, an intelligent HR consulting and technology firm serving 90+ Canadian organizations, and FurtadoFirm, a real estate investment firm specializing in multi-unit property, private lending, and rent-to-own solutions.
+                  Concurrently, Jeffrey is COO & CRO at Mortgage Automator, a BVP Forge portfolio company and the leading SaaS platform for private and asset-based lenders. He was a driving force behind the company's $110M strategic partnership with BVP Forge. The platform serves 400+ lenders globally and has facilitated over $66 billion in funded loans.
                 </p>
                 <p>
-                  Throughout his career, Jeffrey has worn many hats — CRO, CCO, CMO, and VP across Sales, Operations, and Technology — successfully leading exits at CCi, navigating pre-IPO stages at Progressa, and consistently institutionalizing growth-stage companies for profitability and scale.
+                  Jeffrey is also Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving 90+ Canadian organizations. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how Canadian businesses manage compliance, talent, and people operations. He is also the founder of FurtadoFirm, a real estate investment firm specializing in multi-unit property, private lending, and rent-to-own solutions.
+                </p>
+                <p>
+                  Throughout his career, Jeffrey has held senior executive roles including VP of Sales, VP of Operations, VP of Shared Services, VP of Customer Success, VP of Lending, Chief Risk & Compliance Officer, Chief Revenue Officer, and Chief Marketing Officer — successfully leading a strategic exit at CCi, navigating pre-IPO stages at Progressa, and consistently institutionalizing growth-stage companies for profitability and scale.
                 </p>
               </div>
             </motion.div>
@@ -262,10 +275,10 @@ export default function JeffreyFurtadoPage() {
               {[
                 { metric: '$110M', label: 'Strategic exit at Mortgage Automator / BVP Forge partnership' },
                 { metric: '$66B+', label: 'Total loans funded through Mortgage Automator platform' },
+                { metric: 'Millions', label: 'Players across Big Viking Games titles worldwide' },
                 { metric: '400+', label: 'Lenders worldwide on the Mortgage Automator platform' },
                 { metric: '90+', label: 'Canadian organizations served through PreciseHR' },
-                { metric: '30%', label: 'Customer growth driven at Mortgage Automator in 2024' },
-                { metric: '3', label: 'Companies founded or co-founded across industries' },
+                { metric: '4+', label: 'Companies scaled as executive, investor, and operator' },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -325,28 +338,6 @@ export default function JeffreyFurtadoPage() {
           </div>
         </section>
       )}
-
-      {/* Education */}
-      <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <motion.div {...fadeUp}>
-              <h2 className="text-2xl font-bold mb-6">Education</h2>
-              <Card>
-                <CardContent className="p-6 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <Award className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold">Mohawk College</h3>
-                    <p className="text-sm text-muted-foreground">Hamilton, Ontario, Canada</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
