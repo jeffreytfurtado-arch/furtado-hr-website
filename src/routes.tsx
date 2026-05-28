@@ -19,6 +19,7 @@ import SalaryBenchmarkingPage from './pages/salary-benchmarking';
 import TurnoverCalculatorPage from './pages/turnover-calculator';
 import HiringCalculatorPage from './pages/hiring-calculator';
 import JDGeneratorPage from './pages/jd-generator';
+import ComplianceCheckerPage from './pages/compliance-checker';
 import BlogPostPage from './pages/blog/[slug]';
 import ProtectedRoute from './components/ProtectedRoute';
 import PortalDashboard from './pages/portal/index';
@@ -120,6 +121,10 @@ export const routes: RouteObject[] = [
   {
     path: '/jd-generator',
     element: <JDGeneratorPage />,
+  },
+  {
+    path: '/compliance-checker',
+    element: <ComplianceCheckerPage />,
   },
   {
     path: '/portal',

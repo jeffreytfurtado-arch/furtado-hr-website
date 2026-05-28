@@ -464,12 +464,20 @@ export default function HomePage() {
 
           <motion.div {...fadeUp} className="text-center">
             <p className="text-white/60 text-sm mb-4">See what our intelligent tools can do</p>
-            <Link to="/jd-generator">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
-                Try Our Job Description Generator
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/compliance-checker">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold w-full sm:w-auto">
+                  <Shield className="mr-2 w-5 h-5" />
+                  Check Your Compliance
+                </Button>
+              </Link>
+              <Link to="/jd-generator">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
+                  Try JD Generator
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

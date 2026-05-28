@@ -244,15 +244,15 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to elevate your HR?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Not sure where to start?</h2>
             <p className="text-lg text-white/80 mb-10 leading-relaxed">
-              Get a free assessment to discover how PreciseHR can help your organization thrive.
+              Run a free compliance check to see where your business stands — then let us help close the gaps.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
+              <Link to="/compliance-checker">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
-                  Get Free Assessment
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <Shield className="mr-2 w-5 h-5" />
+                  Run Free Compliance Check
                 </Button>
               </Link>
               <a href="tel:+14378872263">

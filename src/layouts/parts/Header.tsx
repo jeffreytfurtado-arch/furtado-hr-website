@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const toolsMenu = [
+  { name: 'Compliance Checker', href: '/compliance-checker', description: 'Check your HR compliance gaps', icon: Shield },
   { name: 'JD Generator', href: '/jd-generator', description: 'Generate job descriptions instantly', icon: Sparkles },
   { name: 'ROI Calculator', href: '/roi-calculator', description: 'Calculate HR outsourcing savings', icon: Calculator },
   { name: 'HR Health Check', href: '/hr-assessment', description: 'Assess your HR compliance', icon: ClipboardCheck },
