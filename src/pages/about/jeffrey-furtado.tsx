@@ -97,7 +97,7 @@ export default function JeffreyFurtadoPage() {
       title: 'Founder (Exited)',
       company: 'DooLeeNoted',
       period: 'Previously',
-      description: 'Founded and scaled DooLeeNoted to a successful multi-million dollar exit. Built the company from concept to acquisition, demonstrating the ability to create, grow, and profitably exit ventures.',
+      description: 'Founded DooLeeNoted, a global resourcing and professional collaboration platform that bridged talent between South Asia, the Middle East, and North America. At its peak, the platform ranked among the top 64,000 most visited websites globally. Scaled to a successful multi-million dollar exit to a European firm.',
     },
     {
       title: 'Chief Operating Officer & CRO',
@@ -118,6 +118,18 @@ export default function JeffreyFurtadoPage() {
       period: 'Previously',
       description: 'Successfully led the company through a strategic exit. Held VP-level roles across Shared Services, Customer Success, and Operations — driving revenue growth and operational efficiency across BPO operations.',
     },
+    {
+      title: 'National Manager / Senior Executive',
+      company: 'goeasy Ltd. (TSX: GSY)',
+      period: 'Previously',
+      description: 'National Manager of Sales, Service, and Shared Services at one of Canada\'s largest publicly traded alternative financial services companies.',
+    },
+    {
+      title: 'Director, Client Solutions & Operations',
+      company: 'NCO Financial Systems',
+      period: 'Previously',
+      description: 'Director-level role leading client solutions, business development, and international contact centre operations.',
+    },
   ];
 
   const mentions = [
@@ -129,11 +141,18 @@ export default function JeffreyFurtadoPage() {
       excerpt: 'Jeffrey Furtado was promoted to Chief Operating Officer (COO)',
     },
     {
-      title: 'Mortgage Automator Receives Strategic Investment from BVP Forge',
+      title: 'AFX Research Integrates with Mortgage Automator to Deliver Fast, Automated Title Updates',
       source: 'Business Wire',
-      date: 'May 2024',
-      url: 'https://www.businesswire.com/news/home/20240501524578/en/',
-      excerpt: '$110M strategic partnership with one of the world\'s largest private equity firms',
+      date: 'April 2025',
+      url: 'https://www.businesswire.com/news/home/20250429040022/en/AFX-Research-Integrates-with-Mortgage-Automator-to-Deliver-Fast-Automated-Title-Updates-to-Private-Lenders',
+      excerpt: '"Mortgage Automator is known for its commitment to streamlining the lending process," said Jeffrey Furtado, COO',
+    },
+    {
+      title: 'Mortgage Automator: Record Growth Coverage',
+      source: 'Morningstar',
+      date: 'February 2025',
+      url: 'https://www.morningstar.com/news/business-wire/20250219687145/mortgage-automator-announces-record-growth-ai-driven-innovation-in-2024',
+      excerpt: 'Jeffrey Furtado promoted to COO — syndicated coverage in Morningstar',
     },
   ];
 

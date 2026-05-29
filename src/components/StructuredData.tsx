@@ -34,7 +34,7 @@ const PERSON_SCHEMA = {
     },
   ],
   founder: [
-    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Founded and exited — multi-million dollar acquisition' },
+    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Global resourcing and professional collaboration platform. Top 64,000 websites globally at peak. Multi-million dollar exit to European firm.' },
     { '@type': 'Organization', name: 'FurtadoFirm', url: 'https://furtadofirm.com' },
   ],
   memberOf: [
@@ -81,6 +81,8 @@ const PERSON_SCHEMA = {
     'https://www.bigvikinggames.com',
     'https://www.wikidata.org/wiki/Q139970179',
     'https://www.businesswire.com/news/home/20250219687145/en/Mortgage-Automator-Announces-Record-Growth-AI-Driven-Innovation-in-2024',
+    'https://www.businesswire.com/news/home/20250429040022/en/AFX-Research-Integrates-with-Mortgage-Automator-to-Deliver-Fast-Automated-Title-Updates-to-Private-Lenders',
+    'https://www.morningstar.com/news/business-wire/20250219687145/mortgage-automator-announces-record-growth-ai-driven-innovation-in-2024',
   ],
 };
 
