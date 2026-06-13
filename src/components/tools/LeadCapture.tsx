@@ -37,11 +37,11 @@ export default function LeadCapture({
 
   if (status === 'sent') {
     return (
-      <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4 flex items-start gap-3">
-        <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+      <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4 flex items-start gap-3 dark:border-emerald-800 dark:bg-emerald-950/40">
+        <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm font-medium text-emerald-900">Sent — check your inbox.</p>
-          <p className="text-sm text-emerald-800/80">We've emailed your draft and will follow up with a free review.</p>
+          <p className="text-sm font-medium text-emerald-900 dark:text-emerald-200">Sent — check your inbox.</p>
+          <p className="text-sm text-emerald-800/80 dark:text-emerald-300/80">We've emailed your draft and will follow up with a free review.</p>
         </div>
       </div>
     );

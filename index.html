@@ -20,6 +20,17 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="PreciseHR — Intelligent HR Solutions for Canadian Businesses" />
     <meta name="twitter:description" content="Strategic HR consulting, intelligent automation, and compliance expertise for Canadian businesses." />
+
+    <!-- Theme: apply saved/system preference before paint to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          var dark = t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="fs-unmask-airo-app-builder">
     <div id="app" class="fs-unmask-airo-app-builder"></div>

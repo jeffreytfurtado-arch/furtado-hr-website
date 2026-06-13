@@ -64,6 +64,46 @@
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   }
 
+  .dark {
+    /* Core Colors */
+    --background: 210 33% 8%;
+    --foreground: 210 16% 95%;
+    --card: 210 28% 11%;
+    --card-foreground: 210 16% 95%;
+    --popover: 210 30% 10%;
+    --popover-foreground: 210 16% 95%;
+    --primary: 205 80% 60%;
+    --primary-foreground: 210 45% 9%;
+    --secondary: 208 38% 24%;
+    --secondary-foreground: 210 16% 95%;
+    --muted: 210 24% 16%;
+    --muted-foreground: 210 14% 66%;
+    --accent: 196 85% 52%;
+    --accent-foreground: 210 45% 9%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 20%;
+    --input: 210 20% 22%;
+    --ring: 205 80% 60%;
+
+    /* Extended Colors */
+    --chart-1: 205 85% 68%;
+    --chart-2: 205 80% 58%;
+    --chart-3: 205 75% 48%;
+    --chart-4: 205 70% 38%;
+    --chart-5: 210 16% 90%;
+
+    /* Sidebar Colors */
+    --sidebar: 210 28% 11%;
+    --sidebar-foreground: 210 16% 95%;
+    --sidebar-primary: 205 80% 60%;
+    --sidebar-primary-foreground: 210 45% 9%;
+    --sidebar-accent: 196 85% 52%;
+    --sidebar-accent-foreground: 210 45% 9%;
+    --sidebar-border: 210 20% 20%;
+    --sidebar-ring: 205 80% 60%;
+  }
+
   * {
     @apply border-border;
   }
