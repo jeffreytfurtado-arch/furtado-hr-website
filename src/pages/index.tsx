@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { HERO_STATS } from '@/lib/site-stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -23,6 +24,11 @@ import {
   Zap,
   Bot,
   BarChart3,
+  BadgeCheck,
+  ShieldCheck,
+  MapPin,
+  Clock,
+  Star,
 } from 'lucide-react';
 import { motion, useAnimation } from 'motion/react';
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -187,12 +193,7 @@ function ProcessStep({ step, title, desc, index }: { step: string; title: string
 }
 
 export default function HomePage() {
-  const stats = [
-    { value: '13', label: 'Provinces Covered' },
-    { value: '15+', label: 'Years Experience' },
-    { value: '98%', label: 'Client Satisfaction' },
-    { value: '1,500+', label: 'Employees Supported' },
-  ];
+  const stats = HERO_STATS;
 
   const primaryServices = [
     {
@@ -316,6 +317,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trust badges */}
+      <section className="border-b bg-background">
+        <div className="container mx-auto px-4 py-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 text-sm text-muted-foreground">
+            {[
+              { icon: BadgeCheck, label: 'Canadian-owned & operated' },
+              { icon: ShieldCheck, label: 'PIPEDA-aware practices' },
+              { icon: MapPin, label: 'All 13 provinces & territories' },
+              { icon: Clock, label: 'Responses within 24 hours' },
+              { icon: Star, label: '98% client satisfaction' },
+            ].map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <span key={i} className="inline-flex items-center gap-2">
+                  <Icon className="w-4 h-4 text-primary" />
+                  {b.label}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Primary Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
@@ -386,7 +410,7 @@ export default function HomePage() {
             <motion.div {...fadeUp}>
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&h=500&fit=crop&q=80"
+                  src="/images/precisehr-home-team.jpg"
                   alt="Professional team collaborating"
                   className="w-full h-auto object-cover"
                   loading="lazy"

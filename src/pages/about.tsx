@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { HERO_STATS } from '@/lib/site-stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -121,25 +122,25 @@ export default function AboutPage() {
       icon: Scale,
       title: 'HR Compliance & Risk',
       description: 'Our compliance team monitors employment law across all Canadian jurisdictions — federal and provincial. From policy audits to workplace investigations, we keep your organization protected and compliant.',
-      image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop&q=80',
+      image: '/images/precisehr-compliance.jpg',
     },
     {
       icon: UserCheck,
       title: 'Talent Acquisition',
       description: 'Our recruitment specialists handle full-cycle hiring — from executive search and candidate screening to employer branding and onboarding programs that reduce early turnover.',
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop&q=80',
+      image: '/images/precisehr-talent.jpg',
     },
     {
       icon: Users,
       title: 'Employee Relations',
       description: 'Experienced consultants specializing in conflict resolution, mediation, performance management, and building positive workplace cultures that drive retention.',
-      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+      image: '/images/precisehr-employee-relations.jpg',
     },
     {
       icon: Laptop,
       title: 'HR Technology',
       description: 'Our technology team builds and supports our intelligent HR software platform — automating compliance tracking, generating documents instantly, surfacing workforce insights, and giving organizations of every size the tools to operate smarter with less overhead.',
-      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
+      image: '/images/precisehr-hr-technology.jpg',
     },
   ];
 
@@ -181,12 +182,7 @@ export default function AboutPage() {
       <section className="bg-[#001d3d] border-t border-white/10">
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: '13', label: 'Provinces Covered' },
-              { value: '15+', label: 'Years Experience' },
-              { value: '98%', label: 'Client Satisfaction' },
-              { value: '1,500+', label: 'Employees Supported' },
-            ].map((stat, i) => (
+            {HERO_STATS.map((stat, i) => (
               <StatCounter key={i} value={stat.value} label={stat.label} delay={i * 0.1} />
             ))}
           </div>
@@ -200,7 +196,7 @@ export default function AboutPage() {
             <AnimatedCard index={0}>
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=500&fit=crop&q=80"
+                  src="/images/precisehr-about-team.jpg"
                   alt="Team collaboration in modern office"
                   className="w-full h-auto object-cover"
                   loading="lazy"
@@ -469,7 +465,7 @@ export default function AboutPage() {
             <AnimatedCard index={1}>
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=450&fit=crop&q=80"
+                  src="/images/precisehr-about-meeting.jpg"
                   alt="Professional certification and credentials"
                   className="w-full h-auto object-cover"
                   loading="lazy"
