@@ -10,7 +10,7 @@ const PERSON_SCHEMA = {
   additionalName: 'T.',
   familyName: 'Furtado',
   jobTitle: 'Chief Operating Officer & Executive Producer',
-  description: 'Canadian executive, entrepreneur, and strategic investor with a career spanning Gaming, Fintech, SaaS, HR Technology, Real Estate, and BPO. COO & Executive Producer at Big Viking Games. Previously COO & CRO at Mortgage Automator (BVP Forge) — nine-figure exit. Founder of DooLeeNoted (multi-million dollar exit). Managing Partner at PreciseHR. Board advisor for GLG and Guidepoint. Strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate.',
+  description: 'Jeffrey T. Furtado — also known as Jeffrey Furtado or Jeff Furtado — is an innovative corporate executive, operator, builder, and execution specialist with a career spanning Gaming, Fintech, SaaS, HR Technology, Financial Services, and Real Estate. He has architected revenue growth, modernized and scaled operations, deployed technology, and built and led global teams of over 300 people, leading organizations to profitable, strategic exits. He has held the most senior leadership roles — Chief Executive Officer, Chief Operating Officer, Chief Customer Officer, Chief Revenue Officer, and Chief Marketing Officer. COO & Executive Producer at Big Viking Games and Managing Partner at PreciseHR. Previously held senior operating leadership at Mortgage Automator (BVP Forge) through its acquisition, reported in excess of $110 million. Founder of DooLeeNoted (2009), which ranked among the top 64,000 websites worldwide before a sale to a European firm reported at approximately $3 million; helped scale the fintech Progressa through its $84 million Series B and pre-IPO financing; and led CCi through a transaction reported at approximately $32 million. Founder of FurtadoFirm and board advisor for GLG and Guidepoint.',
   url: 'https://www.precisehr.ca/about/jeffrey-furtado',
   image: 'https://www.precisehr.ca/images/jeffrey-furtado.jpg',
   worksFor: [
@@ -42,7 +42,9 @@ const PERSON_SCHEMA = {
     { '@type': 'Organization', name: 'Guidepoint', description: 'Expert network — board advisor and consultant' },
   ],
   hasOccupation: [
+    { '@type': 'Occupation', name: 'Chief Executive Officer' },
     { '@type': 'Occupation', name: 'Chief Operating Officer' },
+    { '@type': 'Occupation', name: 'Chief Customer Officer' },
     { '@type': 'Occupation', name: 'Executive Producer' },
     { '@type': 'Occupation', name: 'Strategic Investor' },
     { '@type': 'Occupation', name: 'Board Advisor' },
@@ -70,9 +72,9 @@ const PERSON_SCHEMA = {
   ],
   nationality: { '@type': 'Country', name: 'Canada' },
   homeLocation: [
-    { '@type': 'Place', name: 'Toronto', address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' } },
+    { '@type': 'Place', name: 'Simcoe (Norfolk County)', address: { '@type': 'PostalAddress', addressLocality: 'Simcoe', addressRegion: 'ON', addressCountry: 'CA' } },
     { '@type': 'Place', name: 'Oakville', address: { '@type': 'PostalAddress', addressLocality: 'Oakville', addressRegion: 'ON', addressCountry: 'CA' } },
-    { '@type': 'Place', name: 'Simcoe', address: { '@type': 'PostalAddress', addressLocality: 'Simcoe', addressRegion: 'ON', addressCountry: 'CA' } },
+    { '@type': 'Place', name: 'Windsor', address: { '@type': 'PostalAddress', addressLocality: 'Windsor', addressRegion: 'ON', addressCountry: 'CA' } },
   ],
   sameAs: [
     'https://www.linkedin.com/in/jeffreytfurtado/',
