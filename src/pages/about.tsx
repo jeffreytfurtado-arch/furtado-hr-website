@@ -375,7 +375,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Builders at Our Core</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">We don&apos;t just advise — we build</h2>
             <p className="text-muted-foreground">
-              Our founders have personally designed, built, and shipped the kinds of systems most firms only consult on. Across industries, this software runs internally and externally — and has saved organizations millions.
+              Our founders have personally designed, built, and shipped the kinds of systems most firms only consult on. Across industries, this software runs internally and externally — and has saved clients hundreds of thousands in costs annually.
             </p>
           </motion.div>
           <motion.div {...fadeUp} className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">

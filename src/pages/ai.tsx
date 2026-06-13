@@ -243,7 +243,7 @@ export default function AIPage() {
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Track Record</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What we&apos;ve built</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Between us, we&apos;ve designed, built, and shipped enterprise-grade systems and AI across industries — software used internally and externally that has saved organizations millions.
+              We&apos;ve designed, built, and shipped enterprise-grade systems and AI across industries — software used internally and externally that has saved clients hundreds of thousands in costs annually.
             </p>
           </motion.div>
 
