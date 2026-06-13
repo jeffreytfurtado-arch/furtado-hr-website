@@ -26,6 +26,18 @@ const queryClient = new QueryClient({
   },
 });
 
+// Auto-recover from stale code chunks after a new deploy.
+// When a lazy-loaded chunk fails (its hashed filename no longer exists on the
+// server because a newer build replaced it), reload once to pull the fresh build.
+// A timestamp guard prevents any reload loop.
+window.addEventListener('vite:preloadError', () => {
+  const last = Number(sessionStorage.getItem('chunk-reload-ts') || 0);
+  if (Date.now() - last > 10000) {
+    sessionStorage.setItem('chunk-reload-ts', String(Date.now()));
+    window.location.reload();
+  }
+});
+
 // Support both client-side navigation and SSR hydration
 const rootElement = document.getElementById('app');
 if (!rootElement) throw new Error('Root element not found');
