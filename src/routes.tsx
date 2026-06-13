@@ -7,6 +7,9 @@ const AboutPage = lazy(() => import('./pages/about'));
 const ServicesPage = lazy(() => import('./pages/services'));
 const AIPage = lazy(() => import('./pages/ai'));
 const DemosPage = lazy(() => import('./pages/ai/demos'));
+const PolicyGeneratorPage = lazy(() => import('./pages/policy-generator'));
+const OfferLetterPage = lazy(() => import('./pages/offer-letter'));
+const PolicyScannerPage = lazy(() => import('./pages/policy-scanner'));
 const CookiePolicyPage = lazy(() => import('./pages/cookie-policy'));
 const TermsOfServicePage = lazy(() => import('./pages/terms-of-service'));
 const PrivacyPolicyPage = lazy(() => import('./pages/privacy-policy'));
@@ -139,12 +142,24 @@ export const routes: RouteObject[] = [
     element: <DemosPage />,
   },
   {
+    path: '/policy-generator',
+    element: <PolicyGeneratorPage />,
+  },
+  {
+    path: '/offer-letter',
+    element: <OfferLetterPage />,
+  },
+  {
+    path: '/policy-scanner',
+    element: <PolicyScannerPage />,
+  },
+  {
     path: '*',
     element: <NotFoundPage />,
   },
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;

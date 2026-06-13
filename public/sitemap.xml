@@ -14,6 +14,9 @@
   <url><loc>https://www.precisehr.ca/statutory-holidays</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.precisehr.ca/net-pay-calculator</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.precisehr.ca/jd-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.precisehr.ca/policy-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.precisehr.ca/offer-letter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.precisehr.ca/policy-scanner</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.precisehr.ca/hr-assessment</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.precisehr.ca/roi-calculator</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/salary-benchmarking</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
