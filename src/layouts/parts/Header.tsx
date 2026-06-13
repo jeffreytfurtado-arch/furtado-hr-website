@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell, Calendar, FileText, FileSignature, ScanSearch } from 'lucide-react';
+import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell, Calendar, FileText, FileSignature, ScanSearch, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/ThemeToggle';
 
@@ -224,7 +224,15 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+              aria-label="Search"
+              className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+            >
+              <Search className="w-4 h-4" />
+              <kbd className="text-[10px] font-medium border rounded px-1.5 py-0.5">⌘K</kbd>
+            </button>
             <ThemeToggle />
             <Link to="/contact">
               <Button>Contact Us</Button>
