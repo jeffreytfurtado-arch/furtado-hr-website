@@ -21,23 +21,23 @@ const fadeUp = {
 };
 const stagger = (d: number) => ({ ...fadeUp, transition: { ...fadeUp.transition, delay: d } });
 
-// ⚠️ PLACEHOLDER PRICING — edit prices, names, and features freely.
+// Pricing in CAD (per employee / month, annual rate). Adjust freely.
 const TIERS = [
   {
     name: 'Starter',
-    price: '$5',
+    price: '$6',
     unit: '/ employee / mo',
     blurb: 'For small teams getting organized.',
     popular: false,
-    features: ['Employee records & org chart', 'Time-off tracking & approvals', 'Document storage & e-sign', 'Onboarding checklists', 'Email support'],
+    features: ['Employee records & basic org chart', 'Time-off tracking & approvals', 'Documents & e-signatures', 'Onboarding checklists', 'Email support'],
   },
   {
     name: 'Growth',
-    price: '$9',
+    price: '$12',
     unit: '/ employee / mo',
     blurb: 'For growing companies that need compliance built in.',
     popular: true,
-    features: ['Everything in Starter', 'Payroll-ready: CPP, EI, tax', 'ROE & T4 generation', 'Provincial compliance (ESA) tracking', 'Policies & handbook builder', 'Reporting & analytics', 'Priority support'],
+    features: ['Everything in Starter', 'Payroll-ready: CPP, EI & tax', 'ROE & T4 generation', 'Provincial (ESA) compliance tracking', 'Org-chart builder — drag, edit & plan headcount', 'Policies & handbook builder', 'Reporting & analytics', 'Priority support'],
   },
   {
     name: 'Agency',
@@ -62,8 +62,9 @@ const FAQS = [
   { q: 'When does the PreciseHR app launch?', a: 'We\u2019re rolling out access in stages to a founding group of customers. Join the waitlist and we\u2019ll reach out as soon as your spot opens — founding customers get priority onboarding and launch pricing.' },
   { q: 'Is it built for Canadian businesses?', a: 'Yes. The platform is designed Canadian-first — CPP/EI and tax, Records of Employment, T4s, and province-by-province employment-standards compliance, with PIPEDA-aware data practices.' },
   { q: 'Can HR firms manage multiple clients?', a: 'Absolutely. The Agency plan is multi-tenant, so consultancies can manage many client companies from a single login, with white-label branding.' },
-  { q: 'How much will it cost?', a: 'Pricing is per employee per month, with a custom plan for agencies. The tiers on this page are indicative — join the waitlist or book a demo for exact, current pricing.' },
-  { q: 'Can I see it before committing?', a: 'Yes — book a live demo and we\u2019ll walk you through the platform and answer your questions. No obligation.' },
+  { q: 'How much will it cost?', a: 'Pricing is per employee per month in CAD \u2014 Starter from $6 and Growth from $12, with a custom plan for agencies. Annual billing saves about two months, we never charge for archived employees, and every plan includes a free 30-minute HR consult.' },
+  { q: 'Do I get access to real HR experts?', a: 'Yes \u2014 every plan includes a free 30-minute consult with a PreciseHR advisor. For ongoing support you can add our HR Advice Line for unlimited expert HR advice. It\u2019s software backed by real people, not just a dashboard.' },
+  { q: 'Can I see it before committing?', a: 'Yes \u2014 book a live demo and we\u2019ll walk you through the platform and answer your questions. No obligation.' },
 ];
 
 export default function AppPage() {
@@ -220,7 +221,7 @@ export default function AppPage() {
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-14">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Pricing</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, per-employee pricing</h2>
-            <p className="text-muted-foreground">Founding customers lock in launch pricing. Join the waitlist or book a demo for exact rates.</p>
+            <p className="text-muted-foreground">Per employee, per month, billed in CAD. Save ~2 months with annual billing — and we never charge for archived employees. Founding customers lock in launch pricing.</p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
             {TIERS.map((t, i) => (
@@ -234,10 +235,11 @@ export default function AppPage() {
                   <CardContent className="p-7">
                     <h3 className="text-lg font-bold">{t.name}</h3>
                     <p className="text-sm text-muted-foreground mt-1 mb-5 min-h-[40px]">{t.blurb}</p>
-                    <div className="flex items-baseline gap-1 mb-6">
+                    <div className="flex items-baseline gap-1 mb-1">
                       <span className="text-4xl font-bold">{t.price}</span>
                       {t.unit && <span className="text-sm text-muted-foreground">{t.unit}</span>}
                     </div>
+                    <p className="text-xs text-muted-foreground mb-6">{t.unit ? 'billed annually · CAD' : 'volume pricing · CAD'}</p>
                     <Button className="w-full mb-3" variant={t.popular ? 'default' : 'outline'} onClick={() => pickPlan(t.name)}>
                       Join the waitlist
                     </Button>
@@ -256,6 +258,19 @@ export default function AppPage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Advisory perk + add-on */}
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto mt-10">
+            <div className="rounded-xl border bg-card px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-3 text-center sm:text-left">
+              <span className="inline-flex items-center gap-2 text-sm font-medium">
+                <Calendar className="w-4 h-4 text-primary" /> Every plan includes a free 30-minute HR consult
+              </span>
+              <span className="hidden sm:block w-px h-6 bg-border" />
+              <span className="text-sm text-muted-foreground">
+                Need more? Add the <strong className="text-foreground">HR Advice Line</strong> — unlimited expert HR advice — to any plan.
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
