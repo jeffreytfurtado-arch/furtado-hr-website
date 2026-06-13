@@ -7,6 +7,7 @@ import { FileText, Sparkles, Loader2 } from 'lucide-react';
 import { PROVINCES } from '@/lib/canada';
 import { useTypewriter } from '@/lib/useTypewriter';
 import ToolResult from '@/components/tools/ToolResult';
+import LeadCapture from '@/components/tools/LeadCapture';
 
 const POLICY_TYPES = [
   'Code of Conduct',
@@ -114,6 +115,10 @@ export default function PolicyGeneratorPage() {
           </div>
 
           <ToolResult loading={loading} shown={shown} raw={raw} error={error} loadingLabel="Drafting your policy…" emptyLabel="Your generated policy will appear here." />
+
+          {raw && !loading && (
+            <LeadCapture tool="policy" summary={`${policyType} policy (${province})`} document={raw} />
+          )}
 
           <p className="mt-6 text-sm text-muted-foreground text-center">
             Want it fully tailored and reviewed? <a href="https://calendly.com/precisehr-info/precisehr-consult" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">Book a consult →</a>

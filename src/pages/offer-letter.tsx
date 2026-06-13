@@ -7,6 +7,7 @@ import { FileSignature, Sparkles, Loader2 } from 'lucide-react';
 import { PROVINCES } from '@/lib/canada';
 import { useTypewriter } from '@/lib/useTypewriter';
 import ToolResult from '@/components/tools/ToolResult';
+import LeadCapture from '@/components/tools/LeadCapture';
 
 const EMPLOYMENT_TYPES = ['Full-time', 'Part-time', 'Fixed-term Contract', 'Temporary'];
 const field = 'w-full rounded-lg border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50';
@@ -113,6 +114,10 @@ export default function OfferLetterPage() {
           </div>
 
           <ToolResult loading={loading} shown={shown} raw={raw} error={error} loadingLabel="Drafting your offer letter…" emptyLabel="Your offer letter will appear here." />
+
+          {raw && !loading && (
+            <LeadCapture tool="offer" summary={`Offer letter — ${jobTitle} (${province})`} document={raw} />
+          )}
 
           <p className="mt-6 text-sm text-muted-foreground text-center">
             Hiring at scale or need contracts reviewed? <a href="https://calendly.com/precisehr-info/precisehr-consult" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">Book a consult →</a>

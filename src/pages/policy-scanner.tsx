@@ -7,6 +7,7 @@ import { ScanSearch, Loader2 } from 'lucide-react';
 import { PROVINCES } from '@/lib/canada';
 import { useTypewriter } from '@/lib/useTypewriter';
 import ToolResult from '@/components/tools/ToolResult';
+import LeadCapture from '@/components/tools/LeadCapture';
 
 const field = 'w-full rounded-lg border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50';
 
@@ -88,6 +89,10 @@ export default function PolicyScannerPage() {
           </div>
 
           <ToolResult loading={loading} shown={shown} raw={raw} error={error} loadingLabel="Reviewing your policy…" emptyLabel="Findings will appear here, grouped by severity." />
+
+          {raw && !loading && (
+            <LeadCapture tool="scan" summary={`Policy scan (${province})`} document={raw} />
+          )}
 
           <p className="mt-6 text-sm text-muted-foreground text-center">
             This is general guidance, not legal advice. For a thorough policy audit, <a href="https://calendly.com/precisehr-info/precisehr-consult" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">book a consult →</a>
