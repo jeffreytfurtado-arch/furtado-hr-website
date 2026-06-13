@@ -23,6 +23,12 @@
   <url><loc>https://www.precisehr.ca/turnover-calculator</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/hiring-calculator</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/federal-vs-provincial-employment-standards</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/workplace-investigations</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/performance-management</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/remote-work-policies</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/preventing-workplace-harassment</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.precisehr.ca/blog/termination-best-practices</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/case-studies</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/resources</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.precisehr.ca/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

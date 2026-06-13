@@ -137,7 +137,7 @@ const ORGANIZATION_SCHEMA = {
   name: 'PreciseHR',
   legalName: 'PreciseHR',
   url: 'https://www.precisehr.ca',
-  logo: 'https://www.precisehr.ca/images/logo.png',
+  logo: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png',
   description: 'Intelligent HR consulting, automation-ready software, and deep Canadian expertise. PreciseHR helps Canadian businesses build exceptional teams and stay compliant.',
   address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' },
   telephone: '+1-437-887-2263',
@@ -147,6 +147,10 @@ const ORGANIZATION_SCHEMA = {
     'HR Consulting', 'HR Software', 'Recruitment', 'Compliance Management',
     'Compensation and Benefits', 'Workplace Investigations', 'Termination Services',
     'Performance Management',
+  ],
+  founder: [
+    { '@type': 'Person', '@id': 'https://www.precisehr.ca/about/jeffrey-furtado#person', name: 'Jeffrey T. Furtado' },
+    { '@type': 'Person', '@id': 'https://www.precisehr.ca/about/david-suckling#person', name: 'David Suckling' },
   ],
   sameAs: ['https://www.linkedin.com/company/precisehrcanada/'],
 };

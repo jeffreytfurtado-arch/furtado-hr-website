@@ -25,9 +25,11 @@ export default function SEO({ title, description, path = '', noIndex = false }: 
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="PreciseHR" />
+      <meta property="og:image" content="https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content="https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
     </Helmet>

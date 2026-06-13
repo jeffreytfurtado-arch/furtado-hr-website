@@ -31,7 +31,7 @@ export default function DavidSucklingPage() {
     <div className="flex flex-col">
       <SEO
         title="David Suckling — Co-Founder"
-        description="David Suckling is a Co-Founder of PreciseHR. A builder and applied-AI specialist, he helps organizations adopt and deploy artificial intelligence to work smarter across their operations."
+        description="David Suckling is a Co-Founder of PreciseHR and Chief of Staff at Mortgage Automator. An operator, builder, and AI expert with leadership across sales, revenue operations, and operations."
         path="/about/david-suckling"
       />
       <PersonSchemaDavid />
