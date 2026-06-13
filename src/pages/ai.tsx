@@ -1,5 +1,4 @@
 import SEO from '@/components/SEO';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -22,6 +21,10 @@ import {
   ArrowRight,
   Phone,
   Sparkles,
+  Landmark,
+  LayoutDashboard,
+  Gamepad2,
+  Boxes,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -110,12 +113,15 @@ const departments = [
 ];
 
 const built = [
-  { title: 'Net Pay Calculator', description: 'A full 2026 Canadian payroll engine — federal & provincial tax, CPP/CPP2, and EI.', href: '/net-pay-calculator' },
-  { title: 'JD Generator', description: 'Generates complete, role-specific job descriptions in seconds.', href: '/jd-generator' },
-  { title: 'Compliance Checker', description: 'AI-driven analysis that surfaces your HR compliance gaps.', href: '/compliance-checker' },
-  { title: 'Compliance Updates', description: 'Automated monitoring of Canadian HR law changes, refreshed daily.', href: '/compliance-updates' },
-  { title: 'Minimum Wage Tracker', description: 'Current minimum-wage rates across every province and territory.', href: '/minimum-wage' },
-  { title: 'Statutory Holidays', description: '2026 holiday calendar with built-in stat-holiday pay calculation.', href: '/statutory-holidays' },
+  { icon: Brain, title: 'AI Engines & Data Unification', description: 'AI systems that unify fragmented tools, teams, and data across an organization — connecting what was never designed to talk.' },
+  { icon: Landmark, title: 'Loan Origination & Servicing', description: 'End-to-end lending platforms automating origination, underwriting, servicing, and investor reporting.' },
+  { icon: Users, title: 'HRIS & HR Platforms', description: 'Full HR information systems spanning the entire employee lifecycle, built for scale.' },
+  { icon: TrendingUp, title: 'CRMs & Revenue Systems', description: 'Customer and revenue platforms that give sales and ops teams a single source of truth.' },
+  { icon: LayoutDashboard, title: 'Command Centres & Ops Hubs', description: 'Internal command centres and control panels that put live operations in one place.' },
+  { icon: BarChart3, title: 'Reporting & Analytics', description: 'Reporting and analytics platforms that turn scattered data into fast decisions.' },
+  { icon: Workflow, title: 'Cross-Functional Automation', description: 'Automations across Sales, RevOps, Risk, Compliance, and HR that remove manual work end to end.' },
+  { icon: Gamepad2, title: 'Games & Interactive Products', description: 'Games and interactive platforms built and operated at scale for large audiences.' },
+  { icon: Boxes, title: 'SaaS Products & Software Bundles', description: 'Complete SaaS products and packaged software bundles, shipped from concept to production.' },
 ];
 
 const couldBuild = [
@@ -234,29 +240,30 @@ export default function AIPage() {
       <section id="what-weve-built" className="py-24 bg-background scroll-mt-20">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Proof, Not Promises</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">AI we&apos;ve already built</h2>
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Track Record</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What we&apos;ve built</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              The tools below were designed, built, and shipped by our team — and they&apos;re live on this very site. Try them yourself.
+              Between us, we&apos;ve designed, built, and shipped enterprise-grade systems and AI across industries — software used internally and externally that has saved organizations millions.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {built.map((b, i) => (
-              <motion.div key={i} {...staggerChild(i * 0.05)}>
-                <Link to={b.href} className="block h-full">
+            {built.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={i} {...staggerChild(i * 0.05)}>
                   <Card className="h-full group hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
                     <CardContent className="p-6">
-                      <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-                        {b.title}
-                        <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </h3>
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                        <Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-2">{b.title}</h3>
                       <p className="text-sm text-muted-foreground">{b.description}</p>
                     </CardContent>
                   </Card>
-                </Link>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

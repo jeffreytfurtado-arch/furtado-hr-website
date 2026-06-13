@@ -368,6 +368,37 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Builders */}
+      <section className="py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center mb-10">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Builders at Our Core</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">We don&apos;t just advise — we build</h2>
+            <p className="text-muted-foreground">
+              Our founders have personally designed, built, and shipped the kinds of systems most firms only consult on. Across industries, this software runs internally and externally — and has saved organizations millions.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            {[
+              'AI Engines & Data Unification',
+              'HRIS & HR Platforms',
+              'CRMs & Revenue Systems',
+              'Loan Origination Systems',
+              'Command Centres',
+              'Reporting & Analytics',
+              'Sales & RevOps Automation',
+              'Risk & Compliance Automation',
+              'Games & Interactive Products',
+              'SaaS Products & Software Bundles',
+            ].map((cap) => (
+              <span key={cap} className="px-4 py-2 rounded-full bg-background border text-sm font-medium text-foreground/80 hover:border-primary/40 hover:text-primary transition-colors">
+                {cap}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Process */}
       <section className="py-24 bg-muted/50 relative overflow-hidden">
         <div className="container mx-auto px-4">
