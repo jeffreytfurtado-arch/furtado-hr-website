@@ -1,4 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
+import SEO from '@/components/SEO';
+import { ArticleSchema, BreadcrumbSchema } from '@/components/StructuredData';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, Phone } from 'lucide-react';
@@ -22,9 +24,19 @@ export default function BlogPostPage() {
   const nextPost = blogPosts[currentIndex + 1];
   const prevPost = blogPosts[currentIndex - 1];
 
+  const postUrl = `https://www.precisehr.ca/blog/${post.id}`;
+
   return (
     <div className="min-h-screen bg-background">
-      <title>{post.title} - PreciseHR</title>
+      <SEO title={post.title} description={post.excerpt} path={`/blog/${post.id}`} />
+      <ArticleSchema post={post} url={postUrl} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://www.precisehr.ca/' },
+          { name: 'Blog', url: 'https://www.precisehr.ca/blog' },
+          { name: post.title, url: postUrl },
+        ]}
+      />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white py-16 md:py-24">
@@ -36,7 +48,7 @@ export default function BlogPostPage() {
             <Badge className="mb-4 bg-white/10 text-white border-white/20">{post.category}</Badge>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight">{post.title}</h1>
             <div className="flex flex-wrap items-center gap-4 text-sm text-white/70">
-              <span className="flex items-center gap-2"><User className="w-4 h-4" />{post.author}</span>
+              <span className="flex items-center gap-2"><User className="w-4 h-4" />{post.author} · {post.authorRole}</span>
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{post.date}</span>
               <span className="flex items-center gap-2"><Clock className="w-4 h-4" />{post.readTime}</span>
             </div>

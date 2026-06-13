@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
+import { PROVINCES_DATA } from '@/data/provinces';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,6 +10,7 @@ export default function Footer() {
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Services', href: '/services' },
+      { name: 'HR Services by Province', href: '/hr-services' },
       { name: 'AI Consulting', href: '/ai' },
       { name: 'Contact Us', href: '/contact' },
       { name: 'PreciseHR App', href: 'https://app.precisehr.ca' },
@@ -151,6 +153,22 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* HR Services by province — internal linking */}
+        <div className="mt-12 pt-8 border-t">
+          <p className="text-sm font-semibold mb-4">HR Services by province &amp; territory</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {PROVINCES_DATA.map((p) => (
+              <Link
+                key={p.slug}
+                to={`/hr-services/${p.slug}`}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {p.name}
+              </Link>
+            ))}
           </div>
         </div>
 

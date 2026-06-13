@@ -203,3 +203,96 @@ export function ToolPageSchema({ name, description, url }: { name: string; descr
 }
 
 export default GlobalStructuredData;
+
+// ---------------------------------------------------------------------------
+// Reusable per-page schema (E-E-A-T + rich results)
+// ---------------------------------------------------------------------------
+
+function toISO(d: string): string {
+  const parsed = new Date(d);
+  return isNaN(parsed.getTime()) ? d : parsed.toISOString().slice(0, 10);
+}
+
+// BlogPosting schema with author + publisher for article rich results / E-E-A-T.
+export function ArticleSchema({
+  post,
+  url,
+}: {
+  post: { title: string; excerpt: string; date: string; lastUpdated?: string; author: string; authorRole?: string };
+  url: string;
+}) {
+  const isJeffrey = post.author.includes('Jeffrey');
+  const author: Record<string, unknown> = { '@type': 'Person', name: post.author };
+  if (post.authorRole) author.jobTitle = post.authorRole;
+  if (isJeffrey) {
+    author['@id'] = 'https://www.precisehr.ca/about/jeffrey-furtado#person';
+    author.url = 'https://www.precisehr.ca/about/jeffrey-furtado';
+  }
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: toISO(post.date),
+    dateModified: toISO(post.lastUpdated || post.date),
+    author,
+    publisher: {
+      '@type': 'Organization',
+      '@id': 'https://www.precisehr.ca/#organization',
+      name: 'PreciseHR',
+      logo: { '@type': 'ImageObject', url: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png' },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    image: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png',
+  };
+  return <Helmet><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>;
+}
+
+// BreadcrumbList schema for breadcrumb rich results + crawl clarity.
+export function BreadcrumbSchema({ items }: { items: { name: string; url: string }[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })),
+  };
+  return <Helmet><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>;
+}
+
+// FAQPage schema — eligible for FAQ rich results.
+export function FAQSchema({ faqs }: { faqs: { q: string; a: string }[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+  return <Helmet><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>;
+}
+
+// Service schema for province / service landing pages.
+export function ServiceSchema({
+  name,
+  description,
+  areaServed,
+  url,
+}: {
+  name: string;
+  description: string;
+  areaServed: string;
+  url: string;
+}) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    description,
+    serviceType: 'Human Resources Consulting',
+    areaServed: { '@type': 'AdministrativeArea', name: areaServed },
+    provider: { '@type': 'Organization', '@id': 'https://www.precisehr.ca/#organization', name: 'PreciseHR' },
+    url,
+  };
+  return <Helmet><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>;
+}
