@@ -134,6 +134,7 @@ export default function Header() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'AI', href: '/ai' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

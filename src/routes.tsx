@@ -3,6 +3,7 @@ import { lazy } from 'react';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
 import ServicesPage from './pages/services';
+import AIPage from './pages/ai';
 import CookiePolicyPage from './pages/cookie-policy';
 import TermsOfServicePage from './pages/terms-of-service';
 import PrivacyPolicyPage from './pages/privacy-policy';
@@ -40,6 +41,10 @@ export const routes: RouteObject[] = [
   {
     path: '/services',
     element: <ServicesPage />,
+  },
+  {
+    path: '/ai',
+    element: <AIPage />,
   },
   {
     path: '/cookie-policy',
@@ -128,6 +133,6 @@ export const routes: RouteObject[] = [
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;

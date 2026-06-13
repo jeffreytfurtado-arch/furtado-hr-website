@@ -9,6 +9,7 @@ export default function Footer() {
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Services', href: '/services' },
+      { name: 'AI Consulting', href: '/ai' },
       { name: 'Contact Us', href: '/contact' },
       { name: 'PreciseHR App', href: 'https://app.precisehr.ca' },
     ],
