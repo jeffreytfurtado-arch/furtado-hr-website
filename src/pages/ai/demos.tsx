@@ -8,6 +8,9 @@ import {
   Users, TrendingUp, Banknote, LifeBuoy, PieChart,
   Sparkles, Send, Loader2, ArrowRight, Phone, FlaskConical,
 } from 'lucide-react';
+import RecruitingPipeline from '@/components/demos/RecruitingPipeline';
+import CommandCentre from '@/components/demos/CommandCentre';
+import DocumentBuilder from '@/components/demos/DocumentBuilder';
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -273,6 +276,54 @@ export default function DemosPage() {
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Recruiting automation */}
+      <section className="py-20 md:py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Automation</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Recruiting on autopilot</h2>
+            <p className="text-muted-foreground">
+              From application to booked interview — automatically. Every step below runs without a recruiter lifting a finger.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="max-w-5xl mx-auto">
+            <RecruitingPipeline />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Command centre */}
+      <section className="py-20 md:py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Command Centre</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your whole operation, one screen</h2>
+            <p className="text-muted-foreground">
+              We build live command centres that pull every system into a single view — so leaders see what&apos;s happening, and what needs attention, in real time.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+            <CommandCentre />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Document builder */}
+      <section className="py-20 md:py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Watch It Build</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Documents that write themselves</h2>
+            <p className="text-muted-foreground">
+              Pick a document, give it a topic, and watch a polished, Canadian-compliant draft appear in seconds.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+            <DocumentBuilder />
+          </motion.div>
         </div>
       </section>
 
