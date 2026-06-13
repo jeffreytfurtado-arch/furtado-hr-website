@@ -116,7 +116,7 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col">
-      <SEO title="Contact PreciseHR" description="Get a free HR assessment for your Canadian business. Reach our team by phone, email, or online form." path="/contact" />
+      <SEO title="Contact Us" description="Get a free HR assessment for your Canadian business. Reach our team by phone, email, or online form." path="/contact" />
       <title>Get Free HR Assessment - PreciseHR</title>
       <meta name="description" content="Schedule your free HR assessment with PreciseHR. Get expert analysis of your HR needs and customized solutions." />
 

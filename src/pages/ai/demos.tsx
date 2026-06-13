@@ -181,7 +181,7 @@ export default function DemosPage() {
   return (
     <div className="flex flex-col">
       <SEO
-        title="AI Demos — PreciseHR Labs"
+        title="Live AI Demos"
         description="Try PreciseHR's AI live. Ask a fictional company anything and watch our AI engine answer by unifying data from HR, payroll, CRM, helpdesk, and finance in real time."
         path="/ai/demos"
       />
