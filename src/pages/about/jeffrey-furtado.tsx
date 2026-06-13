@@ -180,7 +180,6 @@ export default function JeffreyFurtadoPage() {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Jeffrey T. Furtado</h1>
             <p className="text-xl text-cyan-300 font-medium mb-2">Executive · Entrepreneur · Strategic Investor</p>
-            <p className="text-sm text-white/60 mb-6">Simcoe (Norfolk County) · Oakville · Windsor, Ontario, Canada</p>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
               Scaling growth-stage companies across gaming, fintech, SaaS, HR technology, and real estate. Track record of multiple exits including nine-figure partnerships, enterprise strategy, and operational transformation.
             </p>
