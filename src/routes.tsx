@@ -6,6 +6,7 @@ import HomePage from './pages/index';
 const AboutPage = lazy(() => import('./pages/about'));
 const ServicesPage = lazy(() => import('./pages/services'));
 const AIPage = lazy(() => import('./pages/ai'));
+const DemosPage = lazy(() => import('./pages/ai/demos'));
 const CookiePolicyPage = lazy(() => import('./pages/cookie-policy'));
 const TermsOfServicePage = lazy(() => import('./pages/terms-of-service'));
 const PrivacyPolicyPage = lazy(() => import('./pages/privacy-policy'));
@@ -134,12 +135,16 @@ export const routes: RouteObject[] = [
     element: <DavidSucklingPage />,
   },
   {
+    path: '/ai/demos',
+    element: <DemosPage />,
+  },
+  {
     path: '*',
     element: <NotFoundPage />,
   },
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/ai' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;

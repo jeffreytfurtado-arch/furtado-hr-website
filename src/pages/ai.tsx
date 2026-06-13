@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -162,11 +163,12 @@ export default function AIPage() {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </a>
-              <a href="#what-weve-built">
+              <Link to="/ai/demos">
                 <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 w-full sm:w-auto">
-                  See what we&apos;ve built
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Try live demos
                 </Button>
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
