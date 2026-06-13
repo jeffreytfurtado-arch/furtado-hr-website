@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Compliance',
     date: 'February 10, 2024',
     readTime: '8 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Compliance Expert',
     sections: [
       { heading: 'The Fundamental Difference', content: 'In Canada, employment standards are primarily governed by provincial legislation. However, approximately 6% of Canadian workplaces fall under federal jurisdiction. Understanding which applies to your organization is crucial for compliance.' },
@@ -40,7 +40,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Workplace Culture',
     date: 'February 8, 2024',
     readTime: '10 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Workplace Investigator',
     sections: [
       { heading: 'Why Investigations Matter', content: 'When allegations of misconduct arise, how you respond can make the difference between resolution and escalation. Failing to properly investigate can lead to legal liability, damaged morale, increased turnover, and reputational harm.' },
@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Performance',
     date: 'February 5, 2024',
     readTime: '7 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Performance Expert',
     sections: [
       { heading: 'The Problem with Traditional Reviews', content: 'Annual performance reviews are often dreaded by managers and employees alike. They suffer from recency bias, infrequent feedback, arbitrary ratings, backward-looking focus, and administrative burden. There\'s a better way.' },
@@ -84,7 +84,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Policy',
     date: 'February 3, 2024',
     readTime: '6 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Remote Work Specialist',
     sections: [
       { heading: 'The New Reality', content: 'Remote work has evolved from emergency response to permanent fixture. Canadian employers need comprehensive policies that address legal obligations, operational needs, and employee expectations.' },
@@ -106,7 +106,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Workplace Culture',
     date: 'February 1, 2024',
     readTime: '9 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Workplace Culture Expert',
     sections: [
       { heading: 'Beyond Compliance', content: 'Compliance with Bill C-65 and provincial harassment legislation is just the starting point. Organizations with strong prevention programs experience lower turnover, higher engagement, better reputation, and reduced legal costs.' },
@@ -128,7 +128,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Compliance',
     date: 'January 22, 2024',
     readTime: '10 min read',
-    author: 'Jeffrey Furtado',
+    author: 'PreciseHR Team',
     authorRole: 'HR Consultant & Employment Law Specialist',
     sections: [
       { heading: 'Getting Termination Right', content: 'Termination is one of the highest-risk activities in HR. Done poorly, it exposes your organization to wrongful dismissal claims, human rights complaints, and reputational damage. Done well, it protects everyone involved.' },

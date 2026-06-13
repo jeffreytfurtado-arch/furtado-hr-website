@@ -21,7 +21,6 @@ import ComplianceUpdatesPage from './pages/compliance-updates';
 import MinimumWagePage from './pages/minimum-wage';
 import StatutoryHolidaysPage from './pages/statutory-holidays';
 import NetPayCalculatorPage from './pages/net-pay-calculator';
-import JeffreyFurtadoPage from './pages/about/jeffrey-furtado';
 import BlogPostPage from './pages/blog/[slug]';
 
 // Lazy load components for code splitting (except HomePage for instant loading)
@@ -118,16 +117,12 @@ export const routes: RouteObject[] = [
     element: <NetPayCalculatorPage />,
   },
   {
-    path: '/about/jeffrey-furtado',
-    element: <JeffreyFurtadoPage />,
-  },
-  {
     path: '*',
     element: <NotFoundPage />,
   },
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;
