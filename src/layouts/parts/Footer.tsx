@@ -10,7 +10,7 @@ export default function Footer() {
       { name: 'About Us', href: '/about' },
       { name: 'Services', href: '/services' },
       { name: 'Contact Us', href: '/contact' },
-      { name: 'PreciseHR App', href: '/client-portal' },
+      { name: 'PreciseHR App', href: 'https://app.precisehr.ca' },
     ],
     tools: [
       { name: 'ROI Calculator', href: '/roi-calculator' },
@@ -79,12 +79,23 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.href.startsWith('http') ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
