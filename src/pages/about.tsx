@@ -324,6 +324,50 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Co-Founders */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Leadership</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet the co-founders</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Seasoned operators and builders, pairing decades of executive leadership with hands-on technology and AI expertise.
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                name: 'Jeffrey T. Furtado',
+                title: 'Co-Founder · Managing Partner',
+                blurb: 'Executive, operator, and investor with a track record of scaling companies and leading strategic exits across fintech, SaaS, gaming, and HR.',
+                href: '/about/jeffrey-furtado',
+              },
+              {
+                name: 'David Suckling',
+                title: 'Co-Founder',
+                blurb: 'Operator and builder. Chief of Staff at Mortgage Automator, with deep go-to-market, operations, and AI-forward engineering expertise.',
+                href: '/about/david-suckling',
+              },
+            ].map((person, i) => (
+              <motion.div key={i} {...fadeUp}>
+                <Link to={person.href} className="block h-full">
+                  <Card className="h-full group hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+                    <CardContent className="p-8">
+                      <h3 className="text-xl font-bold mb-1">{person.name}</h3>
+                      <p className="text-sm font-medium text-primary mb-4">{person.title}</p>
+                      <p className="text-sm text-muted-foreground mb-5">{person.blurb}</p>
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                        Read bio <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Process */}
       <section className="py-24 bg-muted/50 relative overflow-hidden">
         <div className="container mx-auto px-4">

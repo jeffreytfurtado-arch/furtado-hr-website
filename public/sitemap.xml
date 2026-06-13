@@ -3,6 +3,7 @@
   <url><loc>https://www.precisehr.ca/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.precisehr.ca/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.precisehr.ca/about/jeffrey-furtado</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.precisehr.ca/about/david-suckling</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.precisehr.ca/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.precisehr.ca/ai</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.precisehr.ca/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

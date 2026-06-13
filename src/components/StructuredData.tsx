@@ -88,6 +88,48 @@ const PERSON_SCHEMA = {
   ],
 };
 
+const DAVID_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://www.precisehr.ca/about/david-suckling#person',
+  name: 'David Suckling',
+  givenName: 'David',
+  familyName: 'Suckling',
+  jobTitle: 'Co-Founder, PreciseHR',
+  description: 'Co-Founder of PreciseHR and Chief of Staff at Mortgage Automator. An operator and builder with leadership across Sales, Revenue Operations, and Operations, and deep AI-forward engineering expertise — having designed and deployed hundreds of AI-driven projects and automations.',
+  url: 'https://www.precisehr.ca/about/david-suckling',
+  worksFor: [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.precisehr.ca/#organization',
+      name: 'PreciseHR',
+      url: 'https://www.precisehr.ca',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Mortgage Automator',
+      description: 'Leading global SaaS platform for private and asset-based lenders.',
+    },
+  ],
+  hasOccupation: [
+    { '@type': 'Occupation', name: 'Co-Founder' },
+    { '@type': 'Occupation', name: 'Chief of Staff' },
+    { '@type': 'Occupation', name: 'Head of Sales' },
+    { '@type': 'Occupation', name: 'Head of Revenue Operations' },
+    { '@type': 'Occupation', name: 'Head of Operations' },
+    { '@type': 'Occupation', name: 'Software Developer' },
+    { '@type': 'Occupation', name: 'AI Consultant' },
+  ],
+  knowsAbout: [
+    'Artificial Intelligence', 'AI Strategy', 'AI Adoption', 'AI Automation',
+    'Software Development', 'Revenue Operations', 'Sales Leadership',
+    'Business Operations', 'Go-to-Market Strategy', 'HR Technology', 'Process Automation',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/david-suckling-b98353326/',
+  ],
+};
+
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -132,6 +174,15 @@ export function PersonSchema() {
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(PERSON_SCHEMA)}</script>
+    </Helmet>
+  );
+}
+
+// Person schema rendered ONLY on David's bio page.
+export function PersonSchemaDavid() {
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(DAVID_SCHEMA)}</script>
     </Helmet>
   );
 }
