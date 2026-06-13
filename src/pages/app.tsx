@@ -21,11 +21,12 @@ const fadeUp = {
 };
 const stagger = (d: number) => ({ ...fadeUp, transition: { ...fadeUp.transition, delay: d } });
 
-// Pricing in CAD (per employee / month, annual rate). Adjust freely.
+// Pricing in CAD (per employee / month). Adjust freely.
 const TIERS = [
   {
     name: 'Starter',
-    price: '$6',
+    annual: '$6',
+    monthly: '$8',
     unit: '/ employee / mo',
     blurb: 'For small teams getting organized.',
     popular: false,
@@ -33,7 +34,8 @@ const TIERS = [
   },
   {
     name: 'Growth',
-    price: '$12',
+    annual: '$12',
+    monthly: '$14',
     unit: '/ employee / mo',
     blurb: 'For growing companies that need compliance built in.',
     popular: true,
@@ -41,7 +43,8 @@ const TIERS = [
   },
   {
     name: 'Agency',
-    price: 'Custom',
+    annual: 'Custom',
+    monthly: 'Custom',
     unit: '',
     blurb: 'For HR firms managing multiple client companies.',
     popular: false,
@@ -73,6 +76,7 @@ export default function AppPage() {
   const [company, setCompany] = useState('');
   const [plan, setPlan] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [annual, setAnnual] = useState(true);
 
   function pickPlan(tier: string) {
     setPlan(tier);
@@ -221,8 +225,30 @@ export default function AppPage() {
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-14">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Pricing</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, per-employee pricing</h2>
-            <p className="text-muted-foreground">Per employee, per month, billed in CAD. Save ~2 months with annual billing — and we never charge for archived employees. Founding customers lock in launch pricing.</p>
+            <p className="text-muted-foreground">Per employee, per month, billed in CAD. We never charge for archived employees. Founding customers lock in launch pricing.</p>
           </motion.div>
+
+          {/* Billing toggle */}
+          <div className="flex flex-col items-center mb-10">
+            <div className="inline-flex items-center rounded-full border bg-card p-1">
+              <button
+                onClick={() => setAnnual(true)}
+                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${annual ? 'bg-primary text-white' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                Annual
+              </button>
+              <button
+                onClick={() => setAnnual(false)}
+                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${!annual ? 'bg-primary text-white' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                Monthly
+              </button>
+            </div>
+            <p className="text-xs font-medium text-primary mt-3">
+              {annual ? 'You\u2019re saving ~2 months with annual billing' : 'Switch to annual and save ~2 months'}
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
             {TIERS.map((t, i) => (
               <motion.div key={t.name} {...stagger(i * 0.08)}>
@@ -236,10 +262,10 @@ export default function AppPage() {
                     <h3 className="text-lg font-bold">{t.name}</h3>
                     <p className="text-sm text-muted-foreground mt-1 mb-5 min-h-[40px]">{t.blurb}</p>
                     <div className="flex items-baseline gap-1 mb-1">
-                      <span className="text-4xl font-bold">{t.price}</span>
+                      <span className="text-4xl font-bold">{annual ? t.annual : t.monthly}</span>
                       {t.unit && <span className="text-sm text-muted-foreground">{t.unit}</span>}
                     </div>
-                    <p className="text-xs text-muted-foreground mb-6">{t.unit ? 'billed annually · CAD' : 'volume pricing · CAD'}</p>
+                    <p className="text-xs text-muted-foreground mb-6">{t.unit ? (annual ? 'billed annually · CAD' : 'billed monthly · CAD') : 'volume pricing · CAD'}</p>
                     <Button className="w-full mb-3" variant={t.popular ? 'default' : 'outline'} onClick={() => pickPlan(t.name)}>
                       Join the waitlist
                     </Button>
