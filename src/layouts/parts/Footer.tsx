@@ -13,7 +13,7 @@ export default function Footer() {
       { name: 'HR Services by Province', href: '/hr-services' },
       { name: 'AI Consulting', href: '/ai' },
       { name: 'Contact Us', href: '/contact' },
-      { name: 'PreciseHR App', href: 'https://app.precisehr.ca' },
+      { name: 'PreciseHR App', href: '/app' },
     ],
     tools: [
       { name: 'ROI Calculator', href: '/roi-calculator' },

@@ -33,6 +33,7 @@ const DavidSucklingPage = lazy(() => import('./pages/about/david-suckling'));
 const BlogPostPage = lazy(() => import('./pages/blog/[slug]'));
 const HRServicesHub = lazy(() => import('./pages/locations'));
 const ProvincePage = lazy(() => import('./pages/locations/[province]'));
+const AppPage = lazy(() => import('./pages/app'));
 
 // Lazy load components for code splitting (except HomePage for instant loading)
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -160,6 +161,10 @@ export const routes: RouteObject[] = [
     element: <HRServicesHub />,
   },
   {
+    path: '/app',
+    element: <AppPage />,
+  },
+  {
     path: '/hr-services/:province',
     element: <ProvincePage />,
   },
@@ -170,6 +175,6 @@ export const routes: RouteObject[] = [
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/app' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;

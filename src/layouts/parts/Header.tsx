@@ -213,14 +213,12 @@ export default function Header() {
               buttonRef={resourcesRef}
             />
 
-            <a
-              href="https://app.precisehr.ca"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/app"
               className="px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
             >
               PreciseHR App
-            </a>
+            </Link>
           </nav>
 
           {/* Desktop CTA */}
@@ -288,15 +286,13 @@ export default function Header() {
               isActive={isResourcesActive}
             />
 
-            <a
-              href="https://app.precisehr.ca"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/app"
               className="block px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
               onClick={() => setIsMenuOpen(false)}
             >
               PreciseHR App
-            </a>
+            </Link>
 
             <div className="pt-4">
               <Link to="/contact" className="block" onClick={() => setIsMenuOpen(false)}>
