@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { upsertHubSpotContact } from './_hubspot';
 import { Resend } from 'resend';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -96,6 +97,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         console.error('Failed to add contact to audience:', e);
       }
     }
+
+    // Sync to HubSpot CRM (no-op until HUBSPOT_TOKEN is set in Vercel)
+    await upsertHubSpotContact({ email, firstname: firstName, lastname: lastName, lifecyclestage: 'subscriber' });
 
     return res.status(201).json({
       success: true,

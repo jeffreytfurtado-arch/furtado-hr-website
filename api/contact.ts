@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { upsertHubSpotContact } from './_hubspot';
 import { Resend } from 'resend';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -85,6 +86,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         </div>
       `,
     });
+
+    // Sync to HubSpot CRM (no-op until HUBSPOT_TOKEN is set in Vercel)
+    await upsertHubSpotContact({ email, firstname: firstName, lastname: lastName, phone, company, lifecyclestage: 'lead' });
 
     return res.status(200).json({
       success: true,
