@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { track } from '@/lib/track';
 import { motion } from 'motion/react';
 import { Mail, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -39,6 +40,7 @@ export function NewsletterSignup({ variant = 'default', showBenefits = true }: N
         throw new Error(data.error || 'Failed to subscribe');
       }
 
+      track('newsletter_signup');
       setIsSuccess(true);
       setFormData({ firstName: '', lastName: '', email: '', company: '' });
     } catch (err) {

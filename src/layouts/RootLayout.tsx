@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 
 import CookieBanner from '@/components/CookieBanner';
 import CommandPalette from '@/components/CommandPalette';
+import Analytics from '@/components/Analytics';
 import LiveChat from '@/components/LiveChat';
 import ScrollToTop from '@/components/ScrollToTop';
 import { GlobalStructuredData } from '@/components/StructuredData';
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <CookieBanner />
       <LiveChat />
       <CommandPalette />
+      <Analytics />
     </Website>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
+import { track } from '@/lib/track';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -94,6 +95,7 @@ export default function AppPage() {
       });
       if (!r.ok) throw new Error();
       setStatus('success');
+      track('waitlist_signup', { plan: plan || 'none' });
     } catch {
       setStatus('error');
     }

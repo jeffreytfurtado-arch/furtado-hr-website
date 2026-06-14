@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { track } from '@/lib/track';
 import { Button } from '@/components/ui/button';
 import { Mail, Loader2, CheckCircle2 } from 'lucide-react';
 
@@ -29,6 +30,7 @@ export default function LeadCapture({
       });
       if (!res.ok) throw new Error();
       setStatus('sent');
+      track('tool_lead', { tool });
     } catch {
       setStatus('error');
       setError('Could not send right now — please try again.');

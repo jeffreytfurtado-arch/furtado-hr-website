@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { track } from '@/lib/track';
 import { useState, useEffect } from 'react';
 
 // Load Calendly widget script
@@ -85,6 +86,7 @@ export default function ContactPage() {
         }
       }
 
+      track('contact_submit', { service: formData.serviceInterest || 'Not specified' });
       setIsSuccess(true);
       setFormData({
         firstName: '',
