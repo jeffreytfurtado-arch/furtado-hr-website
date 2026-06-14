@@ -78,6 +78,29 @@ export default function AppPage() {
   const [plan, setPlan] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [annual, setAnnual] = useState(true);
+  const [employees, setEmployees] = useState(10);
+  const [checkoutBusy, setCheckoutBusy] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState('');
+
+  async function startCheckout(planKey: string) {
+    if (checkoutBusy) return;
+    setCheckoutError('');
+    setCheckoutBusy(planKey);
+    try {
+      const r = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: planKey, interval: annual ? 'annual' : 'monthly', employees }),
+      });
+      const d = await r.json();
+      if (!r.ok || !d.url) throw new Error(d.error || 'Could not start checkout.');
+      track('checkout_start', { plan: planKey, interval: annual ? 'annual' : 'monthly', employees });
+      window.location.href = d.url;
+    } catch (e) {
+      setCheckoutError(e instanceof Error ? e.message : 'Could not start checkout.');
+      setCheckoutBusy(null);
+    }
+  }
 
   function pickPlan(tier: string) {
     setPlan(tier);
@@ -251,6 +274,18 @@ export default function AppPage() {
             </p>
           </div>
 
+          {/* Employee count drives per-seat checkout quantity */}
+          <div className="flex flex-col items-center mb-8">
+            <label htmlFor="emp" className="text-sm font-medium mb-2">How many employees?</label>
+            <input
+              id="emp" type="number" min={1} max={5000} value={employees}
+              onChange={(e) => setEmployees(Math.max(1, Math.min(5000, Number(e.target.value) || 1)))}
+              className="w-28 text-center rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+            <p className="text-xs text-muted-foreground mt-2">Billed per employee · adjust anytime at checkout</p>
+            {checkoutError && <p className="text-sm text-red-600 mt-3">{checkoutError}</p>}
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
             {TIERS.map((t, i) => (
               <motion.div key={t.name} {...stagger(i * 0.08)}>
@@ -268,9 +303,24 @@ export default function AppPage() {
                       {t.unit && <span className="text-sm text-muted-foreground">{t.unit}</span>}
                     </div>
                     <p className="text-xs text-muted-foreground mb-6">{t.unit ? (annual ? 'billed annually · CAD' : 'billed monthly · CAD') : 'volume pricing · CAD'}</p>
-                    <Button className="w-full mb-3" variant={t.popular ? 'default' : 'outline'} onClick={() => pickPlan(t.name)}>
-                      Join the waitlist
-                    </Button>
+                    {t.unit ? (
+                      <Button
+                        className="w-full mb-3"
+                        variant={t.popular ? 'default' : 'outline'}
+                        disabled={checkoutBusy !== null}
+                        onClick={() => startCheckout(t.name.toLowerCase())}
+                      >
+                        {checkoutBusy === t.name.toLowerCase() ? (
+                          <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Starting…</>
+                        ) : (
+                          <>Subscribe <ArrowRight className="ml-2 w-4 h-4" /></>
+                        )}
+                      </Button>
+                    ) : (
+                      <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="block mb-3">
+                        <Button className="w-full" variant="outline">Talk to sales</Button>
+                      </a>
+                    )}
                     <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="block text-center text-sm text-primary hover:underline mb-6">
                       Book a demo
                     </a>

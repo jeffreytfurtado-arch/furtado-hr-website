@@ -34,6 +34,7 @@ const BlogPostPage = lazy(() => import('./pages/blog/[slug]'));
 const HRServicesHub = lazy(() => import('./pages/locations'));
 const ProvincePage = lazy(() => import('./pages/locations/[province]'));
 const AppPage = lazy(() => import('./pages/app'));
+const WelcomePage = lazy(() => import('./pages/welcome'));
 
 // Lazy load components for code splitting (except HomePage for instant loading)
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -163,6 +164,10 @@ export const routes: RouteObject[] = [
   {
     path: '/app',
     element: <AppPage />,
+  },
+  {
+    path: '/welcome',
+    element: <WelcomePage />,
   },
   {
     path: '/hr-services/:province',
