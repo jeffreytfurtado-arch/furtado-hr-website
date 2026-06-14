@@ -32,7 +32,7 @@ const ITEMS: Item[] = [
   { label: 'Services', group: 'Pages', icon: Briefcase, to: '/services', keywords: 'hr consulting fractional' },
   { label: 'AI Consulting', group: 'Pages', icon: Sparkles, to: '/ai', keywords: 'artificial intelligence automation' },
   { label: 'Live AI Demos', group: 'Pages', icon: FlaskConical, to: '/ai/demos', keywords: 'labs demo data unification' },
-  { label: 'PreciseHR App & Pricing', group: 'Pages', icon: Sparkles, to: '/app', keywords: 'pricing hris software waitlist product early access' },
+  { label: 'PreciseHR App & Pricing', group: 'Pages', icon: Sparkles, to: '/app', keywords: 'pricing hris software product subscribe buy plans' },
   { label: 'HR Services by Province', group: 'Pages', icon: Briefcase, to: '/hr-services', keywords: 'province ontario bc alberta quebec location near me' },
   { label: 'Contact', group: 'Pages', icon: Mail, to: '/contact' },
   { label: 'Blog', group: 'Pages', icon: BookOpen, to: '/blog', keywords: 'articles insights' },
