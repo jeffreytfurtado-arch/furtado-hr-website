@@ -1,5 +1,4 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { upsertHubSpotContact } from './_hubspot';
 import { Resend } from 'resend';
 
 const TOOL_LABELS: Record<string, string> = {
@@ -89,7 +88,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     // Sync to HubSpot CRM (no-op until HUBSPOT_TOKEN is set in Vercel)
-    await upsertHubSpotContact({ email, lifecyclestage: 'lead' });
+    if (process.env.HUBSPOT_TOKEN) {
+      try {
+        const hsHeaders = { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.HUBSPOT_TOKEN}` };
+        const hsBase = 'https://api.hubapi.com/crm/v3/objects/contacts';
+        const hsBody = JSON.stringify({ properties: { email, lifecyclestage: 'lead' } });
+        const hsRes = await fetch(hsBase, { method: 'POST', headers: hsHeaders, body: hsBody });
+        if (hsRes.status === 409) {
+          await fetch(`${hsBase}/${encodeURIComponent(email)}?idProperty=email`, { method: 'PATCH', headers: hsHeaders, body: hsBody });
+        }
+      } catch (e) { console.error('HubSpot sync failed:', e); }
+    }
 
     return res.status(200).json({ success: true });
   } catch (error: any) {
