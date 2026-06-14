@@ -23,6 +23,7 @@ const resourcesMenu = [
   { name: 'Statutory Holidays', href: '/statutory-holidays', description: '2026 holiday calendar & pay calculator', icon: Calendar },
   { name: 'Minimum Wage Tracker', href: '/minimum-wage', description: 'Current rates across Canada', icon: DollarSign },
   { name: 'Blog', href: '/blog', description: 'HR insights and best practices', icon: BookOpen },
+  { name: 'Articles', href: '/articles', description: 'Leadership essays by Jeffrey T. Furtado', icon: FileText },
   { name: 'Case Studies', href: '/case-studies', description: 'Client success stories', icon: FileBarChart },
   { name: 'HR Resources', href: '/resources', description: 'Templates, guides & downloads', icon: FolderOpen },
 ];

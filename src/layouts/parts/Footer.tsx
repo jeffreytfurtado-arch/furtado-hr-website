@@ -24,6 +24,7 @@ export default function Footer() {
     ],
     resources: [
       { name: 'Blog', href: '/blog' },
+      { name: 'Articles', href: '/articles' },
       { name: 'Case Studies', href: '/case-studies' },
       { name: 'HR Resources', href: '/resources' },
     ],

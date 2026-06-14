@@ -36,6 +36,7 @@ const ITEMS: Item[] = [
   { label: 'HR Services by Province', group: 'Pages', icon: Briefcase, to: '/hr-services', keywords: 'province ontario bc alberta quebec location near me' },
   { label: 'Contact', group: 'Pages', icon: Mail, to: '/contact' },
   { label: 'Blog', group: 'Pages', icon: BookOpen, to: '/blog', keywords: 'articles insights' },
+  { label: 'Articles', group: 'Pages', icon: BookOpen, to: '/articles', keywords: 'leadership essays jeffrey furtado operating mentorship character' },
   { label: 'Case Studies', group: 'Pages', icon: FileBarChart, to: '/case-studies', keywords: 'results clients' },
   { label: 'HR Resources', group: 'Pages', icon: FolderOpen, to: '/resources', keywords: 'templates guides' },
   { label: 'Jeffrey T. Furtado', group: 'Pages', icon: User, to: '/about/jeffrey-furtado', keywords: 'founder managing partner bio' },
