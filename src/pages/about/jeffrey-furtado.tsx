@@ -1,5 +1,6 @@
 import SEO from '@/components/SEO';
 import { PersonSchema } from '@/components/StructuredData';
+import { blogPosts } from '@/data/blog-data';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -378,6 +379,39 @@ export default function JeffreyFurtadoPage() {
           </div>
         </section>
       )}
+
+      {/* Insights by Jeffrey */}
+      <section className="py-20 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Insights</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">Articles by Jeffrey</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Practical writing on operations, AI implementation, revenue operations, leadership, and Canadian HR &amp; compliance.
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {[...blogPosts].reverse().filter((p) => p.author.includes('Jeffrey')).slice(0, 6).map((p) => (
+              <motion.div key={p.id} {...fadeUp}>
+                <Link to={`/blog/${p.id}`} className="group block h-full">
+                  <Card className="h-full hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+                    <CardContent className="p-5">
+                      <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">{p.category}</p>
+                      <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors leading-snug">{p.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{p.excerpt}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/blog" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              View all articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
