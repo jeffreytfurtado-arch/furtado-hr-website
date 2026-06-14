@@ -78,11 +78,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <p>We're excited to help you stay informed and ahead of the curve.</p>
             <p>Best regards,<br><strong>The PreciseHR Team</strong></p>
             <hr style="margin: 24px 0; border: none; border-top: 1px solid #ddd;" />
-            <p style="font-size: 12px; color: #666;">You can unsubscribe at any time by clicking the unsubscribe link in our emails.</p>
+            <p style="font-size: 12px; color: #666; line-height: 1.6;">
+              You're receiving this because you subscribed at precisehr.ca. If you'd prefer not to receive these emails, you can <a href="mailto:info@precisehr.ca?subject=Unsubscribe" style="color:#003366;">unsubscribe at any time</a>.<br />
+              PreciseHR &middot; Toronto, ON, Canada &middot; (437) 887-2263 &middot; info@precisehr.ca
+            </p>
           </div>
         </div>
       `,
     });
+
+    // Add subscriber to the mailing list (no-op until RESEND_AUDIENCE_ID is set in Vercel)
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (audienceId) {
+      try {
+        await resend.contacts.create({ email, firstName, lastName, audienceId, unsubscribed: false });
+      } catch (e) {
+        console.error('Failed to add contact to audience:', e);
+      }
+    }
 
     return res.status(201).json({
       success: true,

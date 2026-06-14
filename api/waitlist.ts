@@ -77,6 +77,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `,
     });
 
+    // Add to the mailing list (no-op until RESEND_AUDIENCE_ID is set in Vercel)
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (audienceId) {
+      try {
+        await resend.contacts.create({ email, firstName: name || undefined, audienceId, unsubscribed: false });
+      } catch (e) {
+        console.error('Failed to add contact to audience:', e);
+      }
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Waitlist error:', err);
