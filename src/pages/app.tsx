@@ -243,7 +243,7 @@ export default function AppPage() {
               </button>
             </div>
             <p className="text-xs font-medium text-primary mt-3">
-              {annual ? 'Save ~2 months with annual billing' : 'Switch to annual and save ~2 months'}
+              {annual ? 'Save up to 25% with annual billing' : 'Switch to annual and save up to 25%'}
             </p>
           </div>
 
