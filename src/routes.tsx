@@ -31,6 +31,8 @@ const NetPayCalculatorPage = lazy(() => import('./pages/net-pay-calculator'));
 const JeffreyFurtadoPage = lazy(() => import('./pages/about/jeffrey-furtado'));
 const DavidSucklingPage = lazy(() => import('./pages/about/david-suckling'));
 const BlogPostPage = lazy(() => import('./pages/blog/[slug]'));
+const ArticlesPage = lazy(() => import('./pages/articles'));
+const ArticlePostPage = lazy(() => import('./pages/articles/[slug]'));
 const HRServicesHub = lazy(() => import('./pages/locations'));
 const ProvincePage = lazy(() => import('./pages/locations/[province]'));
 const AppPage = lazy(() => import('./pages/app'));
@@ -84,6 +86,14 @@ export const routes: RouteObject[] = [
   {
     path: '/blog/:slug',
     element: <BlogPostPage />,
+  },
+  {
+    path: '/articles',
+    element: <ArticlesPage />,
+  },
+  {
+    path: '/articles/:slug',
+    element: <ArticlePostPage />,
   },
   {
     path: '/contact',
@@ -180,6 +190,6 @@ export const routes: RouteObject[] = [
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/app' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/articles' | '/articles/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/app' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;
