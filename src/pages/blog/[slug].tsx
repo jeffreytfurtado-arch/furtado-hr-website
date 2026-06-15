@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, Phone } from 'lucide-react';
 import { motion } from 'motion/react';
 import { getPostById, blogPosts } from '@/data/blog-data';
+import { AUTHOR_BIO } from '@/data/author';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -126,6 +127,19 @@ export default function BlogPostPage() {
                 ))}
               </div>
             </motion.div>
+
+            {/* About the author */}
+            {post.author.includes('Jeffrey') && (
+              <motion.div {...fadeUp} className="mt-12 p-6 rounded-xl border bg-muted/40">
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">About the author</p>
+                <p className="font-bold">{post.author}</p>
+                {post.authorRole && <p className="text-sm text-muted-foreground mb-3">{post.authorRole}</p>}
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{AUTHOR_BIO}</p>
+                <Link to="/about/jeffrey-furtado" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+                  More about Jeffrey <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            )}
 
             {/* Nav between posts */}
             <div className="flex justify-between items-center pt-8 border-t">
