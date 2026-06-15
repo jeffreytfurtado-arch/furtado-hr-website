@@ -20,9 +20,10 @@ export default function BlogPostPage() {
 
   if (!post) return <Navigate to="/blog" replace />;
 
-  const currentIndex = blogPosts.findIndex((p) => p.id === post.id);
-  const nextPost = blogPosts[currentIndex + 1];
-  const prevPost = blogPosts[currentIndex - 1];
+  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const currentIndex = sortedPosts.findIndex((p) => p.id === post.id);
+  const nextPost = sortedPosts[currentIndex + 1];
+  const prevPost = sortedPosts[currentIndex - 1];
 
   const postUrl = `https://www.precisehr.ca/blog/${post.id}`;
 
@@ -102,6 +103,27 @@ export default function BlogPostPage() {
                     <Phone className="mr-2 w-4 h-4" /> (437) 887-2263
                   </Button>
                 </a>
+              </div>
+            </motion.div>
+
+            {/* Related tools (internal linking) */}
+            <motion.div {...fadeUp} className="my-12">
+              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">Explore PreciseHR tools</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {[
+                  { label: 'ROI Calculator', to: '/roi-calculator', desc: 'Estimate the value of outsourced HR' },
+                  { label: 'HR Health Check', to: '/hr-assessment', desc: 'Score your HR compliance in minutes' },
+                  { label: 'Salary Benchmarking', to: '/salary-benchmarking', desc: 'Compare pay by role and province' },
+                  { label: 'Net Pay Calculator', to: '/net-pay-calculator', desc: 'CPP, EI, and tax take-home by province' },
+                ].map((t) => (
+                  <Link key={t.to} to={t.to} className="group flex items-center justify-between gap-3 p-4 rounded-lg border hover:border-primary hover:shadow-sm transition-all">
+                    <span>
+                      <span className="block font-medium group-hover:text-primary transition-colors">{t.label}</span>
+                      <span className="block text-xs text-muted-foreground">{t.desc}</span>
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+                  </Link>
+                ))}
               </div>
             </motion.div>
 

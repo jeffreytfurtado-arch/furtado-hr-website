@@ -20,8 +20,9 @@ const staggerChild = (delay: number) => ({
 });
 
 export default function BlogPage() {
-  const featured = blogPosts[0];
-  const rest = blogPosts.slice(1);
+  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const featured = sortedPosts[0];
+  const rest = sortedPosts.slice(1);
 
   return (
     <div className="flex flex-col">
