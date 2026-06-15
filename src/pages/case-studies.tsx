@@ -21,7 +21,7 @@ const caseStudies = [
   {
     company: 'TechVenture Inc.',
     industry: 'Technology',
-    size: '150 employees',
+    size: '50 employees',
     challenge: 'Rapid growth led to inconsistent HR practices, compliance gaps, and difficulty scaling recruitment.',
     solution: 'Implemented comprehensive HR infrastructure including standardized policies, ATS integration, and performance management.',
     results: [
@@ -36,7 +36,7 @@ const caseStudies = [
   {
     company: 'Northern Manufacturing Ltd.',
     industry: 'Manufacturing',
-    size: '300 employees',
+    size: '110 employees',
     challenge: 'Outdated HR processes, high turnover, and workplace safety compliance issues across multiple facilities.',
     solution: 'Redesigned HR policies, implemented safety training, and established employee engagement initiatives.',
     results: [
@@ -51,7 +51,7 @@ const caseStudies = [
   {
     company: 'HealthFirst Services',
     industry: 'Healthcare',
-    size: '200 employees',
+    size: '17 employees',
     challenge: 'Complex scheduling, credential management, and compliance with healthcare regulations.',
     solution: 'Deployed specialized HR software, automated credential tracking, and created flexible scheduling.',
     results: [
@@ -66,7 +66,7 @@ const caseStudies = [
   {
     company: 'GreenRetail Group',
     industry: 'Retail',
-    size: '200+ employees',
+    size: '175 employees',
     challenge: 'High seasonal turnover, inconsistent training across 15 locations, and difficulty managing multi-site workforce.',
     solution: 'Implemented centralized HRIS, standardized onboarding, and performance tracking across all locations.',
     results: [
@@ -81,7 +81,7 @@ const caseStudies = [
   {
     company: 'FinanceCore Solutions',
     industry: 'Financial Services',
-    size: '120 employees',
+    size: '4 employees',
     challenge: 'Needed remote work policies, regulatory compliance, and competitive talent acquisition in tight market.',
     solution: 'Developed hybrid framework, enhanced compensation strategy, and implemented talent acquisition best practices.',
     results: [

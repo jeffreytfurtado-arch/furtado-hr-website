@@ -543,7 +543,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { name: 'Sarah M.', role: 'CEO', industry: 'Technology', quote: 'PreciseHR transformed our HR operations. Their software and consulting helped us scale from 20 to 150 employees seamlessly.' },
+              { name: 'Sarah M.', role: 'CEO', industry: 'Technology', quote: 'PreciseHR transformed our HR operations. Their software and consulting helped us scale from 20 to 50 employees seamlessly.' },
               { name: 'David C.', role: 'Operations Director', industry: 'Manufacturing', quote: 'The compliance support alone has saved us countless hours and potential legal issues. Their team truly cares about our success.' },
               { name: 'Jennifer T.', role: 'HR Manager', industry: 'Retail', quote: 'Best decision we made. The software is intuitive, and their consulting team feels like an extension of our HR department.' },
             ].map((t, i) => (
