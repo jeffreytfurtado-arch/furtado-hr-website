@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell, Calendar, FileText, FileSignature, ScanSearch, Search } from 'lucide-react';
+import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSign, UserMinus, BookOpen, FileBarChart, FolderOpen, Sparkles, Shield, Bell, Calendar, FileText, FileSignature, ScanSearch, Search, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/ThemeToggle';
 
@@ -26,6 +26,17 @@ const resourcesMenu = [
   { name: 'Articles', href: '/articles', description: 'Leadership essays by Jeffrey T. Furtado', icon: FileText },
   { name: 'Case Studies', href: '/case-studies', description: 'Client success stories', icon: FileBarChart },
   { name: 'HR Resources', href: '/resources', description: 'Templates, guides & downloads', icon: FolderOpen },
+];
+
+// Highest-population provinces shown inline in the picker (~90% of Canadians).
+// The full list of 13 lives on the /hr-services hub via the "All" link.
+const TOP_PROVINCES = [
+  { name: 'Ontario', slug: 'ontario' },
+  { name: 'Quebec', slug: 'quebec' },
+  { name: 'British Columbia', slug: 'british-columbia' },
+  { name: 'Alberta', slug: 'alberta' },
+  { name: 'Manitoba', slug: 'manitoba' },
+  { name: 'Nova Scotia', slug: 'nova-scotia' },
 ];
 
 function Dropdown({ label, items, isOpen, onToggle, buttonRef, isHighlighted }: {
@@ -127,12 +138,65 @@ function MobileDropdown({ label, items, isOpen, onToggle, onNavigate, isActive }
   );
 }
 
+function ProvinceDropdown({ isOpen, onToggle, buttonRef }: {
+  isOpen: boolean;
+  onToggle: () => void;
+  buttonRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const location = useLocation();
+  const onProvincePage = location.pathname.startsWith('/hr-services');
+
+  return (
+    <div ref={buttonRef} className="relative">
+      <button
+        onClick={onToggle}
+        className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+          onProvincePage || isOpen ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
+        }`}
+      >
+        <MapPin className="h-4 w-4" />
+        HR by province
+        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-80 rounded-lg border bg-background shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="px-2 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+            HR services by province
+          </div>
+          <div className="grid grid-cols-2 gap-0.5">
+            {TOP_PROVINCES.map((p) => (
+              <Link
+                key={p.slug}
+                to={`/hr-services/${p.slug}`}
+                className={`flex items-center px-3 py-2 rounded-md text-sm transition-colors hover:bg-muted ${
+                  location.pathname === `/hr-services/${p.slug}` ? 'bg-muted text-primary font-medium' : ''
+                }`}
+              >
+                {p.name}
+              </Link>
+            ))}
+          </div>
+          <Link
+            to="/hr-services"
+            className="mt-1.5 flex items-center justify-between border-t border-border px-3 pt-3 pb-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+          >
+            All 13 provinces &amp; territories
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const toolsRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
+  const provincesRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   const navigation = [
@@ -150,8 +214,11 @@ export default function Header() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
-      if (toolsRef.current && !toolsRef.current.contains(target) &&
-          resourcesRef.current && !resourcesRef.current.contains(target)) {
+      const inside =
+        (toolsRef.current && toolsRef.current.contains(target)) ||
+        (resourcesRef.current && resourcesRef.current.contains(target)) ||
+        (provincesRef.current && provincesRef.current.contains(target));
+      if (!inside) {
         setOpenDropdown(null);
       }
     }
@@ -212,6 +279,13 @@ export default function Header() {
               isOpen={openDropdown === 'resources'}
               onToggle={() => toggleDropdown('resources')}
               buttonRef={resourcesRef}
+            />
+
+            {/* HR by Province Dropdown */}
+            <ProvinceDropdown
+              isOpen={openDropdown === 'provinces'}
+              onToggle={() => toggleDropdown('provinces')}
+              buttonRef={provincesRef}
             />
 
             <Link
@@ -286,6 +360,42 @@ export default function Header() {
               onNavigate={() => setIsMenuOpen(false)}
               isActive={isResourcesActive}
             />
+
+            {/* HR by province (mobile) */}
+            <button
+              onClick={() => setMobileOpen(mobileOpen === 'provinces' ? null : 'provinces')}
+              className={`flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                location.pathname.startsWith('/hr-services') ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
+              }`}
+            >
+              <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> HR by province</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${mobileOpen === 'provinces' ? 'rotate-180' : ''}`} />
+            </button>
+            {mobileOpen === 'provinces' && (
+              <div className="ml-4 space-y-1">
+                {TOP_PROVINCES.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to={`/hr-services/${p.slug}`}
+                    className={`block px-4 py-2 text-sm rounded-md transition-colors ${
+                      location.pathname === `/hr-services/${p.slug}`
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {p.name}
+                  </Link>
+                ))}
+                <Link
+                  to="/hr-services"
+                  className="block px-4 py-2 text-sm rounded-md font-medium text-primary hover:bg-muted transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  All 13 provinces &amp; territories →
+                </Link>
+              </div>
+            )}
 
             <Link
               to="/app"
