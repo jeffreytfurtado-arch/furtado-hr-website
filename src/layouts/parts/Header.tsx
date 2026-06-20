@@ -4,6 +4,9 @@ import { Menu, X, ChevronDown, Calculator, ClipboardCheck, TrendingUp, DollarSig
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/ThemeToggle';
 
+// The PreciseHR app (HRIS) lives on its own subdomain, separate from this marketing site.
+const APP_URL = 'https://app.precisehr.ca';
+
 const toolsMenu = [
   { name: 'Compliance Checker', href: '/compliance-checker', description: 'Check your HR compliance gaps', icon: Shield },
   { name: 'JD Generator', href: '/jd-generator', description: 'Generate job descriptions instantly', icon: Sparkles },
@@ -292,7 +295,7 @@ export default function Header() {
               to="/app"
               className="px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
             >
-              PreciseHR App
+              Platform
             </Link>
           </nav>
 
@@ -307,6 +310,12 @@ export default function Header() {
               <kbd className="text-[10px] font-medium border rounded px-1.5 py-0.5">⌘K</kbd>
             </button>
             <ThemeToggle />
+            <a
+              href={APP_URL}
+              className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Log In
+            </a>
             <Link to="/contact">
               <Button>Contact Us</Button>
             </Link>
@@ -402,8 +411,16 @@ export default function Header() {
               className="block px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
               onClick={() => setIsMenuOpen(false)}
             >
-              PreciseHR App
+              Platform
             </Link>
+
+            <a
+              href={APP_URL}
+              className="block px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Log In
+            </a>
 
             <div className="pt-4">
               <Link to="/contact" className="block" onClick={() => setIsMenuOpen(false)}>
