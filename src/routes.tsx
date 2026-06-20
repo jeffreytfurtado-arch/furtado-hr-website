@@ -36,6 +36,7 @@ const ArticlePostPage = lazy(() => import('./pages/articles/[slug]'));
 const HRServicesHub = lazy(() => import('./pages/locations'));
 const ProvincePage = lazy(() => import('./pages/locations/[province]'));
 const AppPage = lazy(() => import('./pages/app'));
+const WelcomePage = lazy(() => import('./pages/welcome'));
 
 // Lazy load components for code splitting (except HomePage for instant loading)
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -175,6 +176,10 @@ export const routes: RouteObject[] = [
     element: <AppPage />,
   },
   {
+    path: '/welcome',
+    element: <WelcomePage />,
+  },
+  {
     path: '/hr-services/:province',
     element: <ProvincePage />,
   },
@@ -185,6 +190,6 @@ export const routes: RouteObject[] = [
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/articles' | '/articles/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/app' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
+export type Path = '/' | '/about' | '/services' | '/ai' | '/ai/demos' | '/policy-generator' | '/offer-letter' | '/policy-scanner' | '/contact' | '/blog' | '/blog/:slug' | '/articles' | '/articles/:slug' | '/case-studies' | '/resources' | '/hr-assessment' | '/roi-calculator' | '/salary-benchmarking' | '/turnover-calculator' | '/hiring-calculator' | '/jd-generator' | '/compliance-checker' | '/compliance-updates' | '/minimum-wage' | '/statutory-holidays' | '/net-pay-calculator' | '/about/jeffrey-furtado' | '/about/david-suckling' | '/hr-services' | '/hr-services/:province' | '/app' | '/welcome' | '/privacy-policy' | '/terms-of-service' | '/cookie-policy';
 
 export type Params = Record<string, string | undefined>;

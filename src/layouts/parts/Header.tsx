@@ -295,7 +295,7 @@ export default function Header() {
               to="/app"
               className="px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
             >
-              Platform
+              Pricing
             </Link>
           </nav>
 
@@ -411,7 +411,7 @@ export default function Header() {
               className="block px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
               onClick={() => setIsMenuOpen(false)}
             >
-              Platform
+              Pricing
             </Link>
 
             <a

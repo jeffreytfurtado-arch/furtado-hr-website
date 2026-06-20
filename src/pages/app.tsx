@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
@@ -7,7 +6,7 @@ import { track } from '@/lib/track';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  Lock, Check, ArrowRight, Calendar, Sparkles, Users, Building2, Shield, FileText,
+  Check, ArrowRight, Calendar, Sparkles, Users, Building2, Shield, FileText,
   BarChart3, Clock, Loader2, CheckCircle2, LayoutDashboard,
 } from 'lucide-react';
 
@@ -22,7 +21,7 @@ const fadeUp = {
 };
 const stagger = (d: number) => ({ ...fadeUp, transition: { ...fadeUp.transition, delay: d } });
 
-// Pricing in CAD (per employee / month). Adjust freely.
+// Pricing in CAD (per employee / month).
 const TIERS = [
   {
     name: 'Starter',
@@ -63,41 +62,41 @@ const FEATURES = [
 ];
 
 const FAQS = [
-  { q: 'When does the PreciseHR app launch?', a: 'We\u2019re rolling out access in stages to a founding group of customers. Join the waitlist and we\u2019ll reach out as soon as your spot opens — founding customers get priority onboarding and launch pricing.' },
+  { q: 'How do I get started?', a: 'Pick a plan, tell us how many employees you have, and check out. Your workspace is created automatically and you get an email to set your password and sign in — most teams are up and running in minutes.' },
   { q: 'Is it built for Canadian businesses?', a: 'Yes. The platform is designed Canadian-first — CPP/EI and tax, Records of Employment, T4s, and province-by-province employment-standards compliance, with PIPEDA-aware data practices.' },
-  { q: 'Can HR firms manage multiple clients?', a: 'Absolutely. The Agency plan is multi-tenant, so consultancies can manage many client companies from a single login, with white-label branding.' },
-  { q: 'How much will it cost?', a: 'Pricing is per employee per month in CAD \u2014 Starter from $6 and Growth from $12, with a custom plan for agencies. Annual billing saves about two months, we never charge for archived employees, and every plan includes a free 30-minute HR consult.' },
-  { q: 'Do I get access to real HR experts?', a: 'Yes \u2014 every plan includes a free 30-minute consult with a PreciseHR advisor. For ongoing support you can add our HR Advice Line for unlimited expert HR advice. It\u2019s software backed by real people, not just a dashboard.' },
-  { q: 'Can I see it before committing?', a: 'Yes \u2014 book a live demo and we\u2019ll walk you through the platform and answer your questions. No obligation.' },
+  { q: 'Can HR firms manage multiple clients?', a: 'Absolutely. The Agency plan is multi-tenant, so consultancies can manage many client companies from a single login, with white-label branding. Contact us to get set up.' },
+  { q: 'How much does it cost?', a: 'Pricing is per employee per month in CAD — Starter from $6 and Growth from $12, with a custom plan for agencies. Annual billing saves about two months, we never charge for archived employees, and every plan includes a free 30-minute HR consult.' },
+  { q: 'Can I change plans or cancel?', a: 'Yes — upgrade, downgrade, or cancel anytime from your billing settings. Per-employee pricing scales with your team, and you are never charged for archived employees.' },
+  { q: 'Do I get access to real HR experts?', a: 'Yes — every plan includes a free 30-minute consult with a PreciseHR advisor. For ongoing support you can add our HR Advice Line for unlimited expert HR advice. It is software backed by real people, not just a dashboard.' },
 ];
 
 export default function AppPage() {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [company, setCompany] = useState('');
-  const [plan, setPlan] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [annual, setAnnual] = useState(true);
+  const [employees, setEmployees] = useState(10);
+  const [checkoutBusy, setCheckoutBusy] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState('');
 
-  function pickPlan(tier: string) {
-    setPlan(tier);
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  function scrollToPricing() {
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  async function submit() {
-    if (!email || status === 'loading') return;
-    setStatus('loading');
+  async function startCheckout(planKey: string) {
+    if (checkoutBusy) return;
+    setCheckoutError('');
+    setCheckoutBusy(planKey);
     try {
-      const r = await fetch('/api/waitlist', {
+      const r = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, company, plan }),
+        body: JSON.stringify({ plan: planKey, interval: annual ? 'annual' : 'monthly', employees }),
       });
-      if (!r.ok) throw new Error();
-      setStatus('success');
-      track('waitlist_signup', { plan: plan || 'none' });
-    } catch {
-      setStatus('error');
+      const d = await r.json();
+      if (!r.ok || !d.url) throw new Error(d.error || 'Could not start checkout.');
+      track('checkout_start', { plan: planKey, interval: annual ? 'annual' : 'monthly', employees });
+      window.location.href = d.url;
+    } catch (e) {
+      setCheckoutError(e instanceof Error ? e.message : 'Could not start checkout.');
+      setCheckoutBusy(null);
     }
   }
 
@@ -105,7 +104,7 @@ export default function AppPage() {
     <div className="min-h-screen bg-background">
       <SEO
         title="PreciseHR App — Canadian HR Software & HRIS"
-        description="The PreciseHR HRIS — Canadian-first HR software with payroll-ready compliance (CPP/EI, ROE, T4, provincial ESA), documents, and multi-tenant support for agencies. Join early access."
+        description="The PreciseHR HRIS — Canadian-first HR software with payroll-ready compliance (CPP/EI, ROE, T4, provincial ESA), documents, and multi-tenant support for agencies. Start today from $6 per employee."
         path="/app"
       />
       <ServiceSchema
@@ -129,15 +128,15 @@ export default function AppPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <span className="inline-flex items-center gap-2 rounded-full bg-cyan-300/15 text-cyan-200 text-xs font-semibold uppercase tracking-wider px-3 py-1 mb-5">
-                <Sparkles className="w-3.5 h-3.5" /> Launching soon · Early access
+                <Sparkles className="w-3.5 h-3.5" /> Now available · Canadian-first HRIS
               </span>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">The PreciseHR HRIS</h1>
               <p className="text-lg md:text-xl text-white/80 mb-8">
                 Canadian-first HR software that handles compliance, payroll prep, documents, and your whole team — built by operators who run HR for a living.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => pickPlan('')}>
-                  Join the waitlist <ArrowRight className="ml-2 w-4 h-4" />
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToPricing}>
+                  See plans &amp; pricing <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
                   <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
@@ -147,17 +146,15 @@ export default function AppPage() {
               </div>
             </motion.div>
 
-            {/* Locked dashboard preview */}
+            {/* Dashboard preview */}
             <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }} className="relative">
               <div className="rounded-xl border border-white/15 bg-white/5 shadow-2xl overflow-hidden">
-                {/* faux app chrome */}
                 <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/10 bg-white/5">
                   <span className="w-3 h-3 rounded-full bg-white/20" />
                   <span className="w-3 h-3 rounded-full bg-white/20" />
                   <span className="w-3 h-3 rounded-full bg-white/20" />
                   <span className="ml-3 text-xs text-white/40 flex items-center gap-1.5"><LayoutDashboard className="w-3.5 h-3.5" /> app.precisehr.ca</span>
                 </div>
-                {/* blurred faux UI */}
                 <div className="relative p-5 blur-[3px] select-none" aria-hidden="true">
                   <div className="grid grid-cols-3 gap-3 mb-4">
                     {['Headcount', 'Time-off', 'Compliance'].map((l) => (
@@ -176,14 +173,13 @@ export default function AppPage() {
                     ))}
                   </div>
                 </div>
-                {/* lock overlay */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-t from-[#001d3d]/80 to-transparent">
                   <div className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center mb-3">
-                    <Lock className="w-5 h-5 text-white" />
+                    <Sparkles className="w-5 h-5 text-white" />
                   </div>
-                  <p className="text-sm font-semibold">Early access only</p>
-                  <button onClick={() => pickPlan('')} className="mt-2 text-xs text-cyan-200 hover:text-white underline underline-offset-2">
-                    Join the waitlist to unlock
+                  <p className="text-sm font-semibold">Your HR command centre</p>
+                  <button onClick={scrollToPricing} className="mt-2 text-xs text-cyan-200 hover:text-white underline underline-offset-2">
+                    See plans &amp; get started
                   </button>
                 </div>
               </div>
@@ -222,12 +218,12 @@ export default function AppPage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-24 bg-muted/50">
+      <section id="pricing" className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-14">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Pricing</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, per-employee pricing</h2>
-            <p className="text-muted-foreground">Per employee, per month, billed in CAD. We never charge for archived employees. Founding customers lock in launch pricing.</p>
+            <p className="text-muted-foreground">Per employee, per month, billed in CAD. We never charge for archived employees. Start today, cancel anytime.</p>
           </motion.div>
 
           {/* Billing toggle */}
@@ -247,8 +243,20 @@ export default function AppPage() {
               </button>
             </div>
             <p className="text-xs font-medium text-primary mt-3">
-              {annual ? 'You\u2019re saving ~2 months with annual billing' : 'Switch to annual and save ~2 months'}
+              {annual ? 'Save up to 25% with annual billing' : 'Switch to annual and save up to 25%'}
             </p>
+          </div>
+
+          {/* Employee count drives per-seat checkout quantity */}
+          <div className="flex flex-col items-center mb-8">
+            <label htmlFor="emp" className="text-sm font-medium mb-2">How many employees?</label>
+            <input
+              id="emp" type="number" min={1} max={5000} value={employees}
+              onChange={(e) => setEmployees(Math.max(1, Math.min(5000, Number(e.target.value) || 1)))}
+              className="w-28 text-center rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+            <p className="text-xs text-muted-foreground mt-2">Billed per employee · adjust anytime at checkout</p>
+            {checkoutError && <p className="text-sm text-red-600 mt-3">{checkoutError}</p>}
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
@@ -268,9 +276,24 @@ export default function AppPage() {
                       {t.unit && <span className="text-sm text-muted-foreground">{t.unit}</span>}
                     </div>
                     <p className="text-xs text-muted-foreground mb-6">{t.unit ? (annual ? 'billed annually · CAD' : 'billed monthly · CAD') : 'volume pricing · CAD'}</p>
-                    <Button className="w-full mb-3" variant={t.popular ? 'default' : 'outline'} onClick={() => pickPlan(t.name)}>
-                      Join the waitlist
-                    </Button>
+                    {t.unit ? (
+                      <Button
+                        className="w-full mb-3"
+                        variant={t.popular ? 'default' : 'outline'}
+                        disabled={checkoutBusy !== null}
+                        onClick={() => startCheckout(t.name.toLowerCase())}
+                      >
+                        {checkoutBusy === t.name.toLowerCase() ? (
+                          <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Starting…</>
+                        ) : (
+                          <>Get started <ArrowRight className="ml-2 w-4 h-4" /></>
+                        )}
+                      </Button>
+                    ) : (
+                      <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="block mb-3">
+                        <Button className="w-full" variant="outline">Talk to sales</Button>
+                      </a>
+                    )}
                     <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="block text-center text-sm text-primary hover:underline mb-6">
                       Book a demo
                     </a>
@@ -302,67 +325,26 @@ export default function AppPage() {
         </div>
       </section>
 
-      {/* Waitlist */}
-      <section id="waitlist" className="py-24 bg-background">
+      {/* Get started CTA */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-xl mx-auto">
-            <div className="text-center mb-8">
-              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Early access</p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Join the waitlist</h2>
-              <p className="text-muted-foreground">Be first in line when access opens. Founding customers get priority onboarding and launch pricing.</p>
-            </div>
-
-            {status === 'success' ? (
-              <Card className="border-primary/30">
-                <CardContent className="p-8 text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">You&apos;re on the list 🎉</h3>
-                  <p className="text-muted-foreground text-sm mb-6">Check your inbox for a confirmation. We&apos;ll reach out as your spot opens up.</p>
-                  <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline"><Calendar className="mr-2 w-4 h-4" /> Book a demo while you wait</Button>
-                  </a>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card>
-                <CardContent className="p-6 sm:p-8 space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Name</label>
-                      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name"
-                        className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Company</label>
-                      <input value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company name"
-                        className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium mb-1.5 block">Work email <span className="text-primary">*</span></label>
-                    <input
-                      type="email" value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
-                      placeholder="you@company.ca"
-                      className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
-                    />
-                  </div>
-                  {plan && (
-                    <p className="text-xs text-muted-foreground">Interested in the <strong>{plan}</strong> plan.</p>
-                  )}
-                  <Button className="w-full" onClick={submit} disabled={status === 'loading' || !email}>
-                    {status === 'loading' ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Joining…</> : 'Join the waitlist'}
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+            <div className="rounded-2xl bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white p-10 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Ready to get started?</h2>
+              <p className="text-white/80 mb-8 max-w-xl mx-auto">
+                Choose a plan, set your team size, and you&apos;ll be up and running in minutes — your workspace is created the moment you check out.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToPricing}>
+                  See plans &amp; pricing <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                    <Calendar className="mr-2 w-4 h-4" /> Book a demo
                   </Button>
-                  {status === 'error' && (
-                    <p className="text-sm text-red-600 text-center">Something went wrong. Please try again or email info@precisehr.ca.</p>
-                  )}
-                  <p className="text-xs text-muted-foreground text-center">No spam. We&apos;ll only email you about early access.</p>
-                </CardContent>
-              </Card>
-            )}
+                </a>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -390,7 +372,7 @@ export default function AppPage() {
           </div>
           <div className="text-center mt-10">
             <a href={APP_SIGNIN} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Already have access? Sign in →
+              Already have an account? Sign in →
             </a>
           </div>
         </div>
