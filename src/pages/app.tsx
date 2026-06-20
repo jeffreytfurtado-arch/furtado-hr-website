@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import SEO from '@/components/SEO';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
 import { track } from '@/lib/track';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  Check, ArrowRight, Calendar, Sparkles, Users, Building2, Shield, FileText,
-  BarChart3, Clock, Loader2, CheckCircle2, LayoutDashboard,
+  Check, ArrowRight, Calendar, Sparkles, Loader2, CheckCircle2,
+  Network, ShieldCheck, FileSignature, BarChart3, LayoutDashboard,
 } from 'lucide-react';
 
 const CALENDLY = 'https://calendly.com/precisehr-info/precisehr-consult';
@@ -52,13 +52,12 @@ const TIERS = [
   },
 ];
 
-const FEATURES = [
-  { icon: Shield, title: 'Canadian-first compliance', desc: 'CPP/EI, provincial ESA rules, ROE and T4 — built for Canada, not bolted on after.' },
-  { icon: FileText, title: 'Documents & e-sign', desc: 'Generate contracts, offer letters, and policies, then send for signature in a click.' },
-  { icon: Building2, title: 'Multi-tenant by design', desc: 'Manage your own team or, for agencies, dozens of client companies from one place.' },
-  { icon: BarChart3, title: 'Workforce insights', desc: 'Headcount, turnover, time-off, and compliance status — surfaced, not buried.' },
-  { icon: Users, title: 'Hiring & onboarding', desc: 'Structured onboarding that gets new hires productive and compliant from day one.' },
-  { icon: Clock, title: 'Less admin, more time', desc: 'Automate the repetitive HR work so you can focus on people, not paperwork.' },
+// Feature showcase. Drop real captures at /public/images/app/<key>.png and they replace the placeholders automatically.
+const SHOTS = [
+  { key: 'orgchart', icon: Network, label: 'Org chart', title: 'Plan your org, visually', desc: 'Drag-and-drop reporting lines, model headcount, and surface open roles — your whole structure on one canvas.', img: '/images/app/orgchart.png' },
+  { key: 'compliance', icon: ShieldCheck, label: 'Compliance & payroll', title: 'Payroll-ready, built for Canada', desc: 'CPP/EI, Records of Employment, T4s, and province-by-province ESA rules — generated, not bolted on after.', img: '/images/app/compliance.png' },
+  { key: 'documents', icon: FileSignature, label: 'Documents & e-sign', title: 'Send for signature in a click', desc: 'Generate contracts, offer letters, and policies, then collect signatures without leaving the platform.', img: '/images/app/documents.png' },
+  { key: 'insights', icon: BarChart3, label: 'Insights', title: 'Your workforce at a glance', desc: 'Headcount, turnover, time-off, and compliance status — surfaced on a live dashboard, not buried in spreadsheets.', img: '/images/app/dashboard.png' },
 ];
 
 const FAQS = [
@@ -75,10 +74,8 @@ export default function AppPage() {
   const [employees, setEmployees] = useState(10);
   const [checkoutBusy, setCheckoutBusy] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState('');
-
-  function scrollToPricing() {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const [shot, setShot] = useState(0);
+  const [imgFailed, setImgFailed] = useState<Record<string, boolean>>({});
 
   async function startCheckout(planKey: string) {
     if (checkoutBusy) return;
@@ -100,11 +97,14 @@ export default function AppPage() {
     }
   }
 
+  const active = SHOTS[shot];
+  const ActiveIcon = active.icon;
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="PreciseHR App — Canadian HR Software & HRIS"
-        description="The PreciseHR HRIS — Canadian-first HR software with payroll-ready compliance (CPP/EI, ROE, T4, provincial ESA), documents, and multi-tenant support for agencies. Start today from $6 per employee."
+        title="PreciseHR App — Pricing & Canadian HR Software"
+        description="Simple per-employee pricing for the PreciseHR HRIS — Canadian-first HR software with payroll-ready compliance (CPP/EI, ROE, T4, provincial ESA), documents, org charts, and multi-tenant support for agencies. Start today from $6 per employee."
         path="/app"
       />
       <ServiceSchema
@@ -121,150 +121,59 @@ export default function AppPage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
-        <div className="container mx-auto px-4 py-20 md:py-24 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="inline-flex items-center gap-2 rounded-full bg-cyan-300/15 text-cyan-200 text-xs font-semibold uppercase tracking-wider px-3 py-1 mb-5">
-                <Sparkles className="w-3.5 h-3.5" /> Now available · Canadian-first HRIS
-              </span>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">The PreciseHR HRIS</h1>
-              <p className="text-lg md:text-xl text-white/80 mb-8">
-                Canadian-first HR software that handles compliance, payroll prep, documents, and your whole team — built by operators who run HR for a living.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToPricing}>
-                  See plans &amp; pricing <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                    <Calendar className="mr-2 w-4 h-4" /> Book a demo
-                  </Button>
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Dashboard preview */}
-            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }} className="relative">
-              <div className="rounded-xl border border-white/15 bg-white/5 shadow-2xl overflow-hidden">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/10 bg-white/5">
-                  <span className="w-3 h-3 rounded-full bg-white/20" />
-                  <span className="w-3 h-3 rounded-full bg-white/20" />
-                  <span className="w-3 h-3 rounded-full bg-white/20" />
-                  <span className="ml-3 text-xs text-white/40 flex items-center gap-1.5"><LayoutDashboard className="w-3.5 h-3.5" /> app.precisehr.ca</span>
-                </div>
-                <div className="relative p-5 blur-[3px] select-none" aria-hidden="true">
-                  <div className="grid grid-cols-3 gap-3 mb-4">
-                    {['Headcount', 'Time-off', 'Compliance'].map((l) => (
-                      <div key={l} className="rounded-lg bg-white/10 p-3">
-                        <div className="text-[10px] text-white/50">{l}</div>
-                        <div className="h-5 mt-2 rounded bg-white/25 w-2/3" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="space-y-2">
-                    {[80, 65, 72, 58, 90].map((w, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-white/15 shrink-0" />
-                        <div className="h-3 rounded bg-white/15" style={{ width: `${w}%` }} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-t from-[#001d3d]/80 to-transparent">
-                  <div className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center mb-3">
-                    <Sparkles className="w-5 h-5 text-white" />
-                  </div>
-                  <p className="text-sm font-semibold">Your HR command centre</p>
-                  <button onClick={scrollToPricing} className="mt-2 text-xs text-cyan-200 hover:text-white underline underline-offset-2">
-                    See plans &amp; get started
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-2xl mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">What it does</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">HR software built for Canadian reality</h2>
-            <p className="text-muted-foreground">One platform for compliance, documents, people, and insight — whether you run one company or many.</p>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FEATURES.map((f, i) => {
-              const Icon = f.icon;
-              return (
-                <motion.div key={i} {...stagger(i * 0.07)}>
-                  <Card className="h-full hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
-                    <CardContent className="p-6">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                        <Icon className="w-6 h-6 text-primary" />
-                      </div>
-                      <h3 className="font-bold mb-2">{f.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-14">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, per-employee pricing</h2>
-            <p className="text-muted-foreground">Per employee, per month, billed in CAD. We never charge for archived employees. Start today, cancel anytime.</p>
+      {/* Pricing — first thing on the page */}
+      <section id="pricing" className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.06)_0%,_transparent_60%)]" />
+        <div className="container mx-auto px-4 py-16 md:py-20 relative">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-2xl mx-auto text-center mb-10">
+            <span className="inline-flex items-center gap-2 rounded-full bg-cyan-300/15 text-cyan-200 text-xs font-semibold uppercase tracking-wider px-3 py-1 mb-5">
+              <Sparkles className="w-3.5 h-3.5" /> Now available · Canadian-first HRIS
+            </span>
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Simple, per-employee pricing</h1>
+            <p className="text-white/80 text-lg">
+              Per employee, per month, billed in CAD. Start today, cancel anytime, and never pay for archived employees.
+            </p>
           </motion.div>
 
           {/* Billing toggle */}
-          <div className="flex flex-col items-center mb-10">
-            <div className="inline-flex items-center rounded-full border bg-card p-1">
+          <div className="flex flex-col items-center mb-8">
+            <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 p-1">
               <button
                 onClick={() => setAnnual(true)}
-                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${annual ? 'bg-primary text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${annual ? 'bg-white text-primary' : 'text-white/80 hover:text-white'}`}
               >
                 Annual
               </button>
               <button
                 onClick={() => setAnnual(false)}
-                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${!annual ? 'bg-primary text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                className={`px-5 py-1.5 text-sm font-medium rounded-full transition-colors ${!annual ? 'bg-white text-primary' : 'text-white/80 hover:text-white'}`}
               >
                 Monthly
               </button>
             </div>
-            <p className="text-xs font-medium text-primary mt-3">
+            <p className="text-xs font-medium text-cyan-200 mt-3">
               {annual ? 'Save up to 25% with annual billing' : 'Switch to annual and save up to 25%'}
             </p>
           </div>
 
           {/* Employee count drives per-seat checkout quantity */}
-          <div className="flex flex-col items-center mb-8">
-            <label htmlFor="emp" className="text-sm font-medium mb-2">How many employees?</label>
+          <div className="flex flex-col items-center mb-10">
+            <label htmlFor="emp" className="text-sm font-medium mb-2 text-white/90">How many employees?</label>
             <input
               id="emp" type="number" min={1} max={5000} value={employees}
               onChange={(e) => setEmployees(Math.max(1, Math.min(5000, Number(e.target.value) || 1)))}
-              className="w-28 text-center rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-28 text-center rounded-md border border-white/20 bg-white/10 text-white px-3 py-2 text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-300/50"
             />
-            <p className="text-xs text-muted-foreground mt-2">Billed per employee · adjust anytime at checkout</p>
-            {checkoutError && <p className="text-sm text-red-600 mt-3">{checkoutError}</p>}
+            <p className="text-xs text-white/60 mt-2">Billed per employee · adjust anytime at checkout</p>
+            {checkoutError && <p className="text-sm text-red-300 mt-3">{checkoutError}</p>}
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
             {TIERS.map((t, i) => (
-              <motion.div key={t.name} {...stagger(i * 0.08)}>
-                <Card className={`h-full relative ${t.popular ? 'border-primary shadow-lg md:-mt-2' : ''}`}>
+              <motion.div key={t.name} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}>
+                <Card className={`h-full relative text-foreground ${t.popular ? 'ring-2 ring-cyan-300 shadow-2xl md:-mt-2' : ''}`}>
                   {t.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-300 text-primary text-xs font-bold px-3 py-1 rounded-full">
                       Most popular
                     </span>
                   )}
@@ -310,23 +219,109 @@ export default function AppPage() {
             ))}
           </div>
 
-          {/* Advisory perk + add-on */}
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto mt-10">
-            <div className="rounded-xl border bg-card px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-3 text-center sm:text-left">
-              <span className="inline-flex items-center gap-2 text-sm font-medium">
-                <Calendar className="w-4 h-4 text-primary" /> Every plan includes a free 30-minute HR consult
-              </span>
-              <span className="hidden sm:block w-px h-6 bg-border" />
-              <span className="text-sm text-muted-foreground">
-                Need more? Add the <strong className="text-foreground">HR Advice Line</strong> — unlimited expert HR advice — to any plan.
-              </span>
-            </div>
+          <p className="text-center text-sm text-white/70 mt-8">
+            Every plan includes a free 30-minute HR consult · add the <strong className="text-white">HR Advice Line</strong> for unlimited expert advice.
+          </p>
+        </div>
+      </section>
+
+      {/* Animated feature showcase — screenshots drop into /public/images/app/ */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">See it in action</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">One platform for your whole HR operation</h2>
+            <p className="text-muted-foreground">Org charts, Canadian compliance, documents, and insight — together, not bolted on.</p>
           </motion.div>
+
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {SHOTS.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <button
+                  key={s.key}
+                  onClick={() => setShot(i)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                    i === shot ? 'bg-primary text-white border-primary' : 'bg-card text-muted-foreground border-border hover:text-foreground hover:border-primary/40'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" /> {s.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid lg:grid-cols-5 gap-8 items-center max-w-6xl mx-auto">
+            {/* Framed screenshot */}
+            <div className="lg:col-span-3">
+              <div className="rounded-xl border bg-card shadow-xl overflow-hidden">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b bg-muted/40">
+                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
+                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
+                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
+                  <span className="ml-3 text-xs text-muted-foreground flex items-center gap-1.5"><LayoutDashboard className="w-3.5 h-3.5" /> app.precisehr.ca</span>
+                </div>
+                <div className="relative aspect-[16/10] bg-gradient-to-br from-muted/60 to-muted">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={active.key}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute inset-0"
+                    >
+                      {!imgFailed[active.key] ? (
+                        <img
+                          src={active.img}
+                          alt={active.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          onError={() => setImgFailed((p) => ({ ...p, [active.key]: true }))}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white">
+                          <div className="w-14 h-14 rounded-2xl bg-white/12 flex items-center justify-center mb-4">
+                            <ActiveIcon className="w-7 h-7" />
+                          </div>
+                          <p className="font-semibold">{active.label}</p>
+                          <p className="text-xs text-white/55 mt-1">Screenshot preview</p>
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
+            {/* Caption */}
+            <div className="lg:col-span-2">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.key}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -16 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                    <ActiveIcon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">{active.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">{active.desc}</p>
+                  <Button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
+                    See pricing <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Get started CTA */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto">
             <div className="rounded-2xl bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white p-10 text-center">
@@ -335,7 +330,7 @@ export default function AppPage() {
                 Choose a plan, set your team size, and you&apos;ll be up and running in minutes — your workspace is created the moment you check out.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToPricing}>
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
                   See plans &amp; pricing <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
@@ -350,7 +345,7 @@ export default function AppPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-muted/50">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQ</p>
