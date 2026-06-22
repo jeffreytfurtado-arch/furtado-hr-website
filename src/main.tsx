@@ -38,16 +38,19 @@ window.addEventListener('vite:preloadError', () => {
   }
 });
 
-// Support both client-side navigation and SSR hydration
 const rootElement = document.getElementById('app');
 if (!rootElement) throw new Error('Root element not found');
 
-const root = ReactDOM.createRoot(rootElement);
-
-root.render(
+const appJsx = (
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
   </React.StrictMode>
 );
+
+if (rootElement.innerHTML.trim()) {
+  ReactDOM.hydrateRoot(rootElement, appJsx);
+} else {
+  ReactDOM.createRoot(rootElement).render(appJsx);
+}

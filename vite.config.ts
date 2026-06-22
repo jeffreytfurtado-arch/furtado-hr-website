@@ -91,4 +91,8 @@ export default defineConfig(({ mode }) => ({
 			],
 		},
 	},
+
+	ssr: {
+		noExternal: true,
+	},
 }));
