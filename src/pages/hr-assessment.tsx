@@ -7,12 +7,11 @@ import { ClipboardCheck, Target, TrendingUp } from 'lucide-react';
 export default function HRAssessmentPage() {
   return (
     <div className="min-h-screen">
-      <title>Free HR Assessment - PreciseHR</title>
-      <meta name="description" content="Take our free HR assessment to evaluate your organization's HR practices and get personalized recommendations." />
+      <SEO title="Free HR Maturity Assessment" description="Evaluate your organization's HR maturity across compliance, culture, and operations. Get a personalized score." path="/hr-assessment" />
       <ToolPageSchema name="Free HR Assessment Tool" description="Evaluate your organization's HR maturity and get personalized recommendations." url="/hr-assessment" />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-b from-primary/10 via-background to-background relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] relative overflow-hidden">
         {/* Animated background */}
         <motion.div
           animate={{ 
@@ -41,13 +40,11 @@ export default function HRAssessmentPage() {
               <span className="text-white font-semibold">Free HR Health Check</span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
                 How Healthy Are Your HR Practices?
-              </span>
             </h1>
 
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-white/80 mb-8">
               Take our 2-minute assessment to discover your HR strengths and areas for improvement. Get personalized recommendations based on your unique situation.
             </p>
 
@@ -57,13 +54,13 @@ export default function HRAssessmentPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-card border border-border rounded-lg p-6"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6"
               >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-bold mb-2">Identify Gaps</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold mb-2 text-white">Identify Gaps</h3>
+                <p className="text-sm text-white/70">
                   Discover blind spots in your HR operations before they become problems
                 </p>
               </motion.div>
@@ -72,13 +69,13 @@ export default function HRAssessmentPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-card border border-border rounded-lg p-6"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6"
               >
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="w-6 h-6 text-accent" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-bold mb-2">Get Insights</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold mb-2 text-white">Get Insights</h3>
+                <p className="text-sm text-white/70">
                   Receive a detailed score across 5 key HR categories
                 </p>
               </motion.div>
@@ -87,13 +84,13 @@ export default function HRAssessmentPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="bg-card border border-border rounded-lg p-6"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6"
               >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <ClipboardCheck className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                  <ClipboardCheck className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-bold mb-2">Take Action</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold mb-2 text-white">Take Action</h3>
+                <p className="text-sm text-white/70">
                   Get personalized recommendations to improve your HR operations
                 </p>
               </motion.div>

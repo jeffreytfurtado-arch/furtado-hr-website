@@ -100,8 +100,7 @@ export default function ContactPage() {
       });
       setSubscribeToNewsletter(false);
       
-      // Immediately redirect to Calendly
-      window.open('https://calendly.com/precisehr-info/precisehr-consult', '_blank');
+      // Success — user can click to open Calendly themselves (avoids popup blocking)
     } catch (err) {
       setError('Something went wrong. Please try again or call us directly.');
     } finally {
@@ -119,11 +118,9 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Contact Us" description="Get a free HR assessment for your Canadian business. Reach our team by phone, email, or online form." path="/contact" />
-      <title>Get Free HR Assessment - PreciseHR</title>
-      <meta name="description" content="Schedule your free HR assessment with PreciseHR. Get expert analysis of your HR needs and customized solutions." />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-secondary text-primary-foreground py-20">
+      <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-primary-foreground py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -167,12 +164,18 @@ export default function ContactPage() {
                           We have received your request and our team will contact you within 24 hours.
                         </p>
                         <div className="space-y-4">
-                          <div className="bg-primary/10 rounded-lg p-4 mb-4">
-                            <p className="text-lg font-semibold text-primary mb-2">Opening your calendar...</p>
-                            <p className="text-sm text-muted-foreground">
-                              We're redirecting you to schedule your free assessment call right now.
-                            </p>
-                          </div>
+                          <a
+                            href="https://calendly.com/precisehr-info/precisehr-consult"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Button size="lg" className="w-full sm:w-auto font-semibold">
+                              Book Your Free Consultation
+                            </Button>
+                          </a>
+                          <p className="text-sm text-muted-foreground">
+                            Pick a time that works for you — no obligation.
+                          </p>
                           <div className="pt-4">
                             <Button onClick={() => setIsSuccess(false)} variant="outline">
                               Submit Another Request

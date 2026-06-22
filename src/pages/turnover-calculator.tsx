@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { motion } from 'motion/react';
 import { ToolPageSchema } from '@/components/StructuredData';
 import { UserMinus, AlertCircle, Phone, ArrowRight, TrendingDown, DollarSign, Clock } from 'lucide-react';
@@ -62,8 +63,7 @@ export default function TurnoverCalculatorPage() {
 
   return (
     <div className="min-h-screen">
-      <title>Free Employee Turnover Cost Calculator - PreciseHR</title>
-      <meta name="description" content="Calculate the true cost of employee turnover for Canadian businesses. Free tool to see how retention strategies save money." />
+      <SEO title="Free Employee Turnover Calculator" description="Calculate the true cost of employee turnover for your Canadian business. Free HR planning tool." path="/turnover-calculator" />
       <ToolPageSchema name="Free Employee Turnover Cost Calculator" description="Calculate the true cost of employee turnover and see how retention saves money." url="/turnover-calculator" />
 
       {/* Hero */}

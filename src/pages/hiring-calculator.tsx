@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { motion } from 'motion/react';
 import { ToolPageSchema } from '@/components/StructuredData';
 import { DollarSign, Users, Clock, ArrowRight, Phone, Briefcase, BarChart3 } from 'lucide-react';
@@ -74,8 +75,7 @@ export default function HiringCalculatorPage() {
 
   return (
     <div className="min-h-screen">
-      <title>Free Hiring Cost Calculator for Canadian Businesses - PreciseHR</title>
-      <meta name="description" content="Calculate your true cost-per-hire and see how outsourcing recruitment can save your Canadian organization money. Free calculator tool." />
+      <SEO title="Free Hiring Cost Calculator" description="Estimate your cost-per-hire including recruitment, onboarding, and training. Free Canadian HR tool." path="/hiring-calculator" />
       <ToolPageSchema name="Free Hiring Cost Calculator" description="Calculate your true cost-per-hire and see how outsourcing recruitment saves money." url="/hiring-calculator" />
 
       {/* Hero */}

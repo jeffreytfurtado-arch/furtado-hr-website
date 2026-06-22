@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'motion/react';
 
 export default function TermsOfServicePage() {
   return (
     <div className="flex flex-col">
-      <title>Terms of Service - PreciseHR</title>
-      <meta name="description" content="Terms of Service for using PreciseHR services and software platform." />
+      <SEO title="Terms of Service" description="PreciseHR terms of service for our website and HR software platform." path="/terms-of-service" />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-secondary text-primary-foreground py-16">

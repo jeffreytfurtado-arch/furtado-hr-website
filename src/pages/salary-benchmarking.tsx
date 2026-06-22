@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { motion } from 'motion/react';
 import { ToolPageSchema } from '@/components/StructuredData';
 import { TrendingUp, BarChart3, Users, Award } from 'lucide-react';
@@ -201,8 +202,7 @@ export default function SalaryBenchmarkingPage() {
 
   return (
     <div className="min-h-screen">
-      <title>Free Canadian Salary Benchmarking Tool - PreciseHR</title>
-      <meta name="description" content="Compare salaries across Canadian provinces for any role. Free benchmarking tool to ensure your compensation packages are competitive." />
+      <SEO title="Free Salary Benchmarking Tool" description="Compare salaries across Canadian provinces and industries. Free benchmarking data for HR professionals." path="/salary-benchmarking" />
       <ToolPageSchema name="Free Canadian Salary Benchmarking Tool" description="Compare salaries across Canadian provinces and ensure competitive compensation." url="/salary-benchmarking" />
 
       {/* Hero */}

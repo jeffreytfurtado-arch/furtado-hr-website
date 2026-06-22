@@ -1,26 +1,23 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { setCorsHeaders, checkRateLimit } from './_shared';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  setCorsHeaders(req, res);
+
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (checkRateLimit(req, res)) return;
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.error('ANTHROPIC_API_KEY not configured');
     return res.status(500).json({ error: 'Service temporarily unavailable' });
   }
-
-  // Log key prefix for debugging (safe - only shows first 10 chars)
-  console.log('API key prefix:', apiKey.substring(0, 10) + '...');
-  console.log('API key length:', apiKey.length);
 
   try {
     const { jobTitle, industry, employmentType, location, seniorityLevel, keyResponsibilities } = req.body;
@@ -55,9 +52,6 @@ Keep the tone professional but warm. Use "you" language where appropriate. Do no
       messages: [{ role: 'user', content: prompt }],
     };
 
-    console.log('Sending request to Anthropic API...');
-    console.log('Model:', requestBody.model);
-
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -68,13 +62,10 @@ Keep the tone professional but warm. Use "you" language where appropriate. Do no
       body: JSON.stringify(requestBody),
     });
 
-    console.log('Response status:', response.status);
-    console.log('Response headers:', JSON.stringify(Object.fromEntries(response.headers.entries())));
-
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('FULL API error response:', errorText);
-      return res.status(500).json({ error: 'Failed to generate job description', debug: errorText });
+      console.error('Anthropic API error:', response.status, errorText);
+      return res.status(500).json({ error: 'Failed to generate job description' });
     }
 
     const data = await response.json();

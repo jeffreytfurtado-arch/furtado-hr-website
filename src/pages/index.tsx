@@ -340,6 +340,90 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trusted By — Client Logos */}
+      <section className="py-14 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-10">
+            <p className="text-sm font-medium text-muted-foreground tracking-wide">
+              Trusted by growing Canadian businesses
+            </p>
+          </motion.div>
+          <motion.div
+            {...fadeUp}
+            className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 max-w-4xl mx-auto"
+          >
+            {[
+              {
+                name: 'FurtadoFirm',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <rect x="0" y="0" width="80" height="40" rx="4" fill="currentColor" className="text-[#0a1628]" />
+                    <text x="40" y="27" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontWeight="700" fontSize="20" className="fill-[#c9a84c]">FF</text>
+                  </svg>
+                ),
+              },
+              {
+                name: 'BrightPath Tech',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <rect x="0" y="0" width="80" height="40" rx="20" fill="currentColor" className="text-[#4a7c9b]" />
+                    <text x="40" y="27" textAnchor="middle" fontFamily="'Segoe UI', system-ui, sans-serif" fontWeight="600" fontSize="18" fill="white">BP</text>
+                  </svg>
+                ),
+              },
+              {
+                name: 'Northern Edge Fabrication',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <polygon points="40,2 76,38 4,38" fill="none" stroke="currentColor" strokeWidth="3" className="text-[#2d6a4f]" />
+                    <text x="40" y="33" textAnchor="middle" fontFamily="'Impact', 'Arial Black', sans-serif" fontWeight="700" fontSize="16" className="fill-[#2d6a4f]">NE</text>
+                  </svg>
+                ),
+              },
+              {
+                name: 'Halton Physiotherapy',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <circle cx="40" cy="20" r="18" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#2a9d8f]" />
+                    <text x="40" y="26" textAnchor="middle" fontFamily="'Segoe UI', system-ui, sans-serif" fontWeight="600" fontSize="16" className="fill-[#2a9d8f]">HP</text>
+                  </svg>
+                ),
+              },
+              {
+                name: 'Canopy Home & Garden',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <rect x="4" y="4" width="72" height="32" rx="6" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#4a6274]" />
+                    <text x="40" y="27" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontWeight="600" fontSize="18" className="fill-[#4a6274]">CH</text>
+                  </svg>
+                ),
+              },
+              {
+                name: 'Fidelis Advisory',
+                svg: (
+                  <svg viewBox="0 0 80 40" className="h-9 w-auto">
+                    <rect x="0" y="0" width="80" height="40" rx="4" fill="currentColor" className="text-[#1a5c52]" />
+                    <text x="40" y="27" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontWeight="700" fontSize="19" fill="white">FA</text>
+                  </svg>
+                ),
+              },
+            ].map((logo, i) => (
+              <motion.div
+                key={logo.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default"
+                title={logo.name}
+              >
+                {logo.svg}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Primary Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">

@@ -1,11 +1,11 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { setCorsHeaders, escapeHtml } from './_shared';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  setCorsHeaders(req, res);
+
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
@@ -35,11 +35,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const fromEmail = process.env.FROM_EMAIL || 'info@precisehr.ca';
     const toEmail = process.env.TO_EMAIL || 'info@precisehr.ca';
 
+    // Sanitize all user inputs for safe HTML embedding
+    const safeFirst = escapeHtml(firstName);
+    const safeLast = escapeHtml(lastName);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = escapeHtml(company || '');
+
     // Notification to PreciseHR
     await resend.emails.send({
       from: `PreciseHR <${fromEmail}>`,
       to: [toEmail],
-      subject: `New Newsletter Subscriber: ${firstName} ${lastName}`,
+      subject: `New Newsletter Subscriber: ${safeFirst} ${safeLast}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #003366; color: white; padding: 20px; border-radius: 8px 8px 0 0;">
@@ -47,9 +53,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </div>
           <div style="padding: 20px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; color: #666; width: 120px;">Name:</td><td style="padding: 8px 0; font-weight: bold;">${firstName} ${lastName}</td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Email:</td><td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Company:</td><td style="padding: 8px 0;">${company || 'Not provided'}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666; width: 120px;">Name:</td><td style="padding: 8px 0; font-weight: bold;">${safeFirst} ${safeLast}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Email:</td><td style="padding: 8px 0;"><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Company:</td><td style="padding: 8px 0;">${safeCompany || 'Not provided'}</td></tr>
               <tr><td style="padding: 8px 0; color: #666;">Subscribed:</td><td style="padding: 8px 0;">${new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })}</td></tr>
             </table>
           </div>
@@ -68,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <h2 style="margin: 0;">Welcome to PreciseHR Insights!</h2>
           </div>
           <div style="padding: 20px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
-            <p>Hi ${firstName},</p>
+            <p>Hi ${safeFirst},</p>
             <p>Thank you for subscribing to our newsletter. You'll now receive:</p>
             <ul style="padding-left: 20px;">
               <li style="margin-bottom: 8px;">Monthly HR insights and best practices</li>

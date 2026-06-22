@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import SEO from '@/components/SEO';
+import { FAQSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -26,6 +28,7 @@ import {
   LayoutDashboard,
   Gamepad2,
   Boxes,
+  ChevronDown,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -134,7 +137,32 @@ const couldBuild = [
   { icon: BarChart3, title: 'AI-driven reporting', description: 'Dashboards and reports that summarize, explain, and surface what matters — without manual effort.' },
 ];
 
+const aiFaqs = [
+  {
+    q: 'What kind of AI tools can you build for my business?',
+    a: 'We build a wide range of AI-powered tools — internal copilots trained on your policies and documents, document and contract automation, knowledge assistants, workflow automation, custom calculators, and AI-driven reporting dashboards. Every solution is tailored to your specific data, workflows, and goals.',
+  },
+  {
+    q: 'How long does an AI implementation take?',
+    a: 'Timelines vary by scope. A focused automation or internal assistant can be live within two to four weeks. Larger platform builds or multi-department rollouts typically take six to twelve weeks. We sequence deliverables so you see value early and often.',
+  },
+  {
+    q: 'Do I need technical staff to use your AI tools?',
+    a: 'No. We design everything for non-technical users — intuitive interfaces, clear outputs, and built-in guardrails. We also provide hands-on training and documentation so your team is confident from day one.',
+  },
+  {
+    q: 'How do you ensure AI outputs are accurate?',
+    a: 'We build in human-in-the-loop checkpoints, validation layers, and confidence scoring so your team always has visibility into what the AI is doing. We also establish governance policies and monitoring so accuracy improves over time.',
+  },
+  {
+    q: 'What does the AI consulting process look like?',
+    a: 'It starts with a discovery session where we audit your workflows, data, and tools to find high-value AI opportunities. From there we build a prioritized roadmap, execute the build, and manage adoption and training across your organization. You are involved at every decision point.',
+  },
+];
+
 export default function AIPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
     <div className="flex flex-col">
       <SEO
@@ -142,6 +170,7 @@ export default function AIPage() {
         description="PreciseHR helps Canadian organizations adopt and execute AI — advisory, strategy, custom builds, and org-wide rollout across HR, Sales, Operations, Finance, and beyond."
         path="/ai"
       />
+      <FAQSchema faqs={aiFaqs} />
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
@@ -299,6 +328,39 @@ export default function AIPage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Frequently asked questions</h2>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto space-y-3">
+            {aiFaqs.map((faq, i) => (
+              <div key={i} className="border rounded-lg bg-background overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-4 text-left font-semibold hover:bg-muted/50 transition-colors"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-muted-foreground shrink-0 ml-4 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                <div
+                  className={`grid transition-all duration-200 ${openFaq === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-4 text-muted-foreground leading-relaxed">{faq.a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 

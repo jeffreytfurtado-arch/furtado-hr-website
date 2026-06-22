@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { setCorsHeaders, checkRateLimit } from './_shared';
 
 const SOURCES = [
   { name: 'HRD Canada', url: 'https://www.hcamag.com/ca/rss', type: 'rss' },
@@ -27,9 +28,12 @@ async function fetchSource(source: typeof SOURCES[0]): Promise<string> {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  setCorsHeaders(req, res);
+
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (checkRateLimit(req, res)) return;
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {

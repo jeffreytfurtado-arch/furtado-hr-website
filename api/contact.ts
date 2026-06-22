@@ -1,11 +1,11 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { setCorsHeaders, escapeHtml } from './_shared';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  setCorsHeaders(req, res);
+
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
@@ -35,11 +35,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const fromEmail = process.env.FROM_EMAIL || 'info@precisehr.ca';
     const toEmail = process.env.TO_EMAIL || 'info@precisehr.ca';
 
+    // Sanitize all user inputs for safe HTML embedding
+    const safeFirst = escapeHtml(firstName);
+    const safeLast = escapeHtml(lastName);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone || '');
+    const safeCompany = escapeHtml(company);
+    const safeEmployees = escapeHtml(employees || '');
+    const safeService = escapeHtml(serviceInterest || '');
+    const safeMessage = message ? escapeHtml(message) : '';
+
     // Notification to PreciseHR
     await resend.emails.send({
       from: `PreciseHR <${fromEmail}>`,
       to: [toEmail],
-      subject: `New Contact Request from ${firstName} ${lastName} - ${company} (${serviceInterest || 'General'})`,
+      subject: `New Contact Request from ${safeFirst} ${safeLast} - ${safeCompany} (${safeService || 'General'})`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #003366; color: white; padding: 20px; border-radius: 8px 8px 0 0;">
@@ -48,17 +58,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </div>
           <div style="padding: 20px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; color: #666; width: 140px;">Name:</td><td style="padding: 8px 0; font-weight: bold;">${firstName} ${lastName}</td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Email:</td><td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Phone:</td><td style="padding: 8px 0;"><a href="tel:${phone}">${phone || 'Not provided'}</a></td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Company:</td><td style="padding: 8px 0;">${company}</td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Employees:</td><td style="padding: 8px 0;">${employees || 'Not provided'}</td></tr>
-              <tr><td style="padding: 8px 0; color: #666;">Service Interest:</td><td style="padding: 8px 0;">${serviceInterest || 'Not specified'}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666; width: 140px;">Name:</td><td style="padding: 8px 0; font-weight: bold;">${safeFirst} ${safeLast}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Email:</td><td style="padding: 8px 0;"><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Phone:</td><td style="padding: 8px 0;"><a href="tel:${safePhone}">${safePhone || 'Not provided'}</a></td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Company:</td><td style="padding: 8px 0;">${safeCompany}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Employees:</td><td style="padding: 8px 0;">${safeEmployees || 'Not provided'}</td></tr>
+              <tr><td style="padding: 8px 0; color: #666;">Service Interest:</td><td style="padding: 8px 0;">${safeService || 'Not specified'}</td></tr>
             </table>
-            ${message ? `
+            ${safeMessage ? `
               <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
                 <p style="color: #666; margin: 0 0 8px;">Message:</p>
-                <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+                <p style="margin: 0; white-space: pre-wrap;">${safeMessage}</p>
               </div>
             ` : ''}
           </div>
@@ -77,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <h2 style="margin: 0;">Thank You for Contacting Us</h2>
           </div>
           <div style="padding: 20px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px;">
-            <p>Hi ${firstName},</p>
+            <p>Hi ${safeFirst},</p>
             <p>Thank you for reaching out to PreciseHR. We've received your inquiry and a member of our team will get back to you within <strong>24 hours</strong>.</p>
             <p>If you need immediate assistance, please call us at <a href="tel:+14378872263">(437) 887-2263</a>.</p>
             <p>Best regards,<br><strong>The PreciseHR Team</strong></p>

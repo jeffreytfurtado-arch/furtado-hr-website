@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { setCorsHeaders, checkRateLimit } from './_shared';
 
 const PROMPTS: Record<string, (topic: string) => string> = {
   jd: (t) => `You are an expert Canadian HR consultant. Write a concise, professional, ready-to-use job description for: "${t}". Comply with Canadian employment standards and use inclusive, non-discriminatory language. Include these sections with clear headings: Job Title; About the Role (2 sentences); Key Responsibilities (5-6 bullets); Requirements (4-5 bullets); What We Offer (3-4 bullets including Canadian benefits like RRSP matching, health benefits, paid vacation). Do not include salary ranges. Keep it tight and specific — this is a live website demo.`,
@@ -7,12 +8,11 @@ const PROMPTS: Record<string, (topic: string) => string> = {
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (checkRateLimit(req, res)) return;
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {

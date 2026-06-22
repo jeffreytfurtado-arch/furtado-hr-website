@@ -16,6 +16,12 @@ export default function Footer() {
       { name: 'PreciseHR App', href: '/app' },
     ],
     tools: [
+      { name: 'Compliance Checker', href: '/compliance-checker' },
+      { name: 'JD Generator', href: '/jd-generator' },
+      { name: 'Policy Generator', href: '/policy-generator' },
+      { name: 'Offer Letter Generator', href: '/offer-letter' },
+      { name: 'Policy Scanner', href: '/policy-scanner' },
+      { name: 'Net Pay Calculator', href: '/net-pay-calculator' },
       { name: 'ROI Calculator', href: '/roi-calculator' },
       { name: 'HR Health Check', href: '/hr-assessment' },
       { name: 'Salary Benchmarking', href: '/salary-benchmarking' },

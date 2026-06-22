@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { setCorsHeaders, escapeHtml } from './_shared';
 
 const TOOL_LABELS: Record<string, string> = {
   policy: 'HR Policy',
@@ -9,12 +10,10 @@ const TOOL_LABELS: Record<string, string> = {
 };
 
 const CALENDLY = 'https://calendly.com/precisehr-info/precisehr-consult';
-const esc = (s = '') => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const esc = (s = '') => escapeHtml(s);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });

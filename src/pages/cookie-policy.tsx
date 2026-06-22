@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'motion/react';
 
 export default function CookiePolicyPage() {
   return (
     <div className="flex flex-col">
-      <title>Cookie Policy - PreciseHR</title>
-      <meta name="description" content="Learn about how PreciseHR uses cookies to improve your experience on our website." />
+      <SEO title="Cookie Policy" description="How PreciseHR uses cookies on our website." path="/cookie-policy" />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-secondary text-primary-foreground py-16">

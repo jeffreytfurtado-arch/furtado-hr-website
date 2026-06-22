@@ -162,7 +162,7 @@ export default function JeffreyFurtadoPage() {
     <div className="flex flex-col">
       <SEO
         title="Jeffrey T. Furtado — Executive, Entrepreneur, Operator"
-        description="Jeffrey T. Furtado is a Canadian executive, entrepreneur, and strategic investor. COO & Executive Producer at Big Viking Games. Previously COO at Mortgage Automator (BVP Forge) — $110M+ acquisition. Managing Partner at PreciseHR. Founder of DooLeeNoted (exited) and FurtadoFirm. Board advisor for GLG and Guidepoint. Track record of multiple exits across Gaming, Fintech, SaaS, HR, and Real Estate."
+        description="Jeffrey Furtado is Managing Partner at PreciseHR and a Canadian executive, entrepreneur, and strategic investor with multiple exits across SaaS, Fintech, Gaming, and HR."
         path="/about/jeffrey-furtado"
       />
       <PersonSchema />

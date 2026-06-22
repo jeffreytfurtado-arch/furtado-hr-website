@@ -35,7 +35,7 @@ const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0
 
 /* ── 2026 Tax Data ── */
 const FEDERAL_BRACKETS = [
-  { min: 0, max: 58523, rate: 0.14 },
+  { min: 0, max: 58523, rate: 0.15 },
   { min: 58523, max: 117045, rate: 0.205 },
   { min: 117045, max: 181440, rate: 0.26 },
   { min: 181440, max: 258482, rate: 0.29 },

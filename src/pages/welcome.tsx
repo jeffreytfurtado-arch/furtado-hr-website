@@ -14,6 +14,7 @@ export default function WelcomePage() {
         title="Welcome to PreciseHR"
         description="Your PreciseHR subscription is active. Check your email to set your password and sign in."
         path="/welcome"
+        noIndex={true}
       />
       <div className="container mx-auto px-4 py-20">
         <motion.div

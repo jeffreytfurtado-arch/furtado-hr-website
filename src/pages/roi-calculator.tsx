@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { motion } from 'motion/react';
 import { ToolPageSchema } from '@/components/StructuredData';
 import { Calculator, CheckCircle2, Clock, Phone } from 'lucide-react';
@@ -81,7 +82,7 @@ export default function ROICalculatorPage() {
 
   return (
     <div className="min-h-screen">
-      <title>HR Outsourcing ROI Calculator - PreciseHR</title>
+      <SEO title="Free HR ROI Calculator" description="Calculate the return on investment of outsourcing HR. See how much time and money your business could save." path="/roi-calculator" />
       <ToolPageSchema name="Free HR Outsourcing ROI Calculator" description="Calculate how much your organization could save by outsourcing HR to PreciseHR." url="/roi-calculator" />
 
       {/* Hero */}

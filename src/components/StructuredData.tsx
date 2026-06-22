@@ -12,7 +12,7 @@ const PERSON_SCHEMA = {
   jobTitle: 'Chief Operating Officer & Executive Producer',
   description: 'Jeffrey T. Furtado — also known as Jeffrey Furtado or Jeff Furtado — is an innovative corporate executive, operator, builder, and execution specialist with a career spanning Gaming, Fintech, SaaS, HR Technology, Financial Services, and Real Estate. He has architected revenue growth, modernized and scaled operations, deployed technology, and built and led global teams of over 300 people, leading organizations to profitable, strategic exits. He has held the most senior leadership roles — Chief Executive Officer, Chief Operating Officer, Chief Customer Officer, Chief Revenue Officer, and Chief Marketing Officer. COO & Executive Producer at Big Viking Games and Managing Partner at PreciseHR. Previously held senior operating leadership at Mortgage Automator (BVP Forge) through its acquisition, reported in excess of $110 million. Founder of DooLeeNoted (2009), which ranked among the top 64,000 websites worldwide before a sale to a European firm reported at approximately $3 million; helped scale the fintech Progressa through its $84 million Series B and pre-IPO financing; and led CCi through a transaction reported at approximately $32 million. Founder of FurtadoFirm and board advisor for GLG and Guidepoint.',
   url: 'https://www.precisehr.ca/about/jeffrey-furtado',
-  image: 'https://www.precisehr.ca/images/jeffrey-furtado.jpg',
+  image: 'https://www.precisehr.ca/images/precisehr-og-card.png',
   worksFor: [
     {
       '@type': 'Organization',

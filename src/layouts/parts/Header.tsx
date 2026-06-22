@@ -58,6 +58,8 @@ function Dropdown({ label, items, isOpen, onToggle, buttonRef, isHighlighted }: 
     <div ref={buttonRef} className="relative">
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className={`inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
           isHighlighted
             ? hasActivePage || isOpen
@@ -73,13 +75,14 @@ function Dropdown({ label, items, isOpen, onToggle, buttonRef, isHighlighted }: 
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 rounded-lg border bg-background shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div role="menu" className="absolute right-0 mt-2 w-72 rounded-lg border bg-background shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
           {items.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.name}
                 to={item.href}
+                role="menuitem"
                 className={`flex items-start gap-3 px-4 py-3 hover:bg-muted transition-colors ${
                   isActive(item.href) ? 'bg-muted' : ''
                 }`}
@@ -112,6 +115,8 @@ function MobileDropdown({ label, items, isOpen, onToggle, onNavigate, isActive }
     <>
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className={`flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-md transition-colors ${
           isActive ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
         }`}
@@ -120,11 +125,12 @@ function MobileDropdown({ label, items, isOpen, onToggle, onNavigate, isActive }
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       {isOpen && (
-        <div className="ml-4 space-y-1">
+        <div role="menu" className="ml-4 space-y-1">
           {items.map((item) => (
             <Link
               key={item.name}
               to={item.href}
+              role="menuitem"
               className={`block px-4 py-2 text-sm rounded-md transition-colors ${
                 location.pathname === item.href
                   ? 'bg-primary/10 text-primary font-medium'
@@ -153,6 +159,8 @@ function ProvinceDropdown({ isOpen, onToggle, buttonRef }: {
     <div ref={buttonRef} className="relative">
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
           onProvincePage || isOpen ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
         }`}
@@ -163,7 +171,7 @@ function ProvinceDropdown({ isOpen, onToggle, buttonRef }: {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 rounded-lg border bg-background shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div role="menu" className="absolute right-0 mt-2 w-80 rounded-lg border bg-background shadow-xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="px-2 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
             HR services by province
           </div>
@@ -172,6 +180,7 @@ function ProvinceDropdown({ isOpen, onToggle, buttonRef }: {
               <Link
                 key={p.slug}
                 to={`/hr-services/${p.slug}`}
+                role="menuitem"
                 className={`flex items-center px-3 py-2 rounded-md text-sm transition-colors hover:bg-muted ${
                   location.pathname === `/hr-services/${p.slug}` ? 'bg-muted text-primary font-medium' : ''
                 }`}
@@ -182,6 +191,7 @@ function ProvinceDropdown({ isOpen, onToggle, buttonRef }: {
           </div>
           <Link
             to="/hr-services"
+            role="menuitem"
             className="mt-1.5 flex items-center justify-between border-t border-border px-3 pt-3 pb-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             All 13 provinces &amp; territories
@@ -197,10 +207,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
+  const [isMac, setIsMac] = useState(true);
   const toolsRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const provincesRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+
+  useEffect(() => {
+    setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.userAgent));
+  }, []);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -307,7 +322,7 @@ export default function Header() {
               className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
             >
               <Search className="w-4 h-4" />
-              <kbd className="text-[10px] font-medium border rounded px-1.5 py-0.5">⌘K</kbd>
+              <kbd className="text-[10px] font-medium border rounded px-1.5 py-0.5">{isMac ? '⌘K' : 'Ctrl+K'}</kbd>
             </button>
             <ThemeToggle />
             <a
@@ -317,12 +332,20 @@ export default function Header() {
               Log In
             </a>
             <Link to="/contact">
-              <Button>Contact Us</Button>
+              <Button>Get Free Assessment</Button>
             </Link>
           </div>
 
-          {/* Mobile: theme + menu */}
+          {/* Mobile: search + theme + menu */}
           <div className="flex items-center gap-1 lg:hidden">
+            <button
+              type="button"
+              className="p-2 rounded-md text-foreground hover:bg-muted"
+              onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+              aria-label="Search"
+            >
+              <Search className="h-5 w-5" />
+            </button>
             <ThemeToggle />
             <button
               type="button"
@@ -373,6 +396,8 @@ export default function Header() {
             {/* HR by province (mobile) */}
             <button
               onClick={() => setMobileOpen(mobileOpen === 'provinces' ? null : 'provinces')}
+              aria-expanded={mobileOpen === 'provinces'}
+              aria-haspopup="true"
               className={`flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 location.pathname.startsWith('/hr-services') ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
               }`}
@@ -381,11 +406,12 @@ export default function Header() {
               <ChevronDown className={`h-4 w-4 transition-transform ${mobileOpen === 'provinces' ? 'rotate-180' : ''}`} />
             </button>
             {mobileOpen === 'provinces' && (
-              <div className="ml-4 space-y-1">
+              <div role="menu" className="ml-4 space-y-1">
                 {TOP_PROVINCES.map((p) => (
                   <Link
                     key={p.slug}
                     to={`/hr-services/${p.slug}`}
+                    role="menuitem"
                     className={`block px-4 py-2 text-sm rounded-md transition-colors ${
                       location.pathname === `/hr-services/${p.slug}`
                         ? 'bg-primary/10 text-primary font-medium'
@@ -398,6 +424,7 @@ export default function Header() {
                 ))}
                 <Link
                   to="/hr-services"
+                  role="menuitem"
                   className="block px-4 py-2 text-sm rounded-md font-medium text-primary hover:bg-muted transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >

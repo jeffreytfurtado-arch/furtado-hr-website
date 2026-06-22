@@ -72,7 +72,6 @@ export function NewsletterSignup({ variant = 'default', showBenefits = true }: N
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="rounded-xl border bg-card/50 p-5"
       >
         {isSuccess ? (
           <motion.div
@@ -84,36 +83,20 @@ export function NewsletterSignup({ variant = 'default', showBenefits = true }: N
             <p className="text-sm font-medium">You're subscribed! Check your email for a welcome message.</p>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row md:items-center gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="flex items-center gap-2 flex-shrink-0">
               <Mail className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold whitespace-nowrap">Stay Informed</span>
+              <span className="text-sm font-semibold whitespace-nowrap">HR insights, delivered monthly</span>
             </div>
             <div className="flex flex-1 gap-2 items-center">
               <Input
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                required
-                disabled={isSubmitting}
-                className="h-9 text-sm"
-              />
-              <Input
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                required
-                disabled={isSubmitting}
-                className="h-9 text-sm"
-              />
-              <Input
                 type="email"
-                placeholder="Email"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
                 disabled={isSubmitting}
-                className="h-9 text-sm"
+                className="h-9 text-sm flex-1"
               />
               <Button type="submit" size="sm" disabled={isSubmitting} className="h-9 px-5 flex-shrink-0">
                 {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Subscribe'}

@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import SEO from '@/components/SEO';
+import { FAQSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +19,7 @@ import {
   Search,
   UserX,
   Phone,
+  ChevronDown,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -116,9 +119,39 @@ export default function ServicesPage() {
     'Lower costs than in-house HR with better coverage',
   ];
 
+  const faqs = [
+    {
+      q: "What's included in a free HR assessment?",
+      a: 'Our free HR assessment is a focused review of your current people operations — covering compliance gaps, policy documentation, recruitment processes, and HR technology. You receive a written summary with prioritized recommendations and a clear action plan, with no obligation to engage further.',
+    },
+    {
+      q: 'Do you work with companies outside Ontario?',
+      a: 'Yes. While we are based in Ontario, we support businesses across all Canadian provinces and territories. Our compliance monitoring covers every jurisdiction, and our consulting and software services are fully remote-capable.',
+    },
+    {
+      q: 'How quickly can you start?',
+      a: 'Most engagements begin within one to two weeks of signing. For urgent needs like workplace investigations, terminations, or compliance issues, we can mobilize within days.',
+    },
+    {
+      q: 'What size companies do you work with?',
+      a: 'We work with organizations ranging from startups with five employees to mid-market companies with several hundred. Our solutions scale to fit — whether you need a single service or a full outsourced HR function.',
+    },
+    {
+      q: 'Do you replace our internal HR team?',
+      a: 'Not unless you want us to. Most clients use PreciseHR to augment their existing team — filling gaps in compliance, recruitment, or strategic planning. We can also serve as your entire HR department if you prefer to outsource.',
+    },
+    {
+      q: 'What industries do you specialize in?',
+      a: 'We have deep experience in technology, professional services, manufacturing, healthcare, financial services, construction, retail, and non-profit sectors. Our platform and consulting adapt to the regulatory and operational needs of each industry.',
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
     <div className="flex flex-col">
       <SEO title="HR Services" description="Intelligent HR solutions for Canadian businesses — consulting, recruitment, compliance, software, compensation, and more." path="/services" />
+      <FAQSchema faqs={faqs} />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
@@ -241,6 +274,39 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Frequently asked questions</h2>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border rounded-lg bg-background overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-4 text-left font-semibold hover:bg-muted/50 transition-colors"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-muted-foreground shrink-0 ml-4 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                <div
+                  className={`grid transition-all duration-200 ${openFaq === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-4 text-muted-foreground leading-relaxed">{faq.a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />
@@ -248,19 +314,19 @@ export default function ServicesPage() {
           <motion.div {...fadeUp} className="max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Not sure where to start?</h2>
             <p className="text-lg text-white/80 mb-10 leading-relaxed">
-              Run a free compliance check to see where your business stands — then let us help close the gaps.
+              See transparent pricing for every service — pick a plan and get started in minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/compliance-checker">
+              <Link to="/app">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto font-semibold">
-                  <Shield className="mr-2 w-5 h-5" />
-                  Run Free Compliance Check
+                  <DollarSign className="mr-2 w-5 h-5" />
+                  See Pricing &amp; Get Started
                 </Button>
               </Link>
-              <a href="tel:+14378872263">
+              <a href="https://calendly.com/precisehr-info/precisehr-consult" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                   <Phone className="mr-2 w-4 h-4" />
-                  (437) 887-2263
+                  Book a Free Consult
                 </Button>
               </a>
             </div>

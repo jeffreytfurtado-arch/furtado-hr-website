@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import SEO from '@/components/SEO';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
 import { track } from '@/lib/track';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import AppShowcase from '@/components/AppShowcase';
 import {
   Check, ArrowRight, Calendar, Sparkles, Loader2, CheckCircle2,
   Network, ShieldCheck, FileSignature, BarChart3, LayoutDashboard,
+  Minus,
 } from 'lucide-react';
 
 const CALENDLY = 'https://calendly.com/precisehr-info/precisehr-consult';
@@ -69,6 +71,71 @@ const FAQS = [
   { q: 'Do I get access to real HR experts?', a: 'Yes — every plan includes a free 30-minute consult with a PreciseHR advisor. For ongoing support you can add our HR Advice Line for unlimited expert HR advice. It is software backed by real people, not just a dashboard.' },
 ];
 
+type Avail = boolean; // true = included, false = not included
+interface CompRow { feature: string; starter: Avail; growth: Avail; agency: Avail }
+interface CompGroup { category: string; rows: CompRow[] }
+
+const COMPARISON: CompGroup[] = [
+  {
+    category: 'Core HR',
+    rows: [
+      { feature: 'Employee records & profiles', starter: true, growth: true, agency: true },
+      { feature: 'Org chart', starter: true, growth: true, agency: true },
+      { feature: 'Time-off tracking', starter: true, growth: true, agency: true },
+      { feature: 'Documents & e-signatures', starter: true, growth: true, agency: true },
+      { feature: 'Onboarding checklists', starter: true, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Payroll & Compliance',
+    rows: [
+      { feature: 'Payroll-ready CPP/EI/tax', starter: false, growth: true, agency: true },
+      { feature: 'ROE & T4 generation', starter: false, growth: true, agency: true },
+      { feature: 'Provincial ESA compliance tracking', starter: false, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Tools & Analytics',
+    rows: [
+      { feature: 'Drag-and-drop org chart builder', starter: false, growth: true, agency: true },
+      { feature: 'Policies & handbook builder', starter: false, growth: true, agency: true },
+      { feature: 'Reporting & analytics', starter: false, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Enterprise & Agency',
+    rows: [
+      { feature: 'Multi-tenant management', starter: false, growth: false, agency: true },
+      { feature: 'White-label branding', starter: false, growth: false, agency: true },
+      { feature: 'SSO / SAML', starter: false, growth: false, agency: true },
+      { feature: 'API access', starter: false, growth: false, agency: true },
+      { feature: 'Custom integrations', starter: false, growth: false, agency: true },
+    ],
+  },
+  {
+    category: 'Support',
+    rows: [
+      { feature: 'Email support', starter: true, growth: true, agency: true },
+      { feature: 'Priority support', starter: false, growth: true, agency: true },
+      { feature: 'Dedicated account manager', starter: false, growth: false, agency: true },
+    ],
+  },
+];
+
+const PLAN_COLS = [
+  { key: 'starter' as const, name: 'Starter', price: '$6–8', unit: '/emp/mo', popular: false, cta: 'get-started', label: 'Get started' },
+  { key: 'growth' as const, name: 'Growth', price: '$12–14', unit: '/emp/mo', popular: true, cta: 'get-started', label: 'Get started' },
+  { key: 'agency' as const, name: 'Agency', price: 'Custom', unit: '', popular: false, cta: 'talk-to-sales', label: 'Talk to sales' },
+];
+
+function CellIcon({ included }: { included: boolean }) {
+  return included ? (
+    <Check className="w-5 h-5 text-primary mx-auto" aria-label="Included" />
+  ) : (
+    <Minus className="w-4 h-4 text-muted-foreground/40 mx-auto" aria-label="Not included" />
+  );
+}
+
 export default function AppPage() {
   const [annual, setAnnual] = useState(true);
   const [employees, setEmployees] = useState(10);
@@ -104,7 +171,7 @@ export default function AppPage() {
     <div className="min-h-screen bg-background">
       <SEO
         title="PreciseHR App — Pricing & Canadian HR Software"
-        description="Simple per-employee pricing for the PreciseHR HRIS — Canadian-first HR software with payroll-ready compliance (CPP/EI, ROE, T4, provincial ESA), documents, org charts, and multi-tenant support for agencies. Start today from $6 per employee."
+        description="Canadian-first HRIS from $6/employee — payroll-ready compliance, documents, org charts, and multi-tenant support for agencies and SMBs."
         path="/app"
       />
       <ServiceSchema
@@ -225,6 +292,9 @@ export default function AppPage() {
         </div>
       </section>
 
+      {/* Product showcase with styled mockups */}
+      <AppShowcase />
+
       {/* Animated feature showcase — screenshots drop into /public/images/app/ */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
@@ -341,6 +411,152 @@ export default function AppPage() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Feature comparison table */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Feature breakdown</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Compare Plans</h2>
+            <p className="text-muted-foreground">See exactly what you get at every level — pick the plan that fits your stage.</p>
+          </motion.div>
+
+          {/* Desktop table */}
+          <motion.div {...fadeUp} className="hidden md:block max-w-5xl mx-auto">
+            <div className="rounded-xl border bg-card shadow-sm overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="sticky top-0 z-10 bg-card border-b">
+                  <tr>
+                    <th className="text-left px-6 py-5 font-semibold text-foreground w-[40%]">Feature</th>
+                    {PLAN_COLS.map((p) => (
+                      <th key={p.key} className="px-4 py-5 text-center w-[20%]">
+                        <div className="flex flex-col items-center gap-1">
+                          {p.popular && (
+                            <span className="inline-block bg-cyan-100 text-primary text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mb-1">
+                              Most Popular
+                            </span>
+                          )}
+                          <span className="font-bold text-foreground">{p.name}</span>
+                          <span className="text-xs text-muted-foreground">{p.price}{p.unit ? ` ${p.unit}` : ''}</span>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON.map((group) => (
+                    <Fragment key={group.category}>
+                      <tr className="bg-muted/50">
+                        <td colSpan={4} className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                          {group.category}
+                        </td>
+                      </tr>
+                      {group.rows.map((row, ri) => (
+                        <tr
+                          key={`${group.category}-${ri}`}
+                          className={`border-t border-border/50 ${ri % 2 === 1 ? 'bg-muted/20' : ''}`}
+                        >
+                          <td className="px-6 py-3.5 text-foreground">{row.feature}</td>
+                          <td className="px-4 py-3.5 text-center"><CellIcon included={row.starter} /></td>
+                          <td className="px-4 py-3.5 text-center"><CellIcon included={row.growth} /></td>
+                          <td className="px-4 py-3.5 text-center"><CellIcon included={row.agency} /></td>
+                        </tr>
+                      ))}
+                    </Fragment>
+                  ))}
+                  {/* CTA row */}
+                  <tr className="border-t">
+                    <td className="px-6 py-5" />
+                    {PLAN_COLS.map((p) => (
+                      <td key={p.key} className="px-4 py-5 text-center">
+                        {p.cta === 'get-started' ? (
+                          <Button
+                            size="sm"
+                            variant={p.popular ? 'default' : 'outline'}
+                            disabled={checkoutBusy !== null}
+                            onClick={() => startCheckout(p.key)}
+                          >
+                            {checkoutBusy === p.key ? (
+                              <><Loader2 className="mr-1.5 w-3.5 h-3.5 animate-spin" /> Starting…</>
+                            ) : (
+                              <>{p.label} <ArrowRight className="ml-1.5 w-3.5 h-3.5" /></>
+                            )}
+                          </Button>
+                        ) : (
+                          <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
+                            <Button size="sm" variant="outline">{p.label}</Button>
+                          </a>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          {/* Mobile card-based view */}
+          <div className="md:hidden space-y-6 max-w-md mx-auto">
+            {PLAN_COLS.map((plan) => (
+              <motion.div key={plan.key} {...fadeUp}>
+                <Card className={`relative ${plan.popular ? 'ring-2 ring-cyan-300' : ''}`}>
+                  {plan.popular && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-300 text-primary text-xs font-bold px-3 py-1 rounded-full">
+                      Most Popular
+                    </span>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="text-center mb-5">
+                      <h3 className="text-lg font-bold">{plan.name}</h3>
+                      <p className="text-sm text-muted-foreground">{plan.price}{plan.unit ? ` ${plan.unit}` : ''}</p>
+                    </div>
+                    {COMPARISON.map((group) => (
+                      <div key={group.category} className="mb-4">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{group.category}</p>
+                        <ul className="space-y-1.5">
+                          {group.rows.map((row, ri) => {
+                            const included = row[plan.key];
+                            return (
+                              <li key={ri} className="flex items-center gap-2 text-sm">
+                                {included ? (
+                                  <Check className="w-4 h-4 text-primary shrink-0" />
+                                ) : (
+                                  <Minus className="w-4 h-4 text-muted-foreground/40 shrink-0" />
+                                )}
+                                <span className={included ? 'text-foreground' : 'text-muted-foreground/50'}>{row.feature}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                    <div className="pt-2">
+                      {plan.cta === 'get-started' ? (
+                        <Button
+                          className="w-full"
+                          variant={plan.popular ? 'default' : 'outline'}
+                          disabled={checkoutBusy !== null}
+                          onClick={() => startCheckout(plan.key)}
+                        >
+                          {checkoutBusy === plan.key ? (
+                            <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Starting…</>
+                          ) : (
+                            <>{plan.label} <ArrowRight className="ml-2 w-4 h-4" /></>
+                          )}
+                        </Button>
+                      ) : (
+                        <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="block">
+                          <Button className="w-full" variant="outline">{plan.label}</Button>
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

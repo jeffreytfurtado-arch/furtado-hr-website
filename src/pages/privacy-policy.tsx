@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'motion/react';
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="flex flex-col">
-      <title>Privacy Policy - PreciseHR</title>
-      <meta name="description" content="Learn how PreciseHR collects, uses, and protects your personal information." />
+      <SEO title="Privacy Policy" description="PreciseHR privacy policy — how we collect, use, and protect your personal information." path="/privacy-policy" />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-secondary text-primary-foreground py-16">

@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { setCorsHeaders, checkRateLimit } from './_shared';
 
 const SYSTEM_PROMPT = `You are the PreciseHR Assistant — a friendly, knowledgeable AI assistant on the website of PreciseHR, a Canadian HR consulting and technology firm based in Toronto, Ontario.
 
@@ -42,7 +43,7 @@ CURRENT CANADIAN EMPLOYMENT LAW (as of 2026 — use these facts, they override y
 
 ONTARIO:
 - Pay Transparency: Employers with 25+ employees MUST include expected salary or wage range in all publicly advertised job postings for positions paying $200,000/year or less. Applies to external postings (job boards, websites, ads). Part of Working for Workers Four Act (Bill 190). Employers must also disclose if AI is used in the hiring process.
-- Minimum wage: $16.55/hour (as of Oct 2024). Indexed to CPI; next adjustment expected 2027.
+- Minimum wage: $17.20/hour (as of Oct 2025). Upcoming: $17.60/hour on Oct 1, 2026. Indexed to CPI.
 - ESA termination notice: 1 week per year of service, up to 8 weeks. Severance pay (5+ years, 50+ employees or $2.5M+ payroll): 1 week per year up to 26 weeks.
 - Job posting requirements: Must not require "Canadian experience." Must disclose if position is an existing vacancy.
 - Working for Workers Acts (Bills 27, 79, 149, 190): Right to disconnect policies required (25+ employees). Non-compete clauses banned for most employees. Naloxone kits required in certain workplaces. Digital platform worker protections. Mandatory WHMIS training.
@@ -60,12 +61,12 @@ ALBERTA:
 - No pay transparency legislation yet.
 
 QUEBEC:
-- Minimum wage: $15.75/hour (as of May 2024).
+- Minimum wage: $16.60/hour (as of May 2026).
 - Language requirements: Bill 96 strengthened French-language requirements — employment contracts, communications, and workplace documents must be in French. Applies to businesses with 25+ employees (expanded from 50+).
 - Pay equity: Pay Equity Act requires employers with 10+ employees to conduct pay equity exercises and audits every 5 years.
 
 FEDERAL (federally regulated employers — banks, telecoms, interprovincial transport, etc.):
-- Minimum wage: $17.30/hour (as of April 2024), indexed annually to CPI.
+- Minimum wage: $18.15/hour (as of Apr 2026), indexed annually to CPI.
 - Pay Equity Act: Employers with 10+ employees must establish and maintain a pay equity plan. Pay equity committees required for 100+ employees.
 - 10 paid sick days per year (as of Dec 2022).
 - Right to disconnect: Federally regulated employers with 25+ employees must have a written policy.
@@ -82,9 +83,9 @@ ACROSS CANADA — KEY THEMES:
 - T4 slips: Must be filed by the last day of February following the calendar year.
 
 MINIMUM WAGES (current as of 2026):
-- Federal: $17.30/hr | Ontario: $16.55/hr | BC: $17.85/hr | Alberta: $15.00/hr | Quebec: $15.75/hr
-- Saskatchewan: $15.00/hr | Manitoba: $15.80/hr | Nova Scotia: $15.20/hr | New Brunswick: $15.30/hr
-- PEI: $15.40/hr | Newfoundland: $15.60/hr | Yukon: $17.59/hr | NWT: $16.05/hr | Nunavut: $19.00/hr
+- Federal: $18.15/hr | Ontario: $17.20/hr | BC: $17.85/hr | Alberta: $15.00/hr | Quebec: $16.60/hr
+- Saskatchewan: $15.00/hr | Manitoba: $16.00/hr | Nova Scotia: $16.75/hr | New Brunswick: $15.90/hr
+- PEI: $16.00/hr | Newfoundland: $16.35/hr | Yukon: $18.51/hr | NWT: $16.95/hr | Nunavut: $19.00/hr
 
 For the latest updates, always point users to our Compliance Updates page at /compliance-updates.
 
@@ -103,12 +104,11 @@ HOW TO RESPOND:
 type Msg = { role: 'user' | 'assistant'; content: string };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (checkRateLimit(req, res, 20)) return;
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
