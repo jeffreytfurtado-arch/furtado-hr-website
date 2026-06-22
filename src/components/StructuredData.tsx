@@ -137,7 +137,7 @@ const ORGANIZATION_SCHEMA = {
   name: 'PreciseHR',
   legalName: 'PreciseHR',
   url: 'https://www.precisehr.ca',
-  logo: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png',
+  logo: 'https://www.precisehr.ca/images/precisehr-og-card.png',
   description: 'Intelligent HR consulting, automation-ready software, and deep Canadian expertise. PreciseHR helps Canadian businesses build exceptional teams and stay compliant.',
   address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' },
   telephone: '+1-437-887-2263',
@@ -240,10 +240,10 @@ export function ArticleSchema({
       '@type': 'Organization',
       '@id': 'https://www.precisehr.ca/#organization',
       name: 'PreciseHR',
-      logo: { '@type': 'ImageObject', url: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png' },
+      logo: { '@type': 'ImageObject', url: 'https://www.precisehr.ca/images/precisehr-og-card.png' },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    image: 'https://www.precisehr.ca/images/precisehr-logo-dwKdsu.png',
+    image: 'https://www.precisehr.ca/images/precisehr-og-card.png',
   };
   return <Helmet><script type="application/ld+json">{JSON.stringify(schema)}</script></Helmet>;
 }
