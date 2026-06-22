@@ -201,7 +201,8 @@ export default function SalaryBenchmarkingPage() {
 
   return (
     <div className="min-h-screen">
-      <title>Canadian Salary Benchmarking Tool - PreciseHR</title>
+      <title>Free Canadian Salary Benchmarking Tool - PreciseHR</title>
+      <meta name="description" content="Compare salaries across Canadian provinces for any role. Free benchmarking tool to ensure your compensation packages are competitive." />
       <ToolPageSchema name="Free Canadian Salary Benchmarking Tool" description="Compare salaries across Canadian provinces and ensure competitive compensation." url="/salary-benchmarking" />
 
       {/* Hero */}

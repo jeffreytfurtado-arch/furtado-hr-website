@@ -543,9 +543,9 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { name: 'Sarah M.', role: 'CEO', industry: 'Technology', quote: 'PreciseHR transformed our HR operations. Their software and consulting helped us scale from 20 to 50 employees seamlessly.' },
-              { name: 'David C.', role: 'Operations Director', industry: 'Manufacturing', quote: 'The compliance support alone has saved us countless hours and potential legal issues. Their team truly cares about our success.' },
-              { name: 'Jennifer T.', role: 'HR Manager', industry: 'Retail', quote: 'Best decision we made. The software is intuitive, and their consulting team feels like an extension of our HR department.' },
+              { name: 'Sarah M.', role: 'CEO', industry: 'Tech Startup, Toronto', quote: 'We went from spreadsheets to a real HR system in a week. PreciseHR handled our compliance across Ontario and BC while we focused on shipping product. Scaling from 15 to 45 people would have been a nightmare without them.' },
+              { name: 'Mark R.', role: 'Operations Director', industry: 'Manufacturing, Hamilton', quote: 'The compliance checker flagged issues in our handbook we had no idea about. Their team rewrote our policies, set up proper termination procedures, and now we sleep at night knowing we are covered.' },
+              { name: 'Jennifer T.', role: 'VP People & Culture', industry: 'Professional Services, Calgary', quote: 'We needed fractional HR leadership while our CHRO was on leave. PreciseHR stepped in, kept our performance review cycle on track, and even improved our onboarding process. They genuinely felt like part of the team.' },
             ].map((t, i) => (
               <motion.div key={i} {...staggerChild(i * 0.1)}>
                 <Card className="h-full hover:shadow-lg transition-shadow duration-300">

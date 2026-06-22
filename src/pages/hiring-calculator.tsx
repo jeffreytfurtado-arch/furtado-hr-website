@@ -74,7 +74,8 @@ export default function HiringCalculatorPage() {
 
   return (
     <div className="min-h-screen">
-      <title>Hiring Cost Calculator - PreciseHR</title>
+      <title>Free Hiring Cost Calculator for Canadian Businesses - PreciseHR</title>
+      <meta name="description" content="Calculate your true cost-per-hire and see how outsourcing recruitment can save your Canadian organization money. Free calculator tool." />
       <ToolPageSchema name="Free Hiring Cost Calculator" description="Calculate your true cost-per-hire and see how outsourcing recruitment saves money." url="/hiring-calculator" />
 
       {/* Hero */}

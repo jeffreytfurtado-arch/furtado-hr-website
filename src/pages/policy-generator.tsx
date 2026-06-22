@@ -3,7 +3,6 @@ import { ToolPageSchema } from '@/components/StructuredData';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useReducedMotion } from 'motion/react';
-import { Helmet } from '@dr.pogodin/react-helmet';
 import { FileText, Sparkles, Loader2 } from 'lucide-react';
 import { PROVINCES } from '@/lib/canada';
 import { useTypewriter } from '@/lib/useTypewriter';
@@ -65,7 +64,7 @@ export default function PolicyGeneratorPage() {
         path="/policy-generator"
       />
       <ToolPageSchema name="Free Canadian HR Policy Generator" description="Generate professional, Canadian-compliant HR policies tailored to your province and industry." url="/policy-generator" />
-      <Helmet><link rel="canonical" href="https://www.precisehr.ca/policy-generator" /></Helmet>
+
 
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.06)_0%,_transparent_60%)]" />
