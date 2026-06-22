@@ -10,14 +10,14 @@ const CALENDLY = 'https://calendly.com/precisehr-info/precisehr-consult';
 const WELCOME: ChatMessage = {
   role: 'assistant',
   content:
-    "Hi! I'm the PreciseHR Assistant. Ask me anything about Canadian HR — compliance, hiring, terminations, policies — or about how we can help your business.",
+    "Hi! I'm the PreciseHR Assistant. Ask me anything about Canadian HR, our services and pricing, the free tools on this site, or about the team behind PreciseHR.",
   ts: new Date(),
 };
 
 const SUGGESTIONS = [
+  'What does PreciseHR cost?',
+  'What free HR tools do you have?',
   'How much notice to terminate in Ontario?',
-  'What is an ROE?',
-  'Do you handle payroll?',
 ];
 
 export default function LiveChat() {
