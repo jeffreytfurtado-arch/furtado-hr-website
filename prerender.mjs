@@ -27,8 +27,8 @@ for (const url of urls) {
 
     // Inject pre-rendered body
     page = page.replace(
-      '<div id="app"></div>',
-      `<div id="app">${html}</div>`,
+      /<div id="app"([^>]*)><\/div>/,
+      `<div id="app"$1>${html}</div>`,
     );
 
     // Replace default <title> with page-specific Helmet title
