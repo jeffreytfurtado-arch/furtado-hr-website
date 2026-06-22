@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { motion } from 'motion/react';
 import { HRAssessmentQuiz } from '@/components/HRAssessmentQuiz';
 import { ClipboardCheck, Target, TrendingUp } from 'lucide-react';
@@ -8,6 +9,7 @@ export default function HRAssessmentPage() {
     <div className="min-h-screen">
       <title>Free HR Assessment - PreciseHR</title>
       <meta name="description" content="Take our free HR assessment to evaluate your organization's HR practices and get personalized recommendations." />
+      <ToolPageSchema name="Free HR Assessment Tool" description="Evaluate your organization's HR maturity and get personalized recommendations." url="/hr-assessment" />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-primary/10 via-background to-background relative overflow-hidden">

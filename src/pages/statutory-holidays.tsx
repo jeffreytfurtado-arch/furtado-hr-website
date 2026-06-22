@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -426,6 +427,7 @@ export default function StatutoryHolidaysPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Canadian Statutory Holidays 2026" description="Complete list of statutory holidays for every Canadian province in 2026. Holiday pay calculator, upcoming dates, and province-by-province comparison." path="/statutory-holidays" />
+      <ToolPageSchema name="Canadian Statutory Holidays 2026" description="Complete statutory holiday calendar for every Canadian province and territory." url="/statutory-holidays" />
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">

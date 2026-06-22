@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { Calculator, CheckCircle2, Clock, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -81,6 +82,7 @@ export default function ROICalculatorPage() {
   return (
     <div className="min-h-screen">
       <title>HR Outsourcing ROI Calculator - PreciseHR</title>
+      <ToolPageSchema name="Free HR Outsourcing ROI Calculator" description="Calculate how much your organization could save by outsourcing HR to PreciseHR." url="/roi-calculator" />
 
       {/* Hero */}
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background text-center">

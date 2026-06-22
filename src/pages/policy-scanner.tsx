@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useReducedMotion } from 'motion/react';
@@ -46,6 +47,7 @@ export default function PolicyScannerPage() {
         description="Paste an existing workplace policy and let AI flag potential Canadian compliance gaps, risky language, and missing clauses by severity."
         path="/policy-scanner"
       />
+      <ToolPageSchema name="Free HR Policy Scanner" description="Paste an existing workplace policy and let AI flag Canadian compliance gaps and risky language." url="/policy-scanner" />
       <Helmet><link rel="canonical" href="https://www.precisehr.ca/policy-scanner" /></Helmet>
 
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { DollarSign, Users, Clock, ArrowRight, Phone, Briefcase, BarChart3 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -74,6 +75,7 @@ export default function HiringCalculatorPage() {
   return (
     <div className="min-h-screen">
       <title>Hiring Cost Calculator - PreciseHR</title>
+      <ToolPageSchema name="Free Hiring Cost Calculator" description="Calculate your true cost-per-hire and see how outsourcing recruitment saves money." url="/hiring-calculator" />
 
       {/* Hero */}
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background text-center">

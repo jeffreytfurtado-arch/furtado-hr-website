@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -373,6 +374,7 @@ export default function ComplianceCheckerPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Free HR Compliance Checker" description="Check your HR compliance in 30 seconds. Personalized assessment based on your province, company size, and industry." path="/compliance-checker" />
+      <ToolPageSchema name="Free Canadian HR Compliance Checker" description="Check if your HR practices comply with Canadian employment standards. Instant results by province, company size, and industry." url="/compliance-checker" />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />

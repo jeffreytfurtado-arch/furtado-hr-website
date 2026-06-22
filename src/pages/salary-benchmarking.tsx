@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { TrendingUp, BarChart3, Users, Award } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -201,6 +202,7 @@ export default function SalaryBenchmarkingPage() {
   return (
     <div className="min-h-screen">
       <title>Canadian Salary Benchmarking Tool - PreciseHR</title>
+      <ToolPageSchema name="Free Canadian Salary Benchmarking Tool" description="Compare salaries across Canadian provinces and ensure competitive compensation." url="/salary-benchmarking" />
 
       {/* Hero */}
       <section className="py-8 bg-gradient-to-r from-primary/5 to-accent/5">

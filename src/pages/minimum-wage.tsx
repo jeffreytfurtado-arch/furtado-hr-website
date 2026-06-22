@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -132,6 +133,7 @@ export default function MinimumWagePage() {
   return (
     <div className="flex flex-col">
       <SEO title="Canadian Minimum Wage Tracker 2026" description="Current minimum wage rates for all Canadian provinces and territories. Compare rates and see upcoming increases." path="/minimum-wage" />
+      <ToolPageSchema name="Canadian Minimum Wage Tracker 2026" description="Current minimum wage rates for all Canadian provinces and territories with upcoming increases." url="/minimum-wage" />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />

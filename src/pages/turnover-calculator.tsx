@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { UserMinus, AlertCircle, Phone, ArrowRight, TrendingDown, DollarSign, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -62,6 +63,7 @@ export default function TurnoverCalculatorPage() {
   return (
     <div className="min-h-screen">
       <title>Employee Turnover Cost Calculator - PreciseHR</title>
+      <ToolPageSchema name="Free Employee Turnover Cost Calculator" description="Calculate the true cost of employee turnover and see how retention saves money." url="/turnover-calculator" />
 
       {/* Hero */}
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background text-center">

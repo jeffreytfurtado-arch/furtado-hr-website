@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useReducedMotion } from 'motion/react';
@@ -53,6 +54,7 @@ export default function OfferLetterPage() {
         description="Create a professional, Canadian employment offer letter in seconds. Enter the role and terms and get a clean, ready-to-send draft."
         path="/offer-letter"
       />
+      <ToolPageSchema name="Free Canadian Offer Letter Generator" description="Create professional, Canadian-compliant employment offer letters in seconds." url="/offer-letter" />
       <Helmet><link rel="canonical" href="https://www.precisehr.ca/offer-letter" /></Helmet>
 
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">

@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -302,6 +303,7 @@ export default function NetPayCalculatorPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Canadian Net Pay Calculator 2026" description="Calculate your take-home pay in any Canadian province for 2026. See federal tax, provincial tax, CPP, CPP2, and EI deductions for any pay frequency." path="/net-pay-calculator" />
+      <ToolPageSchema name="Canadian Net Pay Calculator 2026" description="Calculate take-home pay in any Canadian province. See federal tax, provincial tax, CPP, CPP2, and EI deductions." url="/net-pay-calculator" />
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">

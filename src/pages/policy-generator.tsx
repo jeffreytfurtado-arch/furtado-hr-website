@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { ToolPageSchema } from '@/components/StructuredData';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useReducedMotion } from 'motion/react';
@@ -63,6 +64,7 @@ export default function PolicyGeneratorPage() {
         description="Generate a professional, Canadian-compliant HR policy in seconds. Choose a policy type and province and get a ready-to-adapt draft."
         path="/policy-generator"
       />
+      <ToolPageSchema name="Free Canadian HR Policy Generator" description="Generate professional, Canadian-compliant HR policies tailored to your province and industry." url="/policy-generator" />
       <Helmet><link rel="canonical" href="https://www.precisehr.ca/policy-generator" /></Helmet>
 
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
