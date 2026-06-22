@@ -24,30 +24,37 @@ if (allowedHosts.length === 0) {
 	allowedHosts.push("*");
 }
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode }) => {
+	const isSSR = process.argv.includes('--ssr');
+
+	return {
 	plugins: [
 		react({
 			babel: {
 				plugins: [sourceMapperPlugin],
 			},
 		}),
-		apiRoutes({
-			mode: "isolated",
-			configure: "src/server/configure.js",
-			dirs: [{ dir: "./src/server/api", route: "" }],
-			forceRestart: mode === "development",
-			rollupOptions: {
-				external: [
-					'bcryptjs',
-					'bcrypt',
-					'nodemailer',
-					'mysql2',
-					'drizzle-orm',
-					'better-auth',
-				],
-			},
-		}),
-		...(mode === "development"
+		...(!isSSR
+			? [
+					apiRoutes({
+						mode: "isolated",
+						configure: "src/server/configure.js",
+						dirs: [{ dir: "./src/server/api", route: "" }],
+						forceRestart: mode === "development",
+						rollupOptions: {
+							external: [
+								'bcryptjs',
+								'bcrypt',
+								'nodemailer',
+								'mysql2',
+								'drizzle-orm',
+								'better-auth',
+							],
+						},
+					}),
+				]
+			: []),
+		...(mode === "development" && !isSSR
 			? [devToolsPlugin() as Plugin, fullStoryPlugin()]
 			: []),
 	],
@@ -94,5 +101,13 @@ export default defineConfig(({ mode }) => ({
 
 	ssr: {
 		noExternal: true,
+		external: [
+			'bcryptjs',
+			'bcrypt',
+			'nodemailer',
+			'mysql2',
+			'drizzle-orm',
+			'better-auth',
+		],
 	},
-}));
+}});
