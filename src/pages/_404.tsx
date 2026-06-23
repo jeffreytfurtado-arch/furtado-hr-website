@@ -1,14 +1,10 @@
 import { Link } from '../router';
+import SEO from '@/components/SEO';
 
-/**
- * 404 Not Found page component
- *
- * Displays a user-friendly error page when a route is not found.
- * Includes navigation to available pages and a back button.
- * The layout (header/footer) is handled by RootLayout in App.tsx.
- */
 export default function NotFoundPage() {
   return (
+    <>
+      <SEO title="Page Not Found" description="The page you're looking for doesn't exist or has been moved." path="/404" noIndex={true} />
     <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)))' }}>
     <div className="container mx-auto px-4 max-w-2xl text-center">
       <div className="space-y-8">
@@ -31,5 +27,6 @@ export default function NotFoundPage() {
       </div>
     </div>
   </div>
+    </>
   );
 }

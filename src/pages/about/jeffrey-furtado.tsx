@@ -167,7 +167,6 @@ export default function JeffreyFurtadoPage() {
       />
       <PersonSchema />
       <Helmet>
-        <link rel="canonical" href="https://www.precisehr.ca/about/jeffrey-furtado" />
         <meta property="og:type" content="profile" />
         <meta property="profile:first_name" content="Jeffrey" />
         <meta property="profile:last_name" content="Furtado" />

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -50,6 +51,10 @@ export default function ResourcesPage() {
   return (
     <div className="flex flex-col">
       <SEO title="HR Resources & Guides" description="Free HR guides, templates, and tools for Canadian businesses. Termination checklists, compliance guides, and more." path="/resources" />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Resources', url: 'https://www.precisehr.ca/resources' },
+      ]} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden relative">

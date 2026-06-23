@@ -36,7 +36,6 @@ export default function DavidSucklingPage() {
       />
       <PersonSchemaDavid />
       <Helmet>
-        <link rel="canonical" href="https://www.precisehr.ca/about/david-suckling" />
         <meta property="og:type" content="profile" />
         <meta property="profile:first_name" content="David" />
         <meta property="profile:last_name" content="Suckling" />

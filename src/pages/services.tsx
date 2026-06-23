@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
-import { FAQSchema } from '@/components/StructuredData';
+import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -151,6 +151,16 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col">
       <SEO title="HR Services" description="Intelligent HR solutions for Canadian businesses — consulting, recruitment, compliance, software, compensation, and more." path="/services" />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Services', url: 'https://www.precisehr.ca/services' },
+      ]} />
+      <ServiceSchema
+        name="PreciseHR Services"
+        description="Full-spectrum HR consulting for Canadian businesses — recruitment, compliance, compensation, workplace investigations, and intelligent automation."
+        areaServed="Canada"
+        url="https://www.precisehr.ca/services"
+      />
       <FAQSchema faqs={faqs} />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">

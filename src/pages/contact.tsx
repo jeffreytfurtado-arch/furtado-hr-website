@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { track } from '@/lib/track';
 import { useState, useEffect } from 'react';
 
@@ -118,6 +119,10 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Contact Us" description="Get a free HR assessment for your Canadian business. Reach our team by phone, email, or online form." path="/contact" />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Contact', url: 'https://www.precisehr.ca/contact' },
+      ]} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-primary-foreground py-20">

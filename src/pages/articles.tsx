@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,6 +31,10 @@ export default function ArticlesPage() {
         description="Leadership, operations, and building things that last — essays by Jeffrey T. Furtado on what he has learned as an operator, founder, and investor."
         path="/articles"
       />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Articles', url: 'https://www.precisehr.ca/articles' },
+      ]} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden relative">

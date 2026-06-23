@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -229,6 +230,10 @@ export default function ComplianceUpdatesPage() {
   return (
     <div className="flex flex-col">
       <SEO title="Canadian HR Compliance Updates" description="Latest Canadian employment law changes, regulatory updates, and compliance alerts summarized in plain language." path="/compliance-updates" />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Compliance Updates', url: 'https://www.precisehr.ca/compliance-updates' },
+      ]} />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)]" />

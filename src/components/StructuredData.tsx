@@ -162,6 +162,11 @@ const WEBSITE_SCHEMA = {
   name: 'PreciseHR',
   url: 'https://www.precisehr.ca',
   publisher: { '@type': 'Organization', '@id': 'https://www.precisehr.ca/#organization' },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://www.precisehr.ca/blog?q={search_term_string}' },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 export function GlobalStructuredData() {

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -169,6 +170,10 @@ export default function CaseStudiesPage() {
         description="See how PreciseHR helps Canadian businesses solve real HR challenges — from compliance gaps to scaling teams."
         path="/case-studies"
       />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Case Studies', url: 'https://www.precisehr.ca/case-studies' },
+      ]} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden relative">

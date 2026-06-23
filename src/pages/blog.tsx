@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,10 @@ export default function BlogPage() {
   return (
     <div className="flex flex-col">
       <SEO title="HR Blog" description="Expert insights on Canadian employment law, HR best practices, and compliance updates from the PreciseHR team." path="/blog" />
-      <title>HR Insights & Blog - PreciseHR</title>
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.precisehr.ca/' },
+        { name: 'Blog', url: 'https://www.precisehr.ca/blog' },
+      ]} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white overflow-hidden relative">
