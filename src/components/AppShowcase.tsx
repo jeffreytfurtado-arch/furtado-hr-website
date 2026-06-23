@@ -30,7 +30,7 @@ function BrowserChrome({ children, url }: { children: React.ReactNode; url?: str
 function OrgChartMockup() {
   const box = (name: string, role: string, highlight?: boolean) => (
     <div
-      className={`rounded-lg border px-3 py-2 text-center shadow-sm min-w-[110px] ${
+      className={`rounded-lg border px-3 py-2 text-center shadow-sm min-w-[90px] sm:min-w-[110px] ${
         highlight
           ? 'bg-primary/10 border-primary/30 dark:bg-primary/20'
           : 'bg-white dark:bg-slate-800 border-border'
@@ -46,7 +46,7 @@ function OrgChartMockup() {
 
   return (
     <BrowserChrome url="app.precisehr.ca/org-chart">
-      <div className="p-6 min-h-[320px] flex flex-col items-center">
+      <div className="p-4 sm:p-6 min-h-[320px] flex flex-col items-center overflow-x-auto">
         {/* Top bar */}
         <div className="w-full flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ function OrgChartMockup() {
         <div className="flex flex-col items-center gap-0">
           {box('Sarah Chen', 'CEO', true)}
           <div className="w-px h-5 bg-border" />
-          <div className="flex items-start gap-8 relative">
+          <div className="flex items-start gap-4 sm:gap-8 relative">
             {/* horizontal connector */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[calc(100%-110px)] h-px bg-border" />
             {[
@@ -79,7 +79,7 @@ function OrgChartMockup() {
                     <div className="w-px h-4 bg-border" />
                     <div className="flex gap-4">
                       {box('Lin Wei', 'Sr. Developer')}
-                      <div className="rounded-lg border border-dashed border-primary/40 px-3 py-2 text-center min-w-[110px] bg-primary/5">
+                      <div className="rounded-lg border border-dashed border-primary/40 px-3 py-2 text-center min-w-[90px] sm:min-w-[110px] bg-primary/5">
                         <div className="w-7 h-7 rounded-full border-2 border-dashed border-primary/30 flex items-center justify-center mx-auto mb-1">
                           <Users className="w-3.5 h-3.5 text-primary/50" />
                         </div>
@@ -130,7 +130,7 @@ function PayrollMockup() {
         </div>
 
         {/* Stat cards */}
-        <div className="grid grid-cols-3 gap-3 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
           {stats.map((s, i) => (
             <div key={i} className="bg-white dark:bg-slate-800 rounded-lg border p-3 shadow-sm">
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">{s.label}</p>
