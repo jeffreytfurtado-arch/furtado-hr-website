@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import SEO from '@/components/SEO';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
 import { track } from '@/lib/track';
@@ -7,8 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import AppShowcase from '@/components/AppShowcase';
 import {
-  Check, ArrowRight, Calendar, Sparkles, Loader2, CheckCircle2,
-  Network, ShieldCheck, FileSignature, BarChart3, LayoutDashboard,
+  Check, ArrowRight, Sparkles, Loader2, CheckCircle2,
   Minus,
 } from 'lucide-react';
 
@@ -54,14 +53,6 @@ const TIERS = [
   },
 ];
 
-// Feature showcase. Drop real captures at /public/images/app/<key>.png and they replace the placeholders automatically.
-const SHOTS = [
-  { key: 'orgchart', icon: Network, label: 'Org chart', title: 'Plan your org, visually', desc: 'Drag-and-drop reporting lines, model headcount, and surface open roles — your whole structure on one canvas.', img: '/images/app/orgchart.png' },
-  { key: 'compliance', icon: ShieldCheck, label: 'Compliance & payroll', title: 'Payroll-ready, built for Canada', desc: 'CPP/EI, Records of Employment, T4s, and province-by-province ESA rules — generated, not bolted on after.', img: '/images/app/compliance.png' },
-  { key: 'documents', icon: FileSignature, label: 'Documents & e-sign', title: 'Send for signature in a click', desc: 'Generate contracts, offer letters, and policies, then collect signatures without leaving the platform.', img: '/images/app/documents.png' },
-  { key: 'insights', icon: BarChart3, label: 'Insights', title: 'Your workforce at a glance', desc: 'Headcount, turnover, time-off, and compliance status — surfaced on a live dashboard, not buried in spreadsheets.', img: '/images/app/dashboard.png' },
-];
-
 const FAQS = [
   { q: 'How do I get started?', a: 'Pick a plan, tell us how many employees you have, and check out. Your workspace is created automatically and you get an email to set your password and sign in — most teams are up and running in minutes.' },
   { q: 'Is it built for Canadian businesses?', a: 'Yes. The platform is designed Canadian-first — CPP/EI and tax, Records of Employment, T4s, and province-by-province employment-standards compliance, with PIPEDA-aware data practices.' },
@@ -80,36 +71,75 @@ const COMPARISON: CompGroup[] = [
     category: 'Core HR',
     rows: [
       { feature: 'Employee records & profiles', starter: true, growth: true, agency: true },
-      { feature: 'Org chart', starter: true, growth: true, agency: true },
-      { feature: 'Time-off tracking', starter: true, growth: true, agency: true },
-      { feature: 'Documents & e-signatures', starter: true, growth: true, agency: true },
+      { feature: 'Org chart (view)', starter: true, growth: true, agency: true },
+      { feature: 'Time-off tracking & approvals', starter: true, growth: true, agency: true },
+      { feature: 'Company directory', starter: true, growth: true, agency: true },
+      { feature: 'Employee self-service portal', starter: true, growth: true, agency: true },
+      { feature: 'Custom fields & data', starter: true, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Onboarding & Offboarding',
+    rows: [
       { feature: 'Onboarding checklists', starter: true, growth: true, agency: true },
+      { feature: 'New hire task automation', starter: false, growth: true, agency: true },
+      { feature: 'Offboarding workflows', starter: false, growth: true, agency: true },
+      { feature: 'Equipment & IT provisioning tracking', starter: false, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Documents & E-Signatures',
+    rows: [
+      { feature: 'Document storage & management', starter: true, growth: true, agency: true },
+      { feature: 'E-signature collection', starter: true, growth: true, agency: true },
+      { feature: 'Offer letter generation', starter: false, growth: true, agency: true },
+      { feature: 'Policy & handbook builder', starter: false, growth: true, agency: true },
+      { feature: 'Contract templates', starter: false, growth: true, agency: true },
+      { feature: 'Document expiry alerts', starter: false, growth: true, agency: true },
     ],
   },
   {
     category: 'Payroll & Compliance',
     rows: [
-      { feature: 'Payroll-ready CPP/EI/tax', starter: false, growth: true, agency: true },
-      { feature: 'ROE & T4 generation', starter: false, growth: true, agency: true },
+      { feature: 'Payroll-ready CPP / EI / tax', starter: false, growth: true, agency: true },
+      { feature: 'ROE generation', starter: false, growth: true, agency: true },
+      { feature: 'T4 / T4A generation', starter: false, growth: true, agency: true },
       { feature: 'Provincial ESA compliance tracking', starter: false, growth: true, agency: true },
+      { feature: 'Statutory holiday calendar', starter: false, growth: true, agency: true },
+      { feature: 'Minimum wage tracking by province', starter: false, growth: true, agency: true },
+      { feature: 'PIPEDA-aware data handling', starter: true, growth: true, agency: true },
     ],
   },
   {
-    category: 'Tools & Analytics',
+    category: 'Org Chart & Planning',
     rows: [
       { feature: 'Drag-and-drop org chart builder', starter: false, growth: true, agency: true },
-      { feature: 'Policies & handbook builder', starter: false, growth: true, agency: true },
-      { feature: 'Reporting & analytics', starter: false, growth: true, agency: true },
+      { feature: 'Headcount planning', starter: false, growth: true, agency: true },
+      { feature: 'Open role tracking', starter: false, growth: true, agency: true },
+      { feature: 'Reporting-line management', starter: false, growth: true, agency: true },
+    ],
+  },
+  {
+    category: 'Analytics & Reporting',
+    rows: [
+      { feature: 'Workforce dashboard', starter: false, growth: true, agency: true },
+      { feature: 'Headcount & turnover reports', starter: false, growth: true, agency: true },
+      { feature: 'Time-off analytics', starter: false, growth: true, agency: true },
+      { feature: 'Compliance status reports', starter: false, growth: true, agency: true },
+      { feature: 'Custom report builder', starter: false, growth: false, agency: true },
     ],
   },
   {
     category: 'Enterprise & Agency',
     rows: [
-      { feature: 'Multi-tenant management', starter: false, growth: false, agency: true },
-      { feature: 'White-label branding', starter: false, growth: false, agency: true },
-      { feature: 'SSO / SAML', starter: false, growth: false, agency: true },
+      { feature: 'Multi-tenant: manage many companies', starter: false, growth: false, agency: true },
+      { feature: 'White-label & custom branding', starter: false, growth: false, agency: true },
+      { feature: 'Custom domain', starter: false, growth: false, agency: true },
+      { feature: 'SSO / SAML authentication', starter: false, growth: false, agency: true },
+      { feature: 'Advanced role-based permissions', starter: false, growth: false, agency: true },
       { feature: 'API access', starter: false, growth: false, agency: true },
       { feature: 'Custom integrations', starter: false, growth: false, agency: true },
+      { feature: 'Audit log', starter: false, growth: false, agency: true },
     ],
   },
   {
@@ -117,7 +147,10 @@ const COMPARISON: CompGroup[] = [
     rows: [
       { feature: 'Email support', starter: true, growth: true, agency: true },
       { feature: 'Priority support', starter: false, growth: true, agency: true },
+      { feature: 'HR Advice Line add-on', starter: true, growth: true, agency: true },
+      { feature: 'Free 30-min HR consult', starter: true, growth: true, agency: true },
       { feature: 'Dedicated account manager', starter: false, growth: false, agency: true },
+      { feature: 'Onboarding assistance', starter: false, growth: false, agency: true },
     ],
   },
 ];
@@ -141,8 +174,6 @@ export default function AppPage() {
   const [employees, setEmployees] = useState(10);
   const [checkoutBusy, setCheckoutBusy] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState('');
-  const [shot, setShot] = useState(0);
-  const [imgFailed, setImgFailed] = useState<Record<string, boolean>>({});
 
   async function startCheckout(planKey: string) {
     if (checkoutBusy) return;
@@ -163,9 +194,6 @@ export default function AppPage() {
       setCheckoutBusy(null);
     }
   }
-
-  const active = SHOTS[shot];
-  const ActiveIcon = active.icon;
 
   return (
     <div className="min-h-screen bg-background">
@@ -294,125 +322,6 @@ export default function AppPage() {
 
       {/* Product showcase with styled mockups */}
       <AppShowcase />
-
-      {/* Animated feature showcase — screenshots drop into /public/images/app/ */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center mb-12">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">See it in action</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">One platform for your whole HR operation</h2>
-            <p className="text-muted-foreground">Org charts, Canadian compliance, documents, and insight — together, not bolted on.</p>
-          </motion.div>
-
-          {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {SHOTS.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <button
-                  key={s.key}
-                  onClick={() => setShot(i)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                    i === shot ? 'bg-primary text-white border-primary' : 'bg-card text-muted-foreground border-border hover:text-foreground hover:border-primary/40'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" /> {s.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid lg:grid-cols-5 gap-8 items-center max-w-6xl mx-auto">
-            {/* Framed screenshot */}
-            <div className="lg:col-span-3">
-              <div className="rounded-xl border bg-card shadow-xl overflow-hidden">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b bg-muted/40">
-                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
-                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
-                  <span className="w-3 h-3 rounded-full bg-muted-foreground/25" />
-                  <span className="ml-3 text-xs text-muted-foreground flex items-center gap-1.5"><LayoutDashboard className="w-3.5 h-3.5" /> app.precisehr.ca</span>
-                </div>
-                <div className="relative aspect-[16/10] bg-gradient-to-br from-muted/60 to-muted">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={active.key}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.98 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0"
-                    >
-                      {!imgFailed[active.key] ? (
-                        <img
-                          src={active.img}
-                          alt={active.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={() => setImgFailed((p) => ({ ...p, [active.key]: true }))}
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white">
-                          <div className="w-14 h-14 rounded-2xl bg-white/12 flex items-center justify-center mb-4">
-                            <ActiveIcon className="w-7 h-7" />
-                          </div>
-                          <p className="font-semibold">{active.label}</p>
-                          <p className="text-xs text-white/55 mt-1">Screenshot preview</p>
-                        </div>
-                      )}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
-
-            {/* Caption */}
-            <div className="lg:col-span-2">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.key}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -16 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <ActiveIcon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">{active.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6">{active.desc}</p>
-                  <Button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-                    See pricing <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Get started CTA */}
-      <section className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-            <div className="rounded-2xl bg-gradient-to-br from-[#001d3d] via-primary to-[#003566] text-white p-10 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Ready to get started?</h2>
-              <p className="text-white/80 mb-8 max-w-xl mx-auto">
-                Choose a plan, set your team size, and you&apos;ll be up and running in minutes — your workspace is created the moment you check out.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-                  See plans &amp; pricing <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                    <Calendar className="mr-2 w-4 h-4" /> Book a demo
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Feature comparison table */}
       <section className="py-24 bg-background">

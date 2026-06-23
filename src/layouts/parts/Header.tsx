@@ -308,7 +308,11 @@ export default function Header() {
 
             <Link
               to="/app"
-              className="px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/app')
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-foreground hover:bg-muted'
+              }`}
             >
               Pricing
             </Link>
@@ -435,7 +439,11 @@ export default function Header() {
 
             <Link
               to="/app"
-              className="block px-4 py-2 text-sm font-medium rounded-md transition-colors text-foreground hover:bg-muted"
+              className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive('/app')
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-foreground hover:bg-muted'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
