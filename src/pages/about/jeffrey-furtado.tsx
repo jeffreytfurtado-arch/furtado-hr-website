@@ -99,7 +99,7 @@ export default function JeffreyFurtadoPage() {
       title: 'Founder (Exited)',
       company: 'DooLeeNoted',
       period: 'Previously',
-      description: 'Founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America. The company was sold to a European acquirer in 2016 for a mid-seven figure amount.',
+      description: 'Founded and built DooLeeNoted, a global talent-collaboration platform connecting South Asia, the Middle East and North America. The archived official Alexa Top 1 Million dataset recorded DooLeeNoted at #54,160 globally on March 16, 2015. The company was sold to a European acquirer in 2016 for a mid-seven-figure amount.',
     },
     {
       title: 'Chief Operating Officer & CRO',
@@ -221,7 +221,7 @@ export default function JeffreyFurtadoPage() {
                   Jeffrey is Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving Canadian organizations across all provinces. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.
                 </p>
                 <p>
-                  Jeffrey participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America, which was sold to a European acquirer in 2016 for a mid-seven figure amount.
+                  Jeffrey participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and built DooLeeNoted, a global talent-collaboration platform connecting South Asia, the Middle East and North America. The archived official Alexa Top 1 Million dataset recorded DooLeeNoted at #54,160 globally on March 16, 2015. The company was sold to a European acquirer in 2016 for a mid-seven-figure amount.
                 </p>
                 <p>
                   Throughout his career, Jeffrey has held global senior executive roles across Sales, Operations, Shared Services, Customer Success/Service Delivery, Lending, Risk & Compliance/Legal, Revenue, Human Resources, IT, Development/DevOps, and Marketing. He served as Vice President, Sales, Operations and Shared Services at Consumer Centre Inc. through the company's $24 million exit. He later helped scale Progressa through its $84 million equity and loan funding round and pre-IPO preparations, and has consistently institutionalized growth-stage companies for profitability and scale.

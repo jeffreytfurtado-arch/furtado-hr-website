@@ -34,7 +34,7 @@ const PERSON_SCHEMA = {
     },
   ],
   founder: [
-    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America. Sold to a European acquirer in 2016.' },
+    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Global talent-collaboration platform connecting South Asia, the Middle East and North America. Ranked #54,160 globally in the Alexa Top 1 Million (March 2015). Sold to a European acquirer in 2016.' },
     { '@type': 'Organization', name: 'FurtadoFirm', url: 'https://furtadofirm.com' },
   ],
   memberOf: [
