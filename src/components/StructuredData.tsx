@@ -34,12 +34,12 @@ const PERSON_SCHEMA = {
     },
   ],
   founder: [
-    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Global resourcing and professional collaboration platform. Top 64,000 websites globally at peak. Multi-million dollar exit to European firm.' },
+    { '@type': 'Organization', name: 'DooLeeNoted', description: 'Global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America. Sold to a European acquirer in 2016.' },
     { '@type': 'Organization', name: 'FurtadoFirm', url: 'https://furtadofirm.com' },
   ],
   memberOf: [
-    { '@type': 'Organization', name: 'GLG', description: 'Global expert network — board advisor and consultant' },
-    { '@type': 'Organization', name: 'Guidepoint', description: 'Expert network — board advisor and consultant' },
+    { '@type': 'Organization', name: 'GLG', description: 'GLG Council Member' },
+    { '@type': 'Organization', name: 'Guidepoint', description: 'Guidepoint Advisor' },
   ],
   hasOccupation: [
     { '@type': 'Occupation', name: 'Chief Executive Officer' },
@@ -71,17 +71,12 @@ const PERSON_SCHEMA = {
     'Ed-Tech', 'Strategic Investing',
   ],
   nationality: { '@type': 'Country', name: 'Canada' },
-  homeLocation: [
-    { '@type': 'Place', name: 'Simcoe (Norfolk County)', address: { '@type': 'PostalAddress', addressLocality: 'Simcoe', addressRegion: 'ON', addressCountry: 'CA' } },
-    { '@type': 'Place', name: 'Oakville', address: { '@type': 'PostalAddress', addressLocality: 'Oakville', addressRegion: 'ON', addressCountry: 'CA' } },
-    { '@type': 'Place', name: 'Windsor', address: { '@type': 'PostalAddress', addressLocality: 'Windsor', addressRegion: 'ON', addressCountry: 'CA' } },
-  ],
   sameAs: [
     'https://www.linkedin.com/in/jeffreytfurtado/',
     'https://www.linkedin.com/company/precisehrcanada/',
     'https://furtadofirm.com/about-us',
     'https://www.bigvikinggames.com',
-    'https://www.wikidata.org/wiki/Q139970179',
+
     'https://www.businesswire.com/news/home/20250219687145/en/Mortgage-Automator-Announces-Record-Growth-AI-Driven-Innovation-in-2024',
     'https://www.businesswire.com/news/home/20250429040022/en/AFX-Research-Integrates-with-Mortgage-Automator-to-Deliver-Fast-Automated-Title-Updates-to-Private-Lenders',
     'https://www.morningstar.com/news/business-wire/20250219687145/mortgage-automator-announces-record-growth-ai-driven-innovation-in-2024',
