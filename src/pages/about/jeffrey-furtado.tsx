@@ -99,13 +99,13 @@ export default function JeffreyFurtadoPage() {
       title: 'Founder (Exited)',
       company: 'DooLeeNoted',
       period: 'Previously',
-      description: 'Founded DooLeeNoted, a global resourcing and professional collaboration platform that bridged talent between South Asia, the Middle East, and North America. At its peak, the platform ranked among the top 64,000 most visited websites globally. Scaled to a successful multi-million dollar exit to a European firm.',
+      description: 'Founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America. The company was sold to a European acquirer in 2016 for a mid-seven figure amount.',
     },
     {
       title: 'Chief Operating Officer & CRO',
       company: 'Mortgage Automator (BVP Forge)',
       period: 'Previously',
-      description: 'COO at the leading global SaaS platform for private and asset-based lenders. Facilitated billions in funded loans. Driving force behind the company\'s nine-figure strategic partnership with BVP Forge ($110 million+), one of the world\'s largest private equity firms. Led AI integration across business operations and global expansion.',
+      description: 'Former Chief Operating Officer and Chief Revenue Officer at Mortgage Automator, a SaaS platform serving private and asset-based lenders. Played a central operating role in the company\'s $110 million private equity exit with BVP Forge, structured as a majority recapitalization with the founders retaining minority ownership. Led business transformation, AI integration, organizational development and international growth.',
       url: 'https://www.mortgageautomator.com',
     },
     {
@@ -215,16 +215,16 @@ export default function JeffreyFurtadoPage() {
                   Jeffrey currently serves as Chief Operating Officer & Executive Producer at Big Viking Games, Canada's largest independent mobile and social game studio. Backed by $21.8M in Series B funding, the company develops titles played by millions worldwide across iOS, Android, Facebook, and the web — including YoWorld, acquired from Zynga. He oversees operations, live game production, and studio strategy.
                 </p>
                 <p>
-                  Previously, Jeffrey was COO & CRO at Mortgage Automator, a BVP Forge portfolio company and the leading global SaaS platform for private and asset-based lenders. He was a driving force behind the company's strategic partnership with BVP Forge — one of the world's largest private equity firms — a transaction reported in excess of $110 million. The platform facilitated billions in funded loans across the US, Canada, Australia, and New Zealand.
+                  Previously, Jeffrey served as Chief Operating Officer and Chief Revenue Officer at Mortgage Automator, a leading SaaS platform for private and asset-based lenders. He changed the landscape at Mortgage Automator to prepare for the company's $110 million private equity exit with BVP Forge. The transaction was structured as a majority recapitalization, with BVP Forge acquiring majority ownership. During his tenure, the platform facilitated more than $66 billion in funded loans across the United States, Canada, Australia and New Zealand.
                 </p>
                 <p>
                   Jeffrey is Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving Canadian organizations across all provinces. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.
                 </p>
                 <p>
-                  He serves as a board advisor and consultant for GLG and Guidepoint, advising institutional investors, private equity firms, and Fortune 500 companies. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded DooLeeNoted, which he scaled to an exit to a European firm reported at approximately $3 million.
+                  Participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America, which was sold to a European acquirer in 2016 for a mid-seven figure amount.
                 </p>
                 <p>
-                  Throughout his career, Jeffrey has held senior executive roles including VP of Sales, VP of Operations, VP of Shared Services, VP of Customer Success, VP of Lending, Chief Risk & Compliance Officer, Chief Revenue Officer, and Chief Marketing Officer — successfully leading CCi through a transaction reported at approximately $32 million, helping scale Progressa through its $84 million Series B and pre-IPO financing, and consistently institutionalizing growth-stage companies for profitability and scale.
+                  Throughout his career, Jeffrey has held global senior executive roles across Sales, Operations, Shared Services, Customer Success/Service Delivery, Lending, Risk & Compliance/Legal, Revenue, Human Resources, IT, Development/DevOps, and Marketing. He served as Vice President, Sales, Operations and Shared Services at Consumer Centre Inc. through the company's $24 million exit. He later helped scale Progressa while it went through its $84 million equity and loan funding round and an initiative towards pre-IPO preparation, and has consistently institutionalized growth-stage companies for profitability and scale.
                 </p>
               </div>
             </motion.div>
@@ -313,7 +313,7 @@ export default function JeffreyFurtadoPage() {
             </motion.div>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                { metric: '$110M+', label: 'Strategic partnership — Mortgage Automator / BVP Forge' },
+                { metric: '$110M', label: 'Private equity exit and majority recapitalization with BVP Forge' },
                 { metric: 'Multi-M', label: 'Exit — founded and sold DooLeeNoted' },
                 { metric: 'Billions', label: 'In loans funded globally through the Mortgage Automator platform' },
                 { metric: 'Millions', label: 'Players across Big Viking Games titles worldwide' },
