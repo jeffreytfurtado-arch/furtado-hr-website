@@ -181,7 +181,7 @@ export default function JeffreyFurtadoPage() {
             <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Jeffrey T. Furtado</h1>
             <p className="text-xl text-cyan-300 font-medium mb-2">Executive · Entrepreneur · Strategic Investor</p>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Scaling growth-stage companies across gaming, fintech, SaaS, HR technology, and real estate. Track record of multiple exits including nine-figure partnerships, enterprise strategy, and operational transformation.
+              Scaling growth-stage companies across gaming, fintech, SaaS, HR technology and real estate. Track record spanning multiple exits, including a $110 million private equity exit, alongside enterprise strategy and operational transformation.
             </p>
             <div className="flex gap-3 justify-center mt-8">
               <a href="https://www.linkedin.com/in/jeffreytfurtado/" target="_blank" rel="noopener noreferrer">
@@ -209,13 +209,13 @@ export default function JeffreyFurtadoPage() {
               <h2 className="text-2xl font-bold mb-6">About</h2>
               <div className="text-muted-foreground leading-relaxed space-y-4 text-[15px]">
                 <p>
-                  Jeffrey T. Furtado is a Canadian executive, entrepreneur, and strategic investor with a career defined by scaling businesses, driving nine-figure exits, and architecting enterprise-level strategies across gaming, fintech, SaaS, HR technology, BPO, and real estate.
+                  Jeffrey T. Furtado is a Canadian executive, entrepreneur and strategic investor with a career defined by scaling businesses, driving a $110 million private equity exit and other major transactions, and architecting enterprise-level strategies across gaming, fintech, SaaS, HR technology, BPO and real estate.
                 </p>
                 <p>
                   Jeffrey currently serves as Chief Operating Officer & Executive Producer at Big Viking Games, Canada's largest independent mobile and social game studio. Backed by $21.8M in Series B funding, the company develops titles played by millions worldwide across iOS, Android, Facebook, and the web — including YoWorld, acquired from Zynga. He oversees operations, live game production, and studio strategy.
                 </p>
                 <p>
-                  Previously, Jeffrey served as Chief Operating Officer and Chief Revenue Officer at Mortgage Automator, a leading SaaS platform for private and asset-based lenders. He changed the landscape at Mortgage Automator to prepare for the company's $110 million private equity exit with BVP Forge. The transaction was structured as a majority recapitalization, with BVP Forge acquiring majority ownership. During his tenure, the platform facilitated more than $66 billion in funded loans across the United States, Canada, Australia and New Zealand.
+                  Previously, Jeffrey served as Chief Operating Officer and Chief Revenue Officer at Mortgage Automator, a leading SaaS platform for private and asset-based lenders. He transformed the company's operating model and played a central role in preparing Mortgage Automator for its $110 million private equity exit with BVP Forge. The transaction was structured as a majority recapitalization, with BVP Forge acquiring majority ownership and the founders retaining a minority interest. During his tenure, the platform facilitated more than $66 billion in funded loans across the United States, Canada, Australia and New Zealand.
                 </p>
                 <p>
                   Jeffrey is Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving Canadian organizations across all provinces. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.
@@ -224,7 +224,7 @@ export default function JeffreyFurtadoPage() {
                   Participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America, which was sold to a European acquirer in 2016 for a mid-seven figure amount.
                 </p>
                 <p>
-                  Throughout his career, Jeffrey has held global senior executive roles across Sales, Operations, Shared Services, Customer Success/Service Delivery, Lending, Risk & Compliance/Legal, Revenue, Human Resources, IT, Development/DevOps, and Marketing. He served as Vice President, Sales, Operations and Shared Services at Consumer Centre Inc. through the company's $24 million exit. He later helped scale Progressa while it went through its $84 million equity and loan funding round and an initiative towards pre-IPO preparation, and has consistently institutionalized growth-stage companies for profitability and scale.
+                  Throughout his career, Jeffrey has held global senior executive roles across Sales, Operations, Shared Services, Customer Success/Service Delivery, Lending, Risk & Compliance/Legal, Revenue, Human Resources, IT, Development/DevOps, and Marketing. He served as Vice President, Sales, Operations and Shared Services at Consumer Centre Inc. through the company's $24 million exit. He later helped scale Progressa through its $84 million equity and loan funding round and pre-IPO preparations, and has consistently institutionalized growth-stage companies for profitability and scale.
                 </p>
               </div>
             </motion.div>
