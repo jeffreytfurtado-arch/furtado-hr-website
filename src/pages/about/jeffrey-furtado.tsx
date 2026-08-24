@@ -77,7 +77,7 @@ export default function JeffreyFurtadoPage() {
       highlight: true,
     },
     {
-      title: 'Board Advisor & Consultant',
+      title: 'GLG Council Member & Guidepoint Advisor',
       company: 'GLG · Guidepoint',
       period: 'Current',
       description: 'Advises institutional investors, private equity firms, and Fortune 500 companies on SaaS operations, fintech, gaming, and HR technology through the world\'s leading expert network platforms.',
@@ -147,7 +147,7 @@ export default function JeffreyFurtadoPage() {
       source: 'Business Wire',
       date: 'April 2025',
       url: 'https://www.businesswire.com/news/home/20250429040022/en/AFX-Research-Integrates-with-Mortgage-Automator-to-Deliver-Fast-Automated-Title-Updates-to-Private-Lenders',
-      excerpt: '"Mortgage Automator is known for its commitment to streamlining the lending process," said Jeffrey Furtado, COO',
+      excerpt: '“Mortgage Automator is known for its commitment to streamlining the lending process,” said Jeffrey Furtado, COO',
     },
     {
       title: 'Mortgage Automator: Record Growth Coverage',
@@ -162,7 +162,7 @@ export default function JeffreyFurtadoPage() {
     <div className="flex flex-col">
       <SEO
         title="Jeffrey T. Furtado — Executive, Entrepreneur, Operator"
-        description="Jeffrey Furtado is Managing Partner at PreciseHR and a Canadian executive, entrepreneur, and strategic investor with multiple exits across SaaS, Fintech, Gaming, and HR."
+        description="Jeffrey T. Furtado is COO and Executive Producer at Big Viking Games and Managing Partner at PreciseHR, with experience across fintech, SaaS, gaming and AI."
         path="/about/jeffrey-furtado"
       />
       <PersonSchema />
@@ -221,7 +221,7 @@ export default function JeffreyFurtadoPage() {
                   Jeffrey is Managing Partner at PreciseHR, an intelligent HR consulting and technology firm serving Canadian organizations across all provinces. As an investor and operator, he leads the firm's strategy to leverage AI and automation to reshape how businesses manage compliance, talent, and people operations.
                 </p>
                 <p>
-                  Participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America, which was sold to a European acquirer in 2016 for a mid-seven figure amount.
+                  Jeffrey participates in the GLG and Guidepoint expert networks, advising institutional investors, private equity firms and corporate leaders on SaaS operations, fintech, gaming, HR technology and organizational scale. He is a strategic investor in SaaS, Fintech, Ed-Tech, and Real Estate businesses. Jeffrey is also the founder of FurtadoFirm, a real estate investment firm, and previously founded and scaled DooLeeNoted, a global resourcing and professional collaboration platform connecting talent across South Asia, the Middle East and North America, which was sold to a European acquirer in 2016 for a mid-seven figure amount.
                 </p>
                 <p>
                   Throughout his career, Jeffrey has held global senior executive roles across Sales, Operations, Shared Services, Customer Success/Service Delivery, Lending, Risk & Compliance/Legal, Revenue, Human Resources, IT, Development/DevOps, and Marketing. He served as Vice President, Sales, Operations and Shared Services at Consumer Centre Inc. through the company's $24 million exit. He later helped scale Progressa through its $84 million equity and loan funding round and pre-IPO preparations, and has consistently institutionalized growth-stage companies for profitability and scale.
